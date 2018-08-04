@@ -1,7 +1,7 @@
 # BunkerLabs
 CAPSTONE Project
 
-Members:
+##Members:
 *Stephen Jarrett
 *Sebastian Price
 *Delia Sanders
