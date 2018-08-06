@@ -10,7 +10,7 @@ const CompanySchema = new Schema({
     industry: String,
     stage: String,
     productAndServices: String,
-    needs: String, // this might be an array?
+    needs: Array, // this might be an array?
     website: String,
     email: String,
     phone: Number,
