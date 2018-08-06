@@ -43,7 +43,9 @@ class API extends React.Component{
         )  
       }
     )}
-
+    <Link to={'/admin'} >
+    <button>Admin Panel</button>
+    </Link>
     </div>    
     
 
