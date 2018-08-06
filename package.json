@@ -4,8 +4,8 @@
   "description": "CAPSTONE Project",
   "main": "index.js",
   "scripts": {
-    
-    "test": "mocha"
+    "test": "mocha",
+    "dev" : "nodemon" 
   },
   "repository": {
     "type": "git",
