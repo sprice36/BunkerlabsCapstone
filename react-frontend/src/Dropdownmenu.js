@@ -18,6 +18,7 @@ class Dropdownmenu extends React.Component {
         return (
             <div>
                 {data.name}
+                {data.website}
             </div>
          ) 
 }
