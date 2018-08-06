@@ -1,27 +1,24 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
+import {Link} from 'react-router-dom';
+import Data from './Data';
 
-class LandingPage extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = this.props.landingPageData;
-    }
-
-    handleClickLink=()=>{
-        alert(this.state.CompanyId)
-    }
-    render() {
-        return (
-            <div className="landingPage">
-                <button onClick={(e) => this.handleClickLink() }>
-                    {this.props.landingPageData.CompanyLogo}       
-                </button>
-                
-                <p>{this.props.landingPageData.CompanyName}</p>
+  
+    const LandingPage=()=>
+    <div className="landingPage">
+      {Data.map(function(companyData){
+        return(
+            <div>
+                <Link to={`/company/${companyData.CompanyId}`}>
+                <h1>{companyData.CompanyName}</h1>
+                <h1>{companyData.CompanyLogo}</h1>
+                </Link>
             </div>
-        );
-    }
-}
+        )  
+      }
+    )}
 
+    </div>    
+    
 
 export default LandingPage;
