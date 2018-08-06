@@ -113,6 +113,43 @@ function findOneCompany(userId) {
     .catch(err => console.log(err));
 };
 
+
+function updateCompany(CompanyObject){
+    let modifications = {};
+    modifications.name = CompanyObject.name; 
+    modifications.picture = CompanyObject.picture;
+    modifications.summary = CompanyObject.summary;
+    modifications.industry = CompanyObject.industry;
+    modifications.stage = CompanyObject.stage;
+    modifications.productAndServices = CompanyObject.productAndServices;
+    modifications.needs = CompanyObject.needs;
+    modifications.website = CompanyObject.website;
+    modifications.email = CompanyObject.email;
+    modifications.phone = CompanyObject.phone;
+    modifications.youtubeLink = CompanyObject.youtubeLink;
+    modifications.paypalLink = CompanyObject.paypalLink;  
+    return Company 
+        .findByIdAndUpdate(CompanyObject._id, {$set: modifications}, {new: true})
+        .exec()
+        .then(company => {
+            return company;
+        }).catch(err => console.log(err));
+}
+
+function updateAdmin(AdminObject){
+    let modifications = {};
+    modifications.name = AdminObject.name;
+    modifications.password = AdminObject.password;
+    return Admin 
+        .findByIdAndUpdate(AdminObject._id, {$set: modifications}, {new: true})
+        .exec()
+        .then(admin => {
+            return admin; 
+        }).catch(err => console.log(err));
+
+}
+
+
 // Mongoose functions
 // findById()
 // findOne()
@@ -129,10 +166,10 @@ module.exports = {
     findAllAdmins,
     findOneAdmin,
     deleteAdmin,
-    // updateAdmin,
     createCompany,
-    // updateComapny,
     deleteCompany,
+    updateAdmin,
+    updateCompany,
     findAllCompanies,
     findOneCompany,
     // findCompanyByFilter

@@ -15,10 +15,10 @@ const {
     findAllAdmins,
     deleteAdmin,
     findOneAdmin,
-    // updateAdmin,
     createCompany,
-    // editCompany,
     deleteCompany,
+    updateAdmin, 
+    updateCompany,
     findAllCompanies,
     findOneCompany,
     // findCompanyByFilter 
@@ -111,6 +111,20 @@ app.post('/api/deletecompany/:id', (req,res) => {
         .then(company => res.json(company))
         .catch((err) => res.send(err));
 })
+
+// updates name/userId for specific admin
+app.post('/api/updateadmins/:id', (req, res) => {
+    updateAdmin(req.body)
+        .then(admin => res.json(admin))
+        .catch((err) => res.send(err));
+});
+
+//updates specific company 
+app.post('/api/updatecompany/:id', (req, res) => {
+    updateCompany(req.body)
+        .then(admin => res.json(admin))
+        .catch((err) => res.send(err));
+});
 
 // ******************************
 // DB FUNCTION TESTS
