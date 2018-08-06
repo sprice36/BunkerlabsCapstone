@@ -15,9 +15,9 @@ const {
     findAllAdmins,
     deleteAdmin,
     findOneAdmin,
-    // updateAdminPassword,
+    updateAdmin, 
     // createCompany,
-    // editCompany,
+    updateCompany,
     // deleteCompany,
     findAllCompanies,
     findOneCompany,
@@ -81,6 +81,21 @@ app.get('/api/admins/', (req, res) => {
 app.get('/api/admins/:id', (req, res) => {
     findOneAdmin(req.params.id)
         .then(company => res.json(company))
+        .catch((err) => res.send(err));
+});
+
+
+// updates name/userId for specific admin
+app.post('/api/updateadmins/:id', (req, res) => {
+    updateAdmin(req.body)
+        .then(admin => res.json(admin))
+        .catch((err) => res.send(err));
+});
+
+//updates specific company 
+app.post('/api/updatecompany/:id', (req, res) => {
+    updateCompany(req.body)
+        .then(admin => res.json(admin))
         .catch((err) => res.send(err));
 });
 
