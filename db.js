@@ -24,7 +24,6 @@ function createAdmin(name, password) {
     return user.save((err) => {
         if (err) return console.log(err);
         console.log('saved user');
-        // db.close();
     });
 };
 
@@ -60,12 +59,45 @@ function deleteAdmin(userId) {
     .catch(err => console.log(err));
 };
 
+function createCompany(companyObject) {
+    var company = new Company({
+        name: companyObject.name,
+        picture: companyObject.picture,
+        summary: companyObject.summary,
+        industry: companyObject.industry,
+        stage: companyObject.stage,
+        productAndServices: companyObject.productAndServices,
+        needs: companyObject.needs,
+        website: companyObject.website,
+        email: companyObject. email,
+        phone: companyObject.phone,
+        youtubeLink: companyObject.youtubeLink,
+        paypalLink: companyObject.paypalLink
+    });
+    return company.save()
+    // return company.save((err) => {
+    //     if (err) return err;
+    //     console.log('saved company');
+    //     return company
+    // });
+};
+
+function deleteCompany(companyId) {
+    return Company
+    .findByIdAndRemove(companyId)
+    .exec()
+    .then(company => {
+        console.log(`Company ${companyId} deleted.`);
+        return company
+    })
+    .catch(err => console.log(err))
+};
+
 function findAllCompanies() {
     return Company
     .find()
     .exec()
     .then(companies => {
-        // db.close();
         return companies;
     })
     .catch(err => console.log(err));
@@ -76,7 +108,6 @@ function findOneCompany(userId) {
     .findById(userId)
     .exec()
     .then(company => {
-        // db.close('closing');
         return company;
     })
     .catch(err => console.log(err));
@@ -123,6 +154,7 @@ function updateAdmin(AdminObject){
 // findById()
 // findOne()
 // findByIdAndRemove()
+// findByIdAndUpdate() 
 // findOneAndRemove()
 // findOneAndUpdate()
 // modelname.find()
@@ -134,10 +166,10 @@ module.exports = {
     findAllAdmins,
     findOneAdmin,
     deleteAdmin,
+    createCompany,
+    deleteCompany,
     updateAdmin,
     updateCompany,
-    // editCompany,
-    // deleteCompany,
     findAllCompanies,
     findOneCompany,
     // findCompanyByFilter

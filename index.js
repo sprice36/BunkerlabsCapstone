@@ -15,10 +15,10 @@ const {
     findAllAdmins,
     deleteAdmin,
     findOneAdmin,
+    createCompany,
+    deleteCompany,
     updateAdmin, 
-    // createCompany,
     updateCompany,
-    // deleteCompany,
     findAllCompanies,
     findOneCompany,
     // findCompanyByFilter 
@@ -84,6 +84,33 @@ app.get('/api/admins/:id', (req, res) => {
         .catch((err) => res.send(err));
 });
 
+app.post('/api/createcompany', (req, res) => {
+    // let needsArray = [req.body.need1, req.body.need2, req.body.need3];
+    let newCompanyObject = {
+        name: req.body.name,
+        picture: req.body.picture,
+        summary: req.body.summary,
+        industry: req.body.industry,
+        stage: req.body.stage,
+        productAndServices: req.body.productAndServices,
+        needs: req.body.needs,
+        website: req.body.website,
+        email: req.body. email,
+        phone: req.body.phone,
+        youtubeLink: req.body.youtubeLink,
+        paypalLink: req.body.paypalLink
+    };
+    createCompany(newCompanyObject)
+        .then(company => res.json(company))
+        .catch((err) => res.send(err));
+});
+
+app.post('/api/deletecompany/:id', (req,res) => {
+    let companyId = req.params.id;
+    deleteCompany(companyId)
+        .then(company => res.json(company))
+        .catch((err) => res.send(err));
+})
 
 // updates name/userId for specific admin
 app.post('/api/updateadmins/:id', (req, res) => {
