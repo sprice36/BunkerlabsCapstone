@@ -4,6 +4,7 @@
   "description": "CAPSTONE Project",
   "main": "index.js",
   "scripts": {
+    
     "test": "mocha"
   },
   "repository": {
