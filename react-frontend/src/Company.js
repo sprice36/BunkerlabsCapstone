@@ -43,8 +43,7 @@ import './Company.css';
         constructor(props){
             super(props);
             this.state={
-              company: 
-              {
+                company: {
                     _id:'',
                     name:'',
                     picture:'',
@@ -60,13 +59,13 @@ import './Company.css';
                     phone:'',
                     youtubeLine:'',
                     PaypalLink:''
-                 }
+                }
             }
         }
 
         componentDidMount(){
-           const url=`http://localhost:4000/api/companies/${this.props.match.params.id}`;
-           console.log(url);
+            const url=`http://localhost:4000/api/companies/${this.props.match.params.id}`;
+            console.log(url);
             fetch(url)
                 .then(company=>company.json())
                 .then(company=>{

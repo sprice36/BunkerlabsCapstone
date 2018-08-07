@@ -7,13 +7,13 @@ class API extends React.Component{
     constructor(props){
         super(props);
         this.state={
-          companies:[]
+            companies:[]
         }
     }
 
     componentDidMount(){
-       const url=`http://localhost:4000/api/companies/`;
-       console.log(url);
+        const url=`http://localhost:4000/api/companies/`;
+        console.log(url);
         fetch(url)
             .then(companies=>companies.json())
             .then(companies=>{
@@ -29,10 +29,10 @@ class API extends React.Component{
     )
 }
 }
-  
+
     const LandingPage=({companies})=>
     <div className="landingPage">
-      {companies.map(function(companyData){
+        {companies.map(function(companyData){
         return(
             <div>
                 <Link to={`/company/${companyData._id}`}>
@@ -40,12 +40,16 @@ class API extends React.Component{
                 <h1>{companyData.picture}</h1>
                 </Link>
             </div>
-        )  
-      }
+        )}
     )}
     <Link to={'/admin'} >
     <button>Admin Panel</button>
     </Link>
+
+    <Link to={'/test'}>
+    <button>Image Upload Test</button>
+    </Link>
+    
     </div>    
     
 

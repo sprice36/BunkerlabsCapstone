@@ -32,7 +32,6 @@ function findAllAdmins() {
         {},
         'name',
         (err, admins) => {
-        // db.close();
         if (err) return console.log(err);
         return admins;
     });
@@ -41,10 +40,9 @@ function findAllAdmins() {
 function findOneAdmin(userId) {
     return Admin
     .findById(userId)
-    .select('name')
+    .select('name password')
     .exec()
     .then(admin => {
-        // db.close();
         return admin;
     })
     .catch(err => console.log(err));
@@ -134,7 +132,7 @@ function updateCompany(CompanyObject){
         .then(company => {
             return company;
         }).catch(err => console.log(err));
-}
+};
 
 function updateAdmin(AdminObject){
     let modifications = {};
@@ -146,8 +144,7 @@ function updateAdmin(AdminObject){
         .then(admin => {
             return admin; 
         }).catch(err => console.log(err));
-
-}
+};
 
 
 // Mongoose functions

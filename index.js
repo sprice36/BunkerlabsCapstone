@@ -9,6 +9,9 @@ const expressHbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const staticMiddleware = express.static('build');
 const cors = require('cors');
+const multer = require('multer');
+const upload = multer({ dest: 'public/images/'});
+app.use(staticMiddleware)
 
 const {
     createAdmin,
@@ -31,7 +34,7 @@ app.engine('.hbs', expressHbs({
 }));
 app.set('view engine', '.hbs');
 
-const static = express.static;
+// const static = express.static;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -70,6 +73,7 @@ app.get('/api/companies/:id', (req, res) => {
         .catch((err) => res.send(err));
 });
 
+// Get rid of this route for when this goes live.... no need for it
 // Returns JSON of name/userId of all admins
 app.get('/api/admins/', (req, res) => {
     findAllAdmins()
@@ -84,11 +88,44 @@ app.get('/api/admins/:id', (req, res) => {
         .catch((err) => res.send(err));
 });
 
+app.post('/api/createcompanypicture/:id', upload.single('picture'), (req, res) => {
+    // console.log(req.body);
+    console.log(req.file);
+    res.send([]);
+});
+
 app.post('/api/createcompany', (req, res) => {
+    // add in fs write file for images here and then pass location of stored file to newCompanyObject
+    // console.log(req.body.picture);
+    // upload.single(req.body.picture);
+    // let pictureLocation = '/images/' + req.body._id;
+    // fs.rename(req.body.picture, pictureLocation, (err) => {
+    //     if (err) {
+    //         console.log(err);
+    //     };
+    // });
+    
+    // File input field name is simply 'file'
+    // app.post('/file_upload', upload.single('file'), function (req, res) {
+    //     var file = __dirname + '/' + req.file.filename;
+    //     fs.rename(req.file.path, file, function (err) {
+    //         if (err) {
+    //             console.log(err);
+    //             res.send(500);
+    //         } else {
+    //             res.json({
+    //                 message: 'File uploaded successfully',
+    //                 filename: req.file.filename
+    //             });
+    //         }
+    //     });
+    // });
+
     // let needsArray = [req.body.need1, req.body.need2, req.body.need3];
     let newCompanyObject = {
         name: req.body.name,
-        picture: req.body.picture,
+        // picture: req.body.picture,
+        // picture: pictureLocation,
         summary: req.body.summary,
         industry: req.body.industry,
         stage: req.body.stage,
@@ -126,6 +163,13 @@ app.post('/api/updatecompany/:id', (req, res) => {
         .catch((err) => res.send(err));
 });
 
+
+app.listen(port, () => {
+    console.log(`Your server is running at http://localhost:${port}`);
+});
+
+
+
 // ******************************
 // DB FUNCTION TESTS
 // 
@@ -147,7 +191,3 @@ app.post('/api/updatecompany/:id', (req, res) => {
 // .then((result) => {
 // console.log(Admin.find());
 // ********************************
-
-app.listen(port, () => {
-    console.log(`Your server is running at http://localhost:${port}`);
-});
