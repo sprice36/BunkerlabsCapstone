@@ -1,9 +1,8 @@
 import React from 'react';
 
-
-class NewForm extends React.Component {
-    constructor(){
-        super();
+class EditPage extends React.Component {
+    constructor(props){
+        super(props);
         this.handleEntry = this.handleEntry.bind()
         this.state={
             form:{
@@ -159,12 +158,29 @@ class NewForm extends React.Component {
         const form = event.target.value;
         const data = new FormData(event.target);
 
-
+    
        fetch('/form-submit', {
            method: 'POST',
            body: data,
        });
     }
+
+    componentDidMount() {
+        fetch(`http://localhost:4000/api/companies/${this.props.match.params.id}`)
+        .then(res => res.json())
+        .then(companyData => {
+           
+            this.setState({
+                form: companyData
+
+            });
+         })
+        
+    }
+
+
+
+
 
     render() {
         return (
@@ -224,19 +240,19 @@ class NewForm extends React.Component {
                 <input value={this.state.form.BusinessLocationForAdmin} type='text'
                 onChange={this.handleBusinessLocationForAdmin}/>
                 
-                <label htmlFor=''>Company Image</label>
+                {/* <label htmlFor=''>Company Image</label>
                 <input value={this.state.form.companyImageForAdmin}type='file' name='poi-thumbnail'
                        accept='.png, .jpg, .jpeg, .gif'
                        encType='multipart/form-data' 
-                onChange={this.handleCompanyImageForAdmin}/>
+                onChange={this.handleCompanyImageForAdmin}/> */}
                 
                
 
 
-                <button>Save Company</button><button>Delete Company</button>
+                <button>Edit Company</button><button>Delete Company</button>
             </form>
         );
 }
 }
 
-export default NewForm;
+export default EditPage;

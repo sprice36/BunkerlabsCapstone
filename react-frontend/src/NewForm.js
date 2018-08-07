@@ -32,7 +32,6 @@ class NewForm extends React.Component {
                 companyNameForAdmin: event.target.value
             }
         })
-        console.log(this.state.form)
     }
 
     handleWebsiteDataForAdmin= (event) => {
@@ -42,7 +41,6 @@ class NewForm extends React.Component {
                 WebsiteDataForAdmin: event.target.value
             }
         })
-        console.log(this.state.form)
     }
     handleCompanySummaryForAdmin= (event) => {
         this.setState({
@@ -51,7 +49,6 @@ class NewForm extends React.Component {
                 companySummaryForAdmin: event.target.value
             }
         })
-        console.log(this.state.form)
     }
     handleCompanyNeedNumOne= (event) => {
         this.setState({
@@ -60,7 +57,6 @@ class NewForm extends React.Component {
                 companyNeedNumOne: event.target.value
             }
         })
-        console.log(this.state.form)
     }
     handleCompanyNeedNumTwo= (event) => {
         this.setState({
@@ -233,7 +229,14 @@ class NewForm extends React.Component {
                
 
 
-                <button>Save Company</button><button>Delete Company</button>
+                <input type='submit' value='Create Entry' />
+                <input type='clear' value='Clear Fields' />
+                
+                
+                
+                
+                
+                <button>Delete Company</button>
             </form>
         );
 }
