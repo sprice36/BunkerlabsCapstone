@@ -9,6 +9,9 @@ const expressHbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const staticMiddleware = express.static('build');
 const cors = require('cors');
+const multer = require('multer');
+const upload = multer({ dest: 'public/images/'});
+app.use(staticMiddleware)
 
 const {
     createAdmin,
@@ -21,6 +24,7 @@ const {
     updateCompany,
     findAllCompanies,
     findOneCompany,
+    updateCompanyPhoto,
     findCompanyByIndustry,
     findCompanyByStage 
 } = require('./db.js');
@@ -32,7 +36,7 @@ app.engine('.hbs', expressHbs({
 }));
 app.set('view engine', '.hbs');
 
-const static = express.static;
+// const static = express.static;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -71,6 +75,7 @@ app.get('/api/companies/:id', (req, res) => {
         .catch((err) => res.send(err));
 });
 
+// Get rid of this route for when this goes live.... no need for it
 // Returns JSON of name/userId of all admins
 app.get('/api/admins/', (req, res) => {
     findAllAdmins()
@@ -85,11 +90,28 @@ app.get('/api/admins/:id', (req, res) => {
         .catch((err) => res.send(err));
 });
 
+app.post('/api/createcompanypicture/:id', upload.single('picture'), (req, res) => {
+    fs.rename(`./public/images/${req.file.filename}`, 
+    `./public/images/${req.params.id}`, 
+    (err) => { 
+        if (err) {
+            console.log(err);
+        }
+    })
+    let imagePath = `public/images/${req.params.id}`;
+    let id = req.params.id;
+    let companyObject = {
+        _id: id,
+        picture: imagePath
+    };
+    updateCompanyPhoto(companyObject)
+        .then(company => res.json(company))
+        .catch((err) => res.send(err));
+});
+
 app.post('/api/createcompany', (req, res) => {
-    // let needsArray = [req.body.need1, req.body.need2, req.body.need3];
     let newCompanyObject = {
         name: req.body.name,
-        picture: req.body.picture,
         summary: req.body.summary,
         industry: req.body.industry,
         stage: req.body.stage,
@@ -127,7 +149,6 @@ app.post('/api/updatecompany/:id', (req, res) => {
         .catch((err) => res.send(err));
 });
 
-
 //filter all companies by industry 
 app.get('/api/company/byIndustry/:industry', (req, res) => {
     let industry = req.params.industry; 
@@ -144,6 +165,10 @@ app.get('/api/company/byStage/:stage', (req, res) => {
          .then(stage => res.json(stage))
          .catch((err) => res.send(err))
       
+});
+
+app.listen(port, () => {
+    console.log(`Your server is running at http://localhost:${port}`);
 });
 
 // ******************************
@@ -167,7 +192,3 @@ app.get('/api/company/byStage/:stage', (req, res) => {
 // .then((result) => {
 // console.log(Admin.find());
 // ********************************
-
-app.listen(port, () => {
-    console.log(`Your server is running at http://localhost:${port}`);
-});
