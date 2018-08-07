@@ -134,6 +134,21 @@ function updateCompany(CompanyObject){
         }).catch(err => console.log(err));
 };
 
+function updateCompanyPhoto(CompanyObject) {
+    let modifications = {};
+    modifications.picture = CompanyObject.picture;
+    return Company
+        .findByIdAndUpdate(CompanyObject._id, {
+            $set: modifications
+        }, {
+            new: true
+        })
+        .exec()
+        .then(company => {
+            return company;
+        }).catch(err => console.log(err));
+};
+
 function updateAdmin(AdminObject){
     let modifications = {};
     modifications.name = AdminObject.name;
@@ -169,6 +184,7 @@ module.exports = {
     updateCompany,
     findAllCompanies,
     findOneCompany,
+    updateCompanyPhoto
     // findCompanyByFilter
 };
 
