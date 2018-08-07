@@ -21,7 +21,8 @@ const {
     updateCompany,
     findAllCompanies,
     findOneCompany,
-    // findCompanyByFilter 
+    findCompanyByIndustry,
+    findCompanyByStage 
 } = require('./db.js');
 
 
@@ -122,8 +123,27 @@ app.post('/api/updateadmins/:id', (req, res) => {
 //updates specific company 
 app.post('/api/updatecompany/:id', (req, res) => {
     updateCompany(req.body)
-        .then(admin => res.json(admin))
+        .then(company => res.json(company))
         .catch((err) => res.send(err));
+});
+
+
+//filter all companies by industry 
+app.get('/api/company/byIndustry/:industry', (req, res) => {
+    let industry = req.params.industry; 
+        findCompanyByIndustry(industry)
+          .then(industry => res.json(industry))
+          .catch((err) => res.send(err))
+      
+});
+
+//filter all companies by stage
+app.get('/api/company/byStage/:stage', (req, res) => {
+    let stage = req.params.stage; 
+        findCompanyByStage(stage)
+         .then(stage => res.json(stage))
+         .catch((err) => res.send(err))
+      
 });
 
 // ******************************
