@@ -162,6 +162,30 @@ function updateAdmin(AdminObject){
 };
 
 
+function findCompanyByIndustry(industryObject){
+    return Company
+     .find()
+     .where('industry').equals(industryObject)
+     .exec()
+     .then(companies => {
+            return companies;
+    })
+     .catch(err => console.log(err));
+};
+
+function findCompanyByStage(stageObject){
+    return Company
+     .find()
+     .where('stage').equals(stageObject)
+     .exec()
+     .then(companies => {
+           return companies;
+    })
+     .catch(err => console.log(err));
+};
+
+
+
 // Mongoose functions
 // findById()
 // findOne()
@@ -185,7 +209,8 @@ module.exports = {
     findAllCompanies,
     findOneCompany,
     updateCompanyPhoto
-    // findCompanyByFilter
+    findCompanyByIndustry,
+    findCompanyByStage
 };
 
 // If you don 't specify a callback then the API will return a variable of type Query. You can use this query object to build up your query and then execute it (with a callback) later using the exec() method.

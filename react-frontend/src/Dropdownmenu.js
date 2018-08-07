@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Dropdownmenu extends React.Component {
     state = {
-        posts: []
+        companies: []
     }
 
     componentDidMount() {
@@ -10,22 +10,36 @@ class Dropdownmenu extends React.Component {
         .then(res => res.json())
         .then(companies => {
             console.log(companies)
-            this.setState({posts});
+            this.setState({companies});
          })
         
     }
     _convertToCompany = (data) => {
         return (
             <div>
-                {data.name}
-                {data.website}
-            </div>
+                {data.name},
+                {data.summary},
+                {data.picture},
+                {data.industry},
+                {data.stage},
+                {data.productsAndServices},
+                {data.needs},
+                {data.website},
+                {data.email},
+                {data.youtubeLink}
+                </div>
+                
          ) 
 }
+    _pullCompanyName = (data) => {
+        <div>
+            {data.name}
+            </div>
+    }
         render() {
             return ( 
                 <div>
-                    {this.state.posts.map(company => this._convertToCompany(company))}
+                    {this.state.companies.map(company => this._convertToCompany(company))}
                     
                     <ul>
                         <li><a href='www.google.com'>www.google.com</a></li>
