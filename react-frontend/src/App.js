@@ -11,6 +11,9 @@ import {
   Switch
 } from 'react-router-dom';
 import BunkerForms from './btest';
+import adminPage from './adminPage';
+import EditPage from './EditPage';
+import NewForm from './NewForm';
 
 
 
@@ -21,9 +24,13 @@ class App extends React.Component {
        
         <Router>
         <Switch>
-        <Route path='/admin' component={ BunkerForms } exact={true}/>
+        <Route path='/admin' component={ adminPage } exact={true}/>
+        <Route path='/admin/companies/:id/edit' component={ EditPage } exact={true}/>
+        <Route path='/admin/companies/new' component={ NewForm } exact={true}/>
+
         <Route path='/company/:id' component={Company} exact={true}/>
         <Route path='/' component={LandingPage} exact={true}/>
+
         </Switch>
         </Router>
                 

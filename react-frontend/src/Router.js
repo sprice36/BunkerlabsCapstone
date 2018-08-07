@@ -8,8 +8,7 @@ import Company from './Company';
 const RootRouter=()=>
     <Router>
         <Switch>
-            <Route path='/company/:id' component={Company} />
-            <Route path='/' component={LandingPage} />
+            
         </Switch>
     </Router>
 
