@@ -1,0 +1,43 @@
+
+footer{
+    overflow: hidden;
+    position: relative;
+    padding: 43px 10px 40px;
+    border-top: 12px solid #e9eaee;
+    background: #363839;
+    color: #8c8989;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    height:200px;
+    width:100%;  
+    
+}
+
+p{
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-weight: 300px;
+    letter-spacing: 0px;
+    font-style: normal; 
+    /* position: absolute; */
+    padding-left:76px; 
+    font-size: 16px;
+    line-height: 1.5; 
+    display: flex;
+} 
+
+.black{
+    background-color: black;
+    height:100px;
+    width:100%;
+    color: #8c8989;
+    font-size:9px;
+    position:absolute;
+    display: flex;
+    padding-left:30px;
+}
+
+.footer-class{
+    color: #bfbfbf;
+    font-size: 9px;
+    display:flex;
+}
