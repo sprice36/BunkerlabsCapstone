@@ -91,7 +91,7 @@ app.get('/api/admins/:id', (req, res) => {
 });
 
 app.post('/api/createcompanypicture/:id', upload.single('picture'), (req, res) => {
-    fs.rename(`./public/images/${req.file.filename}`, 
+    fs.rename(req.file.path, 
     `./public/images/${req.params.id}`, 
     (err) => { 
         if (err) {
@@ -110,6 +110,7 @@ app.post('/api/createcompanypicture/:id', upload.single('picture'), (req, res) =
 });
 
 app.post('/api/createcompany', (req, res) => {
+    console.log(req.body)
     let newCompanyObject = {
         name: req.body.name,
         summary: req.body.summary,

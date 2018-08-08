@@ -237,7 +237,8 @@ class ImageUpload extends React.Component {
         .catch(err => console.log(err));
 
     };
-    
+    // after submit button is clicked the functionality needs to redirect to /admin page 
+    // also needs to clear fields 
 
     render() {
         return (
