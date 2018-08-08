@@ -15,7 +15,7 @@ db.once('open', () => {
     console.log('Connected to mongodb!');
 });
 
-function createAdmin(name, password) {
+ function createAdmin(name, password) {
     var user = new Admin({
         name: name,
         password: password
@@ -27,7 +27,7 @@ function createAdmin(name, password) {
     });
 };
 
-function findAllAdmins() {
+ function findAllAdmins() {
     return Admin.find(
         {},
         'name',
@@ -37,7 +37,7 @@ function findAllAdmins() {
     });
 };
 
-function findOneAdmin(userId) {
+ function findOneAdmin(userId) {
     return Admin
     .findById(userId)
     .select('name password')
@@ -48,7 +48,7 @@ function findOneAdmin(userId) {
     .catch(err => console.log(err));
 };
 
-function deleteAdmin(userId) {
+ function deleteAdmin(userId) {
     return Admin
     .findByIdAndRemove(userId)
     .exec(admin => {
@@ -57,7 +57,7 @@ function deleteAdmin(userId) {
     .catch(err => console.log(err));
 };
 
-function createCompany(companyObject) {
+ function createCompany(companyObject) {
     var company = new Company({
         name: companyObject.name,
         picture: companyObject.picture,
@@ -80,7 +80,7 @@ function createCompany(companyObject) {
     // });
 };
 
-function deleteCompany(companyId) {
+ function deleteCompany(companyId) {
     return Company
     .findByIdAndRemove(companyId)
     .exec()
@@ -91,7 +91,7 @@ function deleteCompany(companyId) {
     .catch(err => console.log(err))
 };
 
-function findAllCompanies() {
+ function findAllCompanies() {
     return Company
     .find()
     .exec()
@@ -101,7 +101,7 @@ function findAllCompanies() {
     .catch(err => console.log(err));
 };
 
-function findOneCompany(userId) {
+ function findOneCompany(userId) {
     return Company
     .findById(userId)
     .exec()
@@ -112,7 +112,7 @@ function findOneCompany(userId) {
 };
 
 
-function updateCompany(CompanyObject){
+ function updateCompany(CompanyObject){
     let modifications = {};
     modifications.name = CompanyObject.name; 
     modifications.picture = CompanyObject.picture;
@@ -134,7 +134,7 @@ function updateCompany(CompanyObject){
         }).catch(err => console.log(err));
 };
 
-function updateCompanyPhoto(CompanyObject) {
+ function updateCompanyPhoto(CompanyObject) {
     let modifications = {};
     modifications.picture = CompanyObject.picture;
     return Company
@@ -148,8 +148,7 @@ function updateCompanyPhoto(CompanyObject) {
             return company;
         }).catch(err => console.log(err));
 };
-
-function updateAdmin(AdminObject){
+ function updateAdmin(AdminObject){
     let modifications = {};
     modifications.name = AdminObject.name;
     modifications.password = AdminObject.password;
@@ -162,26 +161,26 @@ function updateAdmin(AdminObject){
 };
 
 
-function findCompanyByIndustry(industryObject){
+ function findCompanyByIndustry(industryObject){
     return Company
-     .find()
-     .where('industry').equals(industryObject)
-     .exec()
-     .then(companies => {
+    .find()
+    .where('industry').equals(industryObject)
+    .exec()
+    .then(companies => {
             return companies;
     })
-     .catch(err => console.log(err));
+    .catch(err => console.log(err));
 };
 
-function findCompanyByStage(stageObject){
+ function findCompanyByStage(stageObject){
     return Company
-     .find()
-     .where('stage').equals(stageObject)
-     .exec()
-     .then(companies => {
-           return companies;
+    .find()
+    .where('stage').equals(stageObject)
+    .exec()
+    .then(companies => {
+        return companies;
     })
-     .catch(err => console.log(err));
+    .catch(err => console.log(err));
 };
 
 

@@ -23,6 +23,7 @@ class App extends React.Component {
     return (
         <div className="App">
         <Navbar />
+        
         <Router>
         <Switch>
         <Route path='/admin' component={ adminPage } exact={true}/>
