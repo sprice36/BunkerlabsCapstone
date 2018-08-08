@@ -7,6 +7,7 @@ import './Company.css';
                 <h3> 
                 <p>Company Name:{companyDetail.name}</p>
                 <p>Company Logo: {companyDetail.picture}</p>
+                <img src={'./'+companyDetail.picture+'.jpg'} alt=""/>
                 <p>Summary:{companyDetail.summary}</p>
                 <p>Industry:{companyDetail.industry}</p>
                 <p>Stage:{companyDetail.stage}</p>

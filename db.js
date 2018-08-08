@@ -163,24 +163,24 @@ db.once('open', () => {
 
  function findCompanyByIndustry(industryObject){
     return Company
-     .find()
-     .where('industry').equals(industryObject)
-     .exec()
-     .then(companies => {
+    .find()
+    .where('industry').equals(industryObject)
+    .exec()
+    .then(companies => {
             return companies;
     })
-     .catch(err => console.log(err));
+    .catch(err => console.log(err));
 };
 
  function findCompanyByStage(stageObject){
     return Company
-     .find()
-     .where('stage').equals(stageObject)
-     .exec()
-     .then(companies => {
-           return companies;
+    .find()
+    .where('stage').equals(stageObject)
+    .exec()
+    .then(companies => {
+        return companies;
     })
-     .catch(err => console.log(err));
+    .catch(err => console.log(err));
 };
 
 
