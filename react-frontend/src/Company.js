@@ -74,7 +74,7 @@ import './Company.css';
                     })
                 })
         }
-
+        
         render(){
         return(
             <Company companyDetail={this.state.company}/>
