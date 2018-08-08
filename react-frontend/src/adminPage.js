@@ -20,7 +20,7 @@ class adminPage extends React.Component {
            <li>
                
                <Link to={`/admin/companies/${data._id}/edit`}>
-                {data.companyNameForAdmin}
+                {data.name}
                </Link>
 
 
