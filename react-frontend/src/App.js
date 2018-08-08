@@ -15,12 +15,14 @@ import ImageUpload from './ImageUpload';
 import adminPage from './adminPage';
 import EditPage from './EditPage';
 import NewForm from './NewForm';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 class App extends React.Component {
   render() {
     return (
         <div className="App">
-
+        <Navbar />
         <Router>
         <Switch>
         <Route path='/admin' component={ adminPage } exact={true}/>
@@ -29,9 +31,12 @@ class App extends React.Component {
         <Route path='/company/:id' component={Company} exact={true}/>
         <Route path='/' component={LandingPage} exact={true}/>
         <Route path='/test' component={ImageUpload} exact={true}/>
+        {/* <Route path='/navbar' component={Navbar} exact={true}/> */}
 
         </Switch>
         </Router>
+
+        <Footer />
                 
         </div>
       

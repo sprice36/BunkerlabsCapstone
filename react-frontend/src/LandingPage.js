@@ -34,12 +34,14 @@ class API extends React.Component{
     <div className="landingPage">
         {companies.map(function(companyData){
         return(
+            <body>
             <div>
                 <Link to={`/company/${companyData._id}`}>
                 <h1>{companyData.name}</h1>
                 <h1>{companyData.picture}</h1>
                 </Link>
             </div>
+            </body>
         )}
     )}
     <Link to={'/admin'} >

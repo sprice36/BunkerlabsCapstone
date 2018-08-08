@@ -208,7 +208,7 @@ module.exports = {
     updateCompany,
     findAllCompanies,
     findOneCompany,
-    updateCompanyPhoto
+    updateCompanyPhoto,
     findCompanyByIndustry,
     findCompanyByStage
 };

@@ -12,9 +12,11 @@ import './Company.css';
                 <p>Stage:{companyDetail.stage}</p>
                 <p>Product and Services:{companyDetail.productAndServices}</p>
                 <p>Top Three needs:
-                <li> {companyDetail.needs}</li>
-                <li>{companyDetail.needs}</li>
-                <li>{companyDetail.needs}</li>
+                <ul>
+                <li> {companyDetail.needs[0]}</li>
+                <li>{companyDetail.needs[1]}</li>
+                <li>{companyDetail.needs[2]}</li>
+                </ul>
                 </p>
                 <p>Website:{companyDetail.website}</p>
                 <p>Email:{companyDetail.email}</p>
