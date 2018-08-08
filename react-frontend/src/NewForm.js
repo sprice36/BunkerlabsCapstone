@@ -191,12 +191,7 @@ class NewForm extends React.Component {
             needs.push(this.state.form.need3);
         };
 
-        let fd;
-        this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
-        fd = new FormData();
-        fd.append('picture', blob);
-        
-        });
+       
         
         // let fd = new FormData();
         // // debugger
@@ -221,18 +216,24 @@ class NewForm extends React.Component {
            return res.data._id;
          })
         .then((id) => {
-           console.log('id',id);
-           console.log(fd)
-           axios({
-               method: 'post',
-               url: `http://localhost:4000/api/createcompanypicture/${id}`,
-               data: fd,
-               config: { headers: {'Content-Type': 'multipart/form-data' }}
-           })
-           .then(res => {
-               console.log(res)
-           })
-           .catch(err => console.log(err));
+            let fd;
+            this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
+             fd = new FormData();
+             fd.append('picture', blob);
+             console.log('id',id);
+             console.log(fd)
+             axios({
+                 method: 'post',
+                 url: `http://localhost:4000/api/createcompanypicture/${id}`,
+                 data: fd,
+                 config: { headers: {'Content-Type': 'multipart/form-data' }}
+             })
+             .then(res => {
+                 console.log(res)
+             })
+             .catch(err => console.log(err));
+        }); 
+           
            })
          .catch(err => console.log(err));
         } 
