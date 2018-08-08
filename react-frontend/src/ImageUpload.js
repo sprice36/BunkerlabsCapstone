@@ -240,6 +240,9 @@ class ImageUpload extends React.Component {
         });   
         console.log(this.state.croppedImage);
     }
+    // after submit button is clicked the functionality needs to redirect to /admin page 
+    // also needs to clear fields 
+
 
     render() {
         return (
