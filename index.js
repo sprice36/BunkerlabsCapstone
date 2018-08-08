@@ -153,42 +153,21 @@ app.post('/api/updatecompany/:id', (req, res) => {
 app.get('/api/company/byIndustry/:industry', (req, res) => {
     let industry = req.params.industry; 
         findCompanyByIndustry(industry)
-          .then(industry => res.json(industry))
-          .catch((err) => res.send(err))
-      
+            .then(industry => res.json(industry))
+            .catch((err) => res.send(err))
+
 });
 
 //filter all companies by stage
 app.get('/api/company/byStage/:stage', (req, res) => {
     let stage = req.params.stage; 
         findCompanyByStage(stage)
-         .then(stage => res.json(stage))
-         .catch((err) => res.send(err))
-      
+            .then(stage => res.json(stage))
+            .catch((err) => res.send(err))
+
 });
 
 app.listen(port, () => {
     console.log(`Your server is running at http://localhost:${port}`);
 });
 
-// ******************************
-// DB FUNCTION TESTS
-// 
-// createAdmin('Stephen3', 'test');
-// findAllAdmins()
-//     .then(users => console.log(users))
-// deleteAdmin('5b679b6b49668fdc86930d7c');
-
-// findOneAdmin('5b65fe5c09017dc174024180')
-//     .then(user => console.log(user));
-// findAllCompanies()
-//     .then(companies => console.log(companies))
-// findOneCompany('5b67b6060b0c077bed36ab1a')
-//     .then(company => console.log(company.json()))
-
-
-// console.log(admin);
-// console.log(admin);
-// .then((result) => {
-// console.log(Admin.find());
-// ********************************

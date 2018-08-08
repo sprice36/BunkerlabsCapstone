@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import Cropper from 'react-cropper';
+import 'cropperjs/dist/cropper.css';
 
 
 class ImageUpload extends React.Component {
@@ -129,13 +131,22 @@ class ImageUpload extends React.Component {
                 ...this.state.form,
                 picture: event.target.files[0]
             }
-            // picture: event.target.files[0]
         }, () => {
-            console.log(this.state.form.picture);
-            console.log(this.state.form);
-        }
-    );
+            // console.log(this.state.form.picture);
+            // console.log(this.state.form);
+        });
+
+        if (event.target.files && event.target.files[0]) {
+            let reader = new FileReader();
+            reader.onloadend = (e) => {
+                this.setState({
+                    imagePreview: e.target.result
+                });
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        };
     }
+    
     handleindustry =(event) => {
         this.setState({
             form: { 
@@ -179,9 +190,13 @@ class ImageUpload extends React.Component {
             needs.push(this.state.form.need3);
         };
 
-        let fd = new FormData();
-        // debugger
-        fd.append('picture', this.state.form.picture, this.state.form.picture.name);
+        // let fd = new FormData();
+        // fd.append('picture', this.state.form.picture, this.state.form.picture.name);
+        let fd;
+        this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
+        fd = new FormData();
+        fd.append('picture', blob);
+        });
 
         let companyObject = {
             name: this.state.form.name,
@@ -196,22 +211,6 @@ class ImageUpload extends React.Component {
             youtubeLink: this.state.form.youtubeLink,
             paypalLink: this.state.form.paypalLink
         };
-
-        // console.log(fd);
-
-    //     fetch('http://localhost:4000/api/createcompany', {
-    //         method: 'POST',
-    //         body: JSON.stringify(fd),
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         }})
-    //         .then(res => res.json())
-    //         .catch(error => console.error('Error:', error))
-    //         .then(response => console.log('Success:', response))
-    //         .then(this.setState({ form: this.state.baseFormState}));
-    //     }
-    // )
 
         axios.post('http://localhost:4000/api/createcompany', companyObject)
         .then(res => {
@@ -230,14 +229,17 @@ class ImageUpload extends React.Component {
                 console.log(res)
             })
             .catch(err => console.log(err));
-
-        }
-        
-        )
+            })
         .catch(err => console.log(err));
-
     };
-    
+
+    _crop() {
+        // const dataUrl = this.refs.cropper.getCroppedCanvas().toDataURL();
+        this.setState({
+            croppedImage: this.refs.cropper.getCroppedCanvas().toDataURL()
+        });   
+        console.log(this.state.croppedImage);
+    }
 
     render() {
         return (
@@ -280,8 +282,6 @@ class ImageUpload extends React.Component {
                 <br/>
                 
                 <label htmlFor='Companies Products and Services'>Products and Services</label>
-                {/* <input value={this.state.form.productAndServices} type='text'
-                onChange={this.handleCompanyProductsAndServices} /> */}
                 <textarea value={this.state.form.productAndServices} cols="30" rows="10"
                 onChange={this.handleProductAndServices}></textarea>
                 <br/>
@@ -321,9 +321,27 @@ class ImageUpload extends React.Component {
 
                 <input type="submit" value="Submit"/>
                 <input type="reset" value="Reset"/>
+                <br/>
+
+                <Cropper
+                ref='cropper'
+                src={this.state.imagePreview}
+                style={{height: 400, width: '100%'}}
+                // Cropper.js options
+                aspectRatio={8/6}
+                guides={false}
+                autoCropArea={0}
+                strict={false} 
+                highlight={false}
+                dragCrop={true}
+                cropBoxMovable={true}
+                cropBoxResizable={false}
+                crop={this._crop.bind(this)} />
+
+                <h4>Cropped Preview</h4>
+                <img src={this.state.croppedImage} alt="" className='imgstyle' />
             </form>
         );
-}
-}
+}}
 
 export default ImageUpload;
