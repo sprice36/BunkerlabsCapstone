@@ -206,6 +206,14 @@ class EditPage extends React.Component {
             // .then(console.log(res.data._id))
     
     }
+        deleteCompany = (event) => {
+            event.preventDefault()
+            axios.post(`http://localhost:4000/api/deletecompany/${this.props.match.params.id}`, this.props.match.params.id)
+            .then(res => {
+               console.log(res);
+            //    return res.data._id;
+             })
+        }
 
 //     handleEntry(event){
 //         event.preventDefault();
