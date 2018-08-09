@@ -15,11 +15,9 @@ class Navbar extends React.Component{
                         <img src={require('./BunkerLogo.png')}/>
                         {/* <NavLink>About</NavLink> */}
                 </NavItem>
-                <div className="navDropdown">
                 <NavDropdown  classname="about" eventkey={1} title='ABOUT US' id='basic-nav-dorpdown'>
                     <MenuItem eventkey={1.1}>About Bunker Labs Marketplace</MenuItem>
                 </NavDropdown>
-                </div>
             </Nav>
         </div>
     )

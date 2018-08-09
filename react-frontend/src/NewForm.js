@@ -78,7 +78,7 @@ class NewForm extends React.Component {
                 need2: event.target.value
             }
         })
-        console.log(this.state.form)
+        // console.log(this.state.form)
     }
     handleneed3= (event) => {
         this.setState({
@@ -87,7 +87,7 @@ class NewForm extends React.Component {
                 need3: event.target.value
             }
         })
-        console.log(this.state.form)
+        // console.log(this.state.form)
     }
     handleyoutubeLink= (event) => {
         this.setState({
@@ -96,7 +96,7 @@ class NewForm extends React.Component {
                 youtubeLink: event.target.value
             }
         })
-        console.log(this.state.form)
+        // console.log(this.state.form)
     }
     
     handleproductsAndServices =(event) => {
@@ -106,7 +106,7 @@ class NewForm extends React.Component {
                 productsAndServices: event.target.value
             }
         })
-        console.log(this.state.form)
+        // console.log(this.state.form)
     }
     handlephone =(event) => {
         this.setState({
@@ -115,7 +115,7 @@ class NewForm extends React.Component {
                 phone: event.target.value
             }
         })
-        console.log(this.state.form)
+        // console.log(this.state.form)
     }
     handleemail =(event) => {
         this.setState({
@@ -124,7 +124,7 @@ class NewForm extends React.Component {
                 email: event.target.value
             }
         })
-        console.log(this.state.form)
+        // console.log(this.state.form)
     }
 
     handlePicture =(event) => {
@@ -153,7 +153,7 @@ class NewForm extends React.Component {
                 industry: event.target.value
             }
         })
-        console.log(this.state.form)
+        // console.log(this.state.form)
     }
     handlestage =(event) => {
         this.setState({
@@ -162,7 +162,7 @@ class NewForm extends React.Component {
                 stage: event.target.value
             }
         })
-        console.log(this.state.form)
+        // console.log(this.state.form)
     }
     handleBusinessLocationForAdmin =(event) => {
         this.setState({
@@ -171,18 +171,43 @@ class NewForm extends React.Component {
                 BusinessLocationForAdmin: event.target.value
             }
         })
-        console.log(this.state.form)
+        // console.log(this.state.form)
     }
+
+    _clearForm = (event) => {
+       
+        console.log('clicked')
+            
+        
+        this.setState({
+            form: {
+                name: '',
+                website: '',
+                summary: '',
+                need1: '',
+                need2: '',
+                need3: '',
+                youtubeLink: '',
+                productsAndServices: '',
+                phone: '',
+                email: '',
+                companyImageForAdmin: '',
+                industry: '',
+                stage: '',
+                BusinessLocationForAdmin: '',
+                picture: null,
+                location: '',
+            }})
+            
+        
+    }
+    
+
 
     handleEntry(event){
         event.preventDefault();
         this.handleOpenModal();
-        // const form = event.target.value;
-        // const data = new FormData(event.target)
-    // }
-
-    
-    // createCompany = () => 
+   
         let needs = [];
         if (this.state.form.need1 !== '') {
             needs.push(this.state.form.need1);
@@ -241,6 +266,8 @@ class NewForm extends React.Component {
             croppedImage: this.refs.cropper.getCroppedCanvas().toDataURL()
         });  
        console.log(this.state.croppedImage);
+       });  
+
    }
 
     handleOpenModal = () => {
@@ -291,8 +318,8 @@ class NewForm extends React.Component {
                 onChange={this.handleyoutubeLink}/>
                 
                 <label htmlFor='Companies Products and Services'>Products and Services</label>
-                <input value={this.state.form.companyProductsandServices} type='text'
-                onChange={this.handleCompanyProductsAndServices} />
+                <input value={this.state.form.productsAndServices} type='text'
+                onChange={this.handleproductsAndServices} />
 
                 <label htmlFor='Company Phone Number'>Company Phone Number</label>
                 <input value={this.state.form.phone} type='tel'
@@ -320,7 +347,28 @@ class NewForm extends React.Component {
                 onChange={this.handlePicture}/>
 
                 <input type='submit' value='Create Entry' />
-                <input type="reset" value='Clear Fields' onClick={this.deleteCompany}/>
+                <button onClick={this._clearForm}>Clear Form</button>
+
+                <Cropper
+               ref='cropper'
+               src={this.state.imagePreview}
+               style={{height: 400, width: '100%'}}
+               // Cropper.js options
+               aspectRatio={8/6}
+               guides={false}
+               autoCropArea={0}
+               strict={false}
+               highlight={false}
+               dragCrop={true}
+               cropBoxMovable={true}
+               cropBoxResizable={false}
+               crop={this._crop.bind(this)} />
+
+               <h4>Cropped Preview</h4>
+               <img src={this.state.croppedImage} alt='' className='imgstyle' />
+
+
+
             </form>
             
             <Cropper

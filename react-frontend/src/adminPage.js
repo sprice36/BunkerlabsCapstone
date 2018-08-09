@@ -13,35 +13,38 @@ class adminPage extends React.Component {
             console.log(companies)
             this.setState({companies});
          })
-        
-    }
+        }
+    _createOption = (company) =>{
+        return(
+            
+         <option value={company._id}>
+         {company._id}
+              </option>
+                 )
+};
     _convertToCompany = (data) => {
         return (
            <li>
-               
                <Link to={`/admin/companies/${data._id}/edit`}>
                 {data.name}
                </Link>
-
-
-
-           </li>
+        </li>
         )
     };
-    
+      _handleCompanySelect = (event) => {
+        // console.log(event.target.value)
+        this.props.history.push(`/admin/companies/${event.target.value}/edit`)
+    }
         render() {
+            console.log(this.props.history)
             return ( 
                 <div>
-            {/* <ul>react router link tag that ajax request jsut that compnies data */}
-                    <ul>
-                        {this.state.companies.map(company => this._convertToCompany(company))}  
-                        <li><button onClick={this.state.NewForm}>www.google.com</button></li>
-                        
-                    </ul>
-                    
-
-                    
-                    <Link to={`admin/companies/new`}>
+                    <form>
+                    <select onChange={this._handleCompanySelect}>
+                   {this.state.companies.map(company => this._createOption(company))}
+                   </select>
+                    </form>
+                     <Link to={`/admin/companies/new`}>
                         <button>New Company</button>
                     </Link>
                     </div>
