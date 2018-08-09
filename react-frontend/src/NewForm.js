@@ -175,10 +175,7 @@ class NewForm extends React.Component {
     }
 
     _clearForm = (event) => {
-       
         console.log('clicked')
-            
-        
         this.setState({
             form: {
                 name: '',
@@ -198,12 +195,8 @@ class NewForm extends React.Component {
                 picture: null,
                 location: '',
             }})
-            
-        
     }
     
-
-
     handleEntry(event){
         event.preventDefault();
         this.handleOpenModal();
@@ -260,15 +253,15 @@ class NewForm extends React.Component {
         .catch(err => console.log(err));
         } 
 
-            _crop() {
+        _crop() {
         // const dataUrl = this.refs.cropper.getCroppedCanvas().toDataURL();
         this.setState({
             croppedImage: this.refs.cropper.getCroppedCanvas().toDataURL()
         });  
        console.log(this.state.croppedImage);
-       });  
+       };  
 
-   }
+   
 
     handleOpenModal = () => {
         this.setState({ 
