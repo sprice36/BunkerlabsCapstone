@@ -170,6 +170,42 @@ class EditPage extends React.Component {
         })
         console.log(this.state.form)
     }
+    updateCompany =(event) => {
+        event.preventDefault()
+        let needs = [];
+        if (this.state.form.need1 !== '') {
+            needs.push(this.state.form.need1);
+        };
+        if (this.state.form.need2 !== '') {
+            needs.push(this.state.form.need2);
+        };
+        if (this.state.form.need3 !== '') {
+            needs.push(this.state.form.need3);
+        }; 
+
+        let companyObject = {
+            name: this.state.form.name,
+            summary: this.state.form.summary,
+            industry: this.state.form.industry,
+            stage: this.state.form.stage,
+            productAndServices: this.state.form.productAndServices,
+            needs: needs,
+            website: this.state.form.website,
+            email: this.state.form.email,
+            phone: this.state.form.phone,
+            youtubeLink: this.state.form.youtubeLink,
+            paypalLink: this.state.form.paypalLink,
+        }
+        fetch(`http://localhost:4000/api/updatecompany/${this.props.match.params.id}`,
+        {
+            method: 'POST',
+            body: JSON.stringify(companyObject)
+            })
+            .then(res => (res.json()))
+            // .then(res => console.log(res.data._id))
+            // .then(console.log(res.data._id))
+    
+    }
 
 //     handleEntry(event){
 //         event.preventDefault();
@@ -246,17 +282,17 @@ class EditPage extends React.Component {
 //    }
 
    
-   handleEntry(event){
-    event.preventDefault();
-    const form = event.target.value;
-    const data = new FormData(event.target);
+//    handleEntry(event){
+//     event.preventDefault();
+//     const form = event.target.value;
+//     const data = new FormData(event.target);
 
 
 //    fetch('/form-submit', {
 //        method: 'POST',
 //        body: data,
 //    });
-}
+// }
 
 componentDidMount() {
     fetch(`http://localhost:4000/api/companies/${this.props.match.params.id}`)
@@ -276,7 +312,7 @@ componentDidMount() {
 
     render() {
         return (
-            <form onSubmit={(e) => {this.handleEntry(e)}} >
+            <form onSubmit={(e) => {this.updateCompany(e)}} >
             
 
                 <label htmlFor='Company Name'>Company</label>
