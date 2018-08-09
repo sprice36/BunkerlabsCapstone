@@ -2,6 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
+import Modal from 'react-modal';
+import {
+    Link
+} from 'react-router-dom';
 
 class NewForm extends React.Component {
     constructor(){
@@ -27,7 +31,6 @@ class NewForm extends React.Component {
                 location: '',
             }
         }
-        
     }
 
     componentDidMount() {
@@ -123,12 +126,13 @@ class NewForm extends React.Component {
         })
         // console.log(this.state.form)
     }
+
     handlePicture =(event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 picture: event.target.files[0]
-            }
+            },
         })
         console.log(this.state.form)
         if (event.target.files && event.target.files[0]) {
@@ -141,7 +145,6 @@ class NewForm extends React.Component {
             reader.readAsDataURL(event.target.files[0]);
         };
     }
-
 
     handleindustry =(event) => {
         this.setState({
@@ -203,13 +206,8 @@ class NewForm extends React.Component {
 
     handleEntry(event){
         event.preventDefault();
-        // console.log(event.target.value)
-        // const form = event.target.value;
-        // const data = new FormData(event.target)
-    // }
-
-    
-    // createCompany = () => 
+        this.handleOpenModal();
+   
         let needs = [];
         if (this.state.form.need1 !== '') {
             needs.push(this.state.form.need1);
@@ -219,13 +217,7 @@ class NewForm extends React.Component {
         };
         if (this.state.form.need3 !== '') {
             needs.push(this.state.form.need3);
-        };
-
-       
-        
-        // let fd = new FormData();
-        // // debugger
-        // fd.append('picture', this.state.form.picture, this.state.form.picture.name);
+        }; 
 
         let companyObject = {
             name: this.state.form.name,
@@ -264,32 +256,38 @@ class NewForm extends React.Component {
              .catch(err => console.log(err));
         }); 
            
-           })
-         .catch(err => console.log(err));
+            })
+        .catch(err => console.log(err));
         } 
 
             _crop() {
         // const dataUrl = this.refs.cropper.getCroppedCanvas().toDataURL();
         this.setState({
-           croppedImage: this.refs.cropper.getCroppedCanvas().toDataURL()
+            croppedImage: this.refs.cropper.getCroppedCanvas().toDataURL()
+        });  
+       console.log(this.state.croppedImage);
        });  
-    //    console.log(this.state.croppedImage);
+
    }
 
-   
-        
-
-    //    fetch('/form-submit', {
-    //        method: 'POST',
-    //        body: data,
-    //    });
+    handleOpenModal = () => {
+        this.setState({ 
+            showModal: true 
+        });
+    }
     
+    handleCloseModal = () => {
+        this.setState({ 
+            showModal: false,
+        });
+    }
 
     render() {
         return (
+            <div>
+
             <form onSubmit={(e) => {this.handleEntry(e)}} >
             
-
                 <label htmlFor='Company Name'>Company</label>
                 <input value={this.state.form.name} type='text'
                 onChange={this.handlename}/>
@@ -345,54 +343,12 @@ class NewForm extends React.Component {
                 
                 <label htmlFor=''>Company Image</label>
                 <input type='file' name='poi-thumbnail'
-                       accept='.png, .jpg, .jpeg'
+                        accept='.png, .jpg, .jpeg'
                 onChange={this.handlePicture}/>
-                
-               
-
 
                 <input type='submit' value='Create Entry' />
                 <button onClick={this._clearForm}>Clear Form</button>
-                
-                
-                
-                {/* <input type='submit' value='Clear Fields' onSubmit={(e)=>{
-                    (e).preventDefault()
-                    console.log('clicked')}} */}
-                
-                
-                
-                
-                {/* // onSubmit={(event) => { */}
-                {/* //     this.event.value({ */}
-                {/* //         name: '',
-                //         website: '',
-                //         summary: '',
-                //         need1: '',
-                //         need2: '',
-                //         need3: '',
-                //         youtubeLink: '',
-                //         productsAndServices: '',
-                //         phone: '',
-                //         email: '',
-                //         companyImageForAdmin: '',
-                //         industry: '',
-                //         stage: '',
-                //         BusinessLocationForAdmin: '',
-                //         picture: null,
-                //         location: '',
-                            
-                //     })
-                    
-                //     this.state.preventDefault();
-                //     this.state.target.reset()
-                //     console.log(this.state.target)
-                    
-                    // }} 
-                    // /> */}
-                
-                
-                
+
                 <Cropper
                ref='cropper'
                src={this.state.imagePreview}
@@ -412,10 +368,38 @@ class NewForm extends React.Component {
                <img src={this.state.croppedImage} alt='' className='imgstyle' />
 
 
+
             </form>
+            
+            <Cropper
+                ref='cropper'
+                src={this.state.imagePreview}
+                style={{height: 400, width: '100%'}}
+                // Cropper.js options
+                aspectRatio={16/9}
+                guides={false}
+                autoCropArea={0}
+                strict={false}
+                highlight={false}
+                dragCrop={true}
+                cropBoxMovable={true}
+                cropBoxResizable={false}
+                crop={this._crop.bind(this)} />
+                <br/>
+
+            <Modal className="create-company-modal"
+            isOpen={this.state.showModal}
+            contentLabel="Minimal Modal Example">
+                {this.state.name} profile created!
+                <Link to = "/admin" > 
+                <button onClick={this.handleCloseModal}>Accept</button>
+                </Link>
+            </Modal>
+                {/* <h4>Cropped Preview</h4>
+                <img src={this.state.croppedImage} alt='' className='imgstyle' /> */}
+            </div>
         );
 }
 }
-
 
 export default NewForm;

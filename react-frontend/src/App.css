@@ -38,6 +38,13 @@ html {
   width: 300px;
 }
 
+.create-company-modal {
+  width: 50%;
+  height: 50px;
+  background-color: cornflowerblue;
+  display: flex;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
