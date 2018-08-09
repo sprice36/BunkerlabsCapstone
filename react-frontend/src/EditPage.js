@@ -340,14 +340,14 @@ componentDidMount() {
                
 
 
-                <input type='submit' value='Create Entry' />
-                <input type='submit' value='Clear Fields' onClick={this.deleteCompany}/>
+                <input type='submit' value='Save Changes' />
+                <button onClick={this.deleteCompany}>Delete Company</button>
                 
                 
                 
                 
                 
-                <button>Delete Company</button>
+               
                 {/* <Cropper
                ref='cropper'
                src={this.state.imagePreview}
