@@ -145,7 +145,20 @@ app.post('/api/updateadmins/:id', (req, res) => {
 
 //updates specific company 
 app.post('/api/updatecompany/:id', (req, res) => {
-    updateCompany(req.body)
+    let newCompanyObject = {
+        name: req.body.name,
+        summary: req.body.summary,
+        industry: req.body.industry,
+        stage: req.body.stage,
+        productAndServices: req.body.productAndServices,
+        needs: req.body.needs,
+        website: req.body.website,
+        email: req.body. email,
+        phone: req.body.phone,
+        youtubeLink: req.body.youtubeLink,
+        paypalLink: req.body.paypalLink
+    };
+    updateCompany(newCompanyObject)
         .then(company => res.json(company))
         .catch((err) => res.send(err));
 });
