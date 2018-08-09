@@ -90,6 +90,41 @@ app.get('/api/admins/:id', (req, res) => {
         .catch((err) => res.send(err));
 });
 
+app.post('/api/deletecompany/:id', (req,res) => {
+    let companyId = req.params.id;
+    deleteCompany(companyId)
+    .then(company => res.json(company))
+    .catch((err) => res.send(err));
+})
+
+// updates name/userId for specific admin
+app.post('/api/updateadmins/:id', (req, res) => {
+    updateAdmin(req.body)
+    .then(admin => res.json(admin))
+    .catch((err) => res.send(err));
+});
+
+// create new company
+app.post('/api/createcompany', (req, res) => {
+    // console.log(req.body)
+    let newCompanyObject = {
+        name: req.body.name,
+        summary: req.body.summary,
+        industry: req.body.industry,
+        stage: req.body.stage,
+        productAndServices: req.body.productAndServices,
+        needs: req.body.needs,
+        website: req.body.website,
+        email: req.body. email,
+        phone: req.body.phone,
+        youtubeLink: req.body.youtubeLink,
+        paypalLink: req.body.paypalLink
+    };
+    createCompany(newCompanyObject)
+        .then(company => res.json(company))
+        .catch((err) => res.send(err));
+});
+
 app.post('/api/createcompanypicture/:id', upload.single('picture'), (req, res) => {
     fs.rename(req.file.path, 
     `public/images/${req.params.id}`, 
@@ -109,43 +144,11 @@ app.post('/api/createcompanypicture/:id', upload.single('picture'), (req, res) =
         .catch((err) => res.send(err));
 });
 
-app.post('/api/createcompany', (req, res) => {
-    console.log(req.body)
-    let newCompanyObject = {
-        name: req.body.name,
-        summary: req.body.summary,
-        industry: req.body.industry,
-        stage: req.body.stage,
-        productAndServices: req.body.productAndServices,
-        needs: req.body.needs,
-        website: req.body.website,
-        email: req.body. email,
-        phone: req.body.phone,
-        youtubeLink: req.body.youtubeLink,
-        paypalLink: req.body.paypalLink
-    };
-    createCompany(newCompanyObject)
-        .then(company => res.json(company))
-        .catch((err) => res.send(err));
-});
-
-app.post('/api/deletecompany/:id', (req,res) => {
-    let companyId = req.params.id;
-    deleteCompany(companyId)
-        .then(company => res.json(company))
-        .catch((err) => res.send(err));
-})
-
-// updates name/userId for specific admin
-app.post('/api/updateadmins/:id', (req, res) => {
-    updateAdmin(req.body)
-        .then(admin => res.json(admin))
-        .catch((err) => res.send(err));
-});
-
 //updates specific company 
 app.post('/api/updatecompany/:id', (req, res) => {
+    console.log(req.body)
     let newCompanyObject = {
+        _id: req.params.id,
         name: req.body.name,
         summary: req.body.summary,
         industry: req.body.industry,
@@ -159,6 +162,25 @@ app.post('/api/updatecompany/:id', (req, res) => {
         paypalLink: req.body.paypalLink
     };
     updateCompany(newCompanyObject)
+        .then(company => res.json(company))
+        .catch((err) => res.send(err));
+});
+
+app.post('/api/updatecompanypicture/:id', upload.single('picture'), (req, res) => {
+    fs.rename(req.file.path, 
+    `public/images/${req.params.id}`, 
+    (err) => { 
+        if (err) {
+            console.log(err);
+        }
+    })
+    let imagePath = `public/images/${req.params.id}`;
+    let id = req.params.id;
+    let companyObject = {
+        _id: id,
+        picture: imagePath
+    };
+    updateCompanyPhoto(companyObject)
         .then(company => res.json(company))
         .catch((err) => res.send(err));
 });

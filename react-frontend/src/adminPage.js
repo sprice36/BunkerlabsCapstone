@@ -41,6 +41,7 @@ class adminPage extends React.Component {
                 <div>
                     <form>
                     <select onChange={this._handleCompanySelect}>
+                    <option value="" defaultValue></option>
                    {this.state.companies.map(company => this._createOption(company))}
                    </select>
                     </form>

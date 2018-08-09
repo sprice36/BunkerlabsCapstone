@@ -342,26 +342,7 @@ class NewForm extends React.Component {
                 <input type='submit' value='Create Entry' />
                 <button onClick={this._clearForm}>Clear Form</button>
 
-                <Cropper
-               ref='cropper'
-               src={this.state.imagePreview}
-               style={{height: 400, width: '100%'}}
-               // Cropper.js options
-               aspectRatio={8/6}
-               guides={false}
-               autoCropArea={0}
-               strict={false}
-               highlight={false}
-               dragCrop={true}
-               cropBoxMovable={true}
-               cropBoxResizable={false}
-               crop={this._crop.bind(this)} />
-
-               <h4>Cropped Preview</h4>
-               <img src={this.state.croppedImage} alt='' className='imgstyle' />
-
-
-
+                <img src={this.state.croppedImage} alt='' className='imgstyle' />
             </form>
             
             <Cropper
