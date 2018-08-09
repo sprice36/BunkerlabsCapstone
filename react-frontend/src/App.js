@@ -12,7 +12,6 @@ import NewForm from './NewForm';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import AboutMarketplace from './AboutMarketplace';
-import ReactModal from './modalTest';
 
 class App extends React.Component {
   render() {
@@ -24,10 +23,8 @@ class App extends React.Component {
         <Route path='/company/:id' component={Company} exact={true}/>
         <Route path='/admin' component={ adminPage } exact={true}/>
         <Route path='/admin/companies/new' component={ NewForm } exact={true}/>
-        <Route path='/' component={LandingPage} exact={true}/>
         <Route path='/aboutMarketplace' component={AboutMarketplace} exact={true}/>
         <Route path='/admin/companies/:id/edit' component={ EditPage } exact={true}/>
-        <Route path='/modal' component={ ReactModal } exact={true}/>
 
         <Footer />
                 
