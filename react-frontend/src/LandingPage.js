@@ -37,6 +37,10 @@ class API extends React.Component{
             <body>
             <div>
                 <Link to={`/company/${companyData._id}`}>
+                {
+                    `../${companyData.picture}.jpg`
+                }
+                <img src={`./${companyData.picture}`} alt=""/>
                 <h1>{companyData.name}</h1>
                 <h1>{companyData.picture}</h1>
                 </Link>
@@ -47,11 +51,11 @@ class API extends React.Component{
     <Link to={'/admin'} >
     <button>Admin Panel</button>
     </Link>
-
-    <Link to={'/test'}>
-    <button>Image Upload Test</button>
-    </Link>
     
+    <Link to={'/login'} >
+    <button>Admin login</button>
+    </Link>
+
     </div>    
     
 
