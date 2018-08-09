@@ -126,6 +126,7 @@ db.once('open', () => {
     modifications.phone = CompanyObject.phone;
     modifications.youtubeLink = CompanyObject.youtubeLink;
     modifications.paypalLink = CompanyObject.paypalLink;  
+    console.log(CompanyObject._id);
     return Company 
         .findByIdAndUpdate(CompanyObject._id, {$set: modifications}, {new: true})
         .exec()

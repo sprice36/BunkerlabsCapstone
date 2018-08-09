@@ -6,7 +6,6 @@ import 'cropperjs/dist/cropper.css';
 class EditPage extends React.Component {
     constructor(){
         super();
-        // this.handleEntry = this.handleEntry()
         this.state={
             form:{
                 name: '',
@@ -27,14 +26,18 @@ class EditPage extends React.Component {
                 location: '',
             }
         }
-        
     }
 
     componentDidMount() {
+    fetch(`http://localhost:4000/api/companies/${this.props.match.params.id}`)
+    .then(res => res.json())
+    .then(companyData => {
         this.setState({
-            baseFormState: this.state.form
-        })
+            form: companyData
+        });
+        })  
     }
+
     handlename= (event) => {
         this.setState({
             form: {
@@ -105,6 +108,7 @@ class EditPage extends React.Component {
         })
         console.log(this.state.form)
     }
+
     handlephone =(event) => {
         this.setState({
             form: {
@@ -114,6 +118,7 @@ class EditPage extends React.Component {
         })
         console.log(this.state.form)
     }
+
     handleemail =(event) => {
         this.setState({
             form: {
@@ -123,6 +128,7 @@ class EditPage extends React.Component {
         })
         console.log(this.state.form)
     }
+
     handlePicture =(event) => {
         this.setState({
             form: {
@@ -142,7 +148,6 @@ class EditPage extends React.Component {
         };
     }
 
-
     handleindustry =(event) => {
         this.setState({
             form: {
@@ -152,6 +157,7 @@ class EditPage extends React.Component {
         })
         console.log(this.state.form)
     }
+
     handlestage =(event) => {
         this.setState({
             form: {
@@ -161,6 +167,7 @@ class EditPage extends React.Component {
         })
         console.log(this.state.form)
     }
+
     handleBusinessLocationForAdmin =(event) => {
         this.setState({
             form: {
@@ -170,7 +177,8 @@ class EditPage extends React.Component {
         })
         console.log(this.state.form)
     }
-    updateCompany =(event) => {
+
+    updateCompany = (event) => {
         event.preventDefault()
         let needs = [];
         if (this.state.form.need1 !== '') {
@@ -196,15 +204,19 @@ class EditPage extends React.Component {
             youtubeLink: this.state.form.youtubeLink,
             paypalLink: this.state.form.paypalLink,
         }
-        fetch(`http://localhost:4000/api/updatecompany/${this.props.match.params.id}`,
-        {
-            method: 'POST',
-            body: JSON.stringify(companyObject)
+        axios.post(`http://localhost:4000/api/updatecompany/${this.props.match.params.id}`, companyObject)
+            .then(res => {
+                console.log(res);
+                // return r
             })
-            .then(res => (res.json()))
+        // fetch(`http://localhost:4000/api/updatecompany/${this.props.match.params.id}`,
+        // {
+        //     method: 'POST',
+        //     body: JSON.stringify(companyObject)
+        //     })
+        // .then(res => (res.json()))
             // .then(res => console.log(res.data._id))
             // .then(console.log(res.data._id))
-    
     }
         deleteCompany = (event) => {
             event.preventDefault()
@@ -215,111 +227,9 @@ class EditPage extends React.Component {
              })
         }
 
-//     handleEntry(event){
-//         event.preventDefault();
-//         console.log(event.target.value)
-//         // const form = event.target.value;
-//         // const data = new FormData(event.target)
-//     // }
-
-    
-//     // createCompany = () => 
-//         let needs = [];
-//         if (this.state.form.need1 !== '') {
-//             needs.push(this.state.form.need1);
-//         };
-//         if (this.state.form.need2 !== '') {
-//             needs.push(this.state.form.need2);
-//         };
-//         if (this.state.form.need3 !== '') {
-//             needs.push(this.state.form.need3);
-//         };
-
-//         let fd;
-//         this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
-//         fd = new FormData();
-//         fd.append('picture', blob);
-        
-//         });
-        
-//         // let fd = new FormData();
-//         // // debugger
-//         // fd.append('picture', this.state.form.picture, this.state.form.picture.name);
-
-//         let companyObject = {
-//             name: this.state.form.name,
-//             summary: this.state.form.summary,
-//             industry: this.state.form.industry,
-//             stage: this.state.form.stage,
-//             productAndServices: this.state.form.productAndServices,
-//             needs: needs,
-//             website: this.state.form.website,
-//             email: this.state.form.email,
-//             phone: this.state.form.phone,
-//             youtubeLink: this.state.form.youtubeLink,
-//             paypalLink: this.state.form.paypalLink,
-//         }
-//          axios.post('http://localhost:4000/api/createcompany', companyObject)
-//         .then(res => {
-//            console.log(res);
-//            return res.data._id;
-//          })
-//         .then((id) => {
-//            console.log('id',id);
-//            console.log(fd)
-//            axios({
-//                method: 'post',
-//                url: `http://localhost:4000/api/createcompanypicture/${id}`,
-//                data: fd,
-//                config: { headers: {'Content-Type': 'multipart/form-data' }}
-//            })
-//            .then(res => {
-//                console.log(res)
-//            })
-//            .catch(err => console.log(err));
-//            })
-//          .catch(err => console.log(err));
-//         } 
-
-//             _crop() {
-//         // const dataUrl = this.refs.cropper.getCroppedCanvas().toDataURL();
-//         this.setState({
-//            croppedImage: this.refs.cropper.getCroppedCanvas().toDataURL()
-//        });  
-//        console.log(this.state.croppedImage);
-//    }
-
-   
-//    handleEntry(event){
-//     event.preventDefault();
-//     const form = event.target.value;
-//     const data = new FormData(event.target);
-
-
-//    fetch('/form-submit', {
-//        method: 'POST',
-//        body: data,
-//    });
-// }
-
-componentDidMount() {
-    fetch(`http://localhost:4000/api/companies/${this.props.match.params.id}`)
-    .then(res => res.json())
-    .then(companyData => {
-       
-        this.setState({
-            form: companyData
-
-        });
-     })
-    
-}
-
-
-   
-
     render() {
         return (
+            <div>
             <form onSubmit={(e) => {this.updateCompany(e)}} >
             
 
@@ -378,40 +288,29 @@ componentDidMount() {
                 
                 <label htmlFor=''>Company Image</label>
                 <input type='file' name='poi-thumbnail'
-                       accept='.png, .jpg, .jpeg'
+                        accept='.png, .jpg, .jpeg'
                 onChange={this.handlePicture}/>
                 
-               
-
-
                 <input type='submit' value='Save Changes' />
                 <button onClick={this.deleteCompany}>Delete Company</button>
-                
-                
-                
-                
-                
-               
-                {/* <Cropper
-               ref='cropper'
-               src={this.state.imagePreview}
-               style={{height: 400, width: '100%'}}
-               // Cropper.js options
-               aspectRatio={8/6}
-               guides={false}
-               autoCropArea={0}
-               strict={false}
-               highlight={false}
-               dragCrop={true}
-               cropBoxMovable={true}
-               cropBoxResizable={false}
-               crop={this._crop.bind(this)} />
-
-               <h4>Cropped Preview</h4>
-               <img src={this.state.croppedImage} alt='' className='imgstyle' /> */}
-
-
             </form>
+
+            {/* <Cropper
+                ref='cropper'
+                src={this.state.imagePreview}
+                style={{height: 400, width: '100%'}}
+                // Cropper.js options
+                aspectRatio={16/9}
+                guides={false}
+                autoCropArea={0}
+                strict={false}
+                highlight={false}
+                dragCrop={true}
+                cropBoxMovable={true}
+                cropBoxResizable={false}
+                crop={this._crop.bind(this)} /> */}
+                <br/>
+            </div>
         );
 }
 }
