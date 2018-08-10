@@ -25,6 +25,8 @@ class EditPage extends React.Component {
                 BusinessLocationForAdmin: '',
                 picture: null,
                 location: '',
+                linkedIn: '',
+                profile: ''
             }
         }
         
@@ -52,6 +54,26 @@ class EditPage extends React.Component {
             }
         })
     }
+
+    handlelinkedIn= (event) => {
+        this.setState({
+            form: {
+                ...this.state.form, 
+                linkedIn: event.target.value
+            }
+        })
+    }
+
+    handleprofile= (event) => {
+        this.setState({
+            form: {
+                ...this.state.form, 
+                profile: event.target.value
+            }
+        })
+    }
+
+
     handlesummary= (event) => {
         this.setState({
             form: {
@@ -195,6 +217,8 @@ class EditPage extends React.Component {
             phone: this.state.form.phone,
             youtubeLink: this.state.form.youtubeLink,
             paypalLink: this.state.form.paypalLink,
+            profile: this.state.form.profile,
+            linkedIn: this.state.form.linkedIn,
         }
         fetch(`http://localhost:4000/api/updatecompany/${this.props.match.params.id}`,
         {
@@ -337,20 +361,60 @@ componentDidMount() {
                 onChange={this.handlesummary}/>
 
                 <label htmlFor='Company Needs 1'>Need 1</label>
-                <input value={this.state.form.need1} type='text'
-                onChange={this.handleneed1}/>
+                <select value={this.state.form.need1}
+                onChange={this.handleneed1}>
+                <option>Investing</option>
+                <option>Mentorship</option>
+                <option>Employees</option>
+                <option>Marketing</option>
+                <option>Public Relations</option>
+                <option>Facilities</option>
+                <option>System Monitoring</option>
+                <option>Legal Aide</option>
+                <option>IT Help</option>
+                </select>
+                
                 
                 <label htmlFor='Company Needs 2'>Need 2</label>
-                <input value={this.state.form.need2} type='text'
-                onChange={this.handleneed2}/>
+                <select value={this.state.form.need1}
+                onChange={this.handleneed1}>
+                <option>Investing</option>
+                <option>Mentorship</option>
+                <option>Employees</option>
+                <option>Marketing</option>
+                <option>Public Relations</option>
+                <option>Facilities</option>
+                <option>System Monitoring</option>
+                <option>Legal Aide</option>
+                <option>IT Help</option>
+                </select>
                 
                 <label htmlFor='Company Needs 3'>Need 3</label>
-                <input value={this.state.form.need3} type='text'
-                onChange={this.handleneed3}/>
+                <select value={this.state.form.need1}
+                onChange={this.handleneed1}>
+                <option>Investing</option>
+                <option>Mentorship</option>
+                <option>Employees</option>
+                <option>Marketing</option>
+                <option>Public Relations</option>
+                <option>Facilities</option>
+                <option>System Monitoring</option>
+                <option>Legal Aide</option>
+                <option>IT Help</option>
+                </select>
                 
-                <label htmlFor='Youtube Video'>Youtube Link</label>
+                <label htmlFor='Pitch Video'>Pitch Link</label>
                 <input value={this.state.form.youtubeLink} type='url'
                 onChange={this.handleyoutubeLink}/>
+                
+                <label htmlFor='Profile Picture'>Profile Picture</label>
+                <input value={this.state.form.profile} type='url'
+                onChange={this.handleprofile}/>
+
+                 <label htmlFor='LinkedIn'>LinkedIn</label>
+                <input value={this.state.form.linkedIn} type='url'
+                onChange={this.handlelinkedIn}/>
+
                 
                 <label htmlFor='Companies Products and Services'>Products and Services</label>
                 <input value={this.state.form.companyProductsandServices} type='text'
@@ -365,12 +429,53 @@ componentDidMount() {
                 onChange={this.handleemail}/>
                 
                 <label htmlFor='Industry'>Industry</label>
-                <input value={this.state.form.industry} type='text'
-                onChange={this.handleindustry}/>
+                <select value={this.state.form.industry} 
+                onChange={this.handleindustry}>
+                <option>Apparel</option>
+                <option>Banking</option>
+                <option>Media</option>
+                <option>  Construction</option>
+                <option> Civic</option>
+                <option> Real Estate</option>
+                <option> Gaming</option>
+                <option> Software</option>
+                <option> Hardware</option>
+                <option>Security</option>
+                <option> Education</option>
+                <option>Entertainment</option>
+                <option> Food/Beverage</option>
+                <option> Health/Fitness</option>
+                <option> IT</option>
+                <option> Insurance</option>
+                <option>  Legal Services</option>
+                <option> Leisure</option>
+                <option> Management/Consulting</option>
+                <option> Military</option>
+                <option> Music</option>
+                <option> News</option>
+                <option> Alternative Energy</option>
+                <option>Public Relations</option>
+                <option>Manufacturing</option>
+                <option> Religion</option>
+                <option> Retail</option>
+                <option>Sporting Goods</option>
+                <option> Recruiting</option>
+                <option> Telecommunications</option>
+                <option>  Transportation</option>
+                <option> Warehousing</option>
+                <option> Venture Capitalism</option>
+                </select>
                 
                 <label htmlFor='Stage of Business'>Stage of Company</label>
-                <input value={this.state.form.stage} type='text'
-                onChange={this.handlestage}/>
+                <select value={this.state.form.stage}
+                onChange={this.handlestage}
+                >
+                    <option>StartUp</option>
+                    <option>Growth</option>
+                    <option>Establishment</option>
+                    <option>Expansion</option>
+                    <option>Maturity</option>
+                    </select>
                 
                 <label htmlFor='Business Location'>Business Location</label>
                 <input value={this.state.form.BusinessLocationForAdmin} type='text'
