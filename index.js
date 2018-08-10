@@ -3,14 +3,25 @@ dotenv.config();
 const express = require('express');
 const app = express();
 const fs = require('fs'); // will be use to write images
-const path = require('path'); // do we need?
 const port = 4000; // change this to .env file
 const expressHbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const staticMiddleware = express.static('build');
 const cors = require('cors');
 const multer = require('multer');
-const upload = multer({ dest: 'public/images/'});
+const upload = multer({
+    dest: 'public/images/'
+});
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const Schema = mongoose.Schema;
+const jwt = require('jsonwebtoken');
+const router = express.Router();
+const expressJwt = require('express-jwt');
+
+const {createAccount, verifyToken, verifyUser} = require('./routes/auth');
+const admin = require('./admin')
+
 app.use(staticMiddleware)
 
 const {
@@ -20,14 +31,15 @@ const {
     findOneAdmin,
     createCompany,
     deleteCompany,
-    updateAdmin, 
+    updateAdmin,
     updateCompany,
     findAllCompanies,
     findOneCompany,
     updateCompanyPhoto,
     findCompanyByIndustry,
-    findCompanyByStage 
+    findCompanyByStage,
 } = require('./db.js');
+
 
 
 app.engine('.hbs', expressHbs({
@@ -43,8 +55,8 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+
 // API routes if we use express router???
-// require('./routes')(app);
 
 // This is for cross domain fun --> from Chris
 app.all('*', function (req, res, next) {
@@ -61,6 +73,10 @@ app.use(cors({
     credentials: true
 }));
 
+app.post('/createAccount', createAccount)
+
+
+//public routes
 // Returns JSON data for all companies
 app.get('/api/companies/', (req, res) => {
     findAllCompanies()
@@ -75,12 +91,36 @@ app.get('/api/companies/:id', (req, res) => {
         .catch((err) => res.send(err));
 });
 
-// Get rid of this route for when this goes live.... no need for it
+//filter all companies by industry 
+app.get('/api/company/byIndustry/:industry', (req, res) => {
+    let industry = req.params.industry;
+    findCompanyByIndustry(industry)
+        .then(industry => res.json(industry))
+        .catch((err) => res.send(err))
+
+});
+
+//filter all companies by stage
+app.get('/api/company/byStage/:stage', (req, res) => {
+    let stage = req.params.stage;
+    findCompanyByStage(stage)
+        .then(stage => res.json(stage))
+        .catch((err) => res.send(err))
+
+});
+
+//routes ONLY if authentication is verified
 // Returns JSON of name/userId of all admins
+app.post('/api/admin/', verifyUser) 
+    //put authentication part
+
+
 app.get('/api/admins/', (req, res) => {
+
     findAllAdmins()
         .then(admins => res.json(admins))
         .catch((err) => res.send(err));
+
 });
 
 // Returns JSON of name/userId for specific admin
@@ -88,16 +128,17 @@ app.get('/api/admins/:id', (req, res) => {
     findOneAdmin(req.params.id)
         .then(company => res.json(company))
         .catch((err) => res.send(err));
+
 });
 
 app.post('/api/createcompanypicture/:id', upload.single('picture'), (req, res) => {
-    fs.rename(`./public/images/${req.file.filename}`, 
-    `./public/images/${req.params.id}`, 
-    (err) => { 
-        if (err) {
-            console.log(err);
-        }
-    })
+    fs.rename(`./public/images/${req.file.filename}`,
+        `./public/images/${req.params.id}`,
+        (err) => {
+            if (err) {
+                console.log(err);
+            }
+        })
     let imagePath = `public/images/${req.params.id}`;
     let id = req.params.id;
     let companyObject = {
@@ -118,7 +159,7 @@ app.post('/api/createcompany', (req, res) => {
         productAndServices: req.body.productAndServices,
         needs: req.body.needs,
         website: req.body.website,
-        email: req.body. email,
+        email: req.body.email,
         phone: req.body.phone,
         youtubeLink: req.body.youtubeLink,
         paypalLink: req.body.paypalLink
@@ -128,7 +169,7 @@ app.post('/api/createcompany', (req, res) => {
         .catch((err) => res.send(err));
 });
 
-app.post('/api/deletecompany/:id', (req,res) => {
+app.post('/api/deletecompany/:id', (req, res) => {
     let companyId = req.params.id;
     deleteCompany(companyId)
         .then(company => res.json(company))
@@ -149,46 +190,14 @@ app.post('/api/updatecompany/:id', (req, res) => {
         .catch((err) => res.send(err));
 });
 
-//filter all companies by industry 
-app.get('/api/company/byIndustry/:industry', (req, res) => {
-    let industry = req.params.industry; 
-        findCompanyByIndustry(industry)
-          .then(industry => res.json(industry))
-          .catch((err) => res.send(err))
-      
+
+//404 message for nonexistent routes
+app.get('*', function (req, res) {
+    res.send('page not found', 404);
 });
 
-//filter all companies by stage
-app.get('/api/company/byStage/:stage', (req, res) => {
-    let stage = req.params.stage; 
-        findCompanyByStage(stage)
-         .then(stage => res.json(stage))
-         .catch((err) => res.send(err))
-      
-});
+app.use(verifyToken, admin)
 
 app.listen(port, () => {
     console.log(`Your server is running at http://localhost:${port}`);
 });
-
-// ******************************
-// DB FUNCTION TESTS
-// 
-// createAdmin('Stephen3', 'test');
-// findAllAdmins()
-//     .then(users => console.log(users))
-// deleteAdmin('5b679b6b49668fdc86930d7c');
-
-// findOneAdmin('5b65fe5c09017dc174024180')
-//     .then(user => console.log(user));
-// findAllCompanies()
-//     .then(companies => console.log(companies))
-// findOneCompany('5b67b6060b0c077bed36ab1a')
-//     .then(company => console.log(company.json()))
-
-
-// console.log(admin);
-// console.log(admin);
-// .then((result) => {
-// console.log(Admin.find());
-// ********************************

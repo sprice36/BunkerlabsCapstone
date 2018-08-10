@@ -15,6 +15,9 @@ import ImageUpload from './ImageUpload';
 import adminPage from './adminPage';
 import EditPage from './EditPage';
 import NewForm from './NewForm';
+import adminLogin from './adminLogin';
+
+
 
 class App extends React.Component {
   render() {
@@ -23,7 +26,8 @@ class App extends React.Component {
 
         <Router>
         <Switch>
-        <Route path='/admin' component={ adminPage } exact={true}/>
+        <Route path='/login' component={ adminLogin } exact={true}/>
+        <Route path='/admin' component={ adminPage }  exact={true}/>
         <Route path='/admin/companies/:id/edit' component={ EditPage } exact={true}/>
         <Route path='/admin/companies/new' component={ NewForm } exact={true}/>
         <Route path='/company/:id' component={Company} exact={true}/>
