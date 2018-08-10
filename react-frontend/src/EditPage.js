@@ -356,8 +356,8 @@ class EditPage extends React.Component {
                 <br/>
                 
                 <label htmlFor='Company Needs 2'>Need 2</label>
-                <select value={this.state.form.need1}
-                onChange={this.handleneed1}>
+                <select value={this.state.form.need2}
+                onChange={this.handleneed2}>
                 <option>Investing</option>
                 <option>Mentorship</option>
                 <option>Employees</option>
@@ -371,8 +371,8 @@ class EditPage extends React.Component {
                 <br/>
                 
                 <label htmlFor='Company Needs 3'>Need 3</label>
-                <select value={this.state.form.need1}
-                onChange={this.handleneed1}>
+                <select value={this.state.form.need3}
+                onChange={this.handleneed3}>
                 <option>Investing</option>
                 <option>Mentorship</option>
                 <option>Employees</option>
@@ -468,8 +468,28 @@ class EditPage extends React.Component {
                 <br/>
   
                 <label htmlFor='Business Location'>Business Location</label>
-                <input value={this.state.form.location} type='text'
-                onChange={this.handlelocation}/>
+                <select value={this.state.form.location} 
+                onChange={this.location}
+                >
+                <option>Atlanta, GA</option>
+                <option>Austin, TX</option>
+                <option>Bozeman, MT</option>
+                <option>Chicago, IL</option>
+                <option>Bay Area, CA</option>
+                <option>Columbis, OH</option>
+                <option>Detriot, MI</option>
+                <option>Houston, TX</option>
+                <option>Madison, WI</option>
+                <option>Minneapolis, MN</option>
+                <option>Nashville, TN</option>
+                <option>New York, NY</option>
+                <option>Philadelphia, PA</option>
+                <option>Raleigh, NC</option>
+                <option>San Antonio, TX</option>
+                <option>Seattle, WA</option>
+                <option>Washington D.C.</option>
+                </select>
+                
                 <br/>
                 
                 <label htmlFor=''>Company Image</label>
