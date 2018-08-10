@@ -7,7 +7,7 @@ const path = require('path'); // do we need?
 const port = 4000; // change this to .env file
 const expressHbs = require('express-handlebars');
 const bodyParser = require('body-parser');
-const staticMiddleware = express.static('build');
+const staticMiddleware = express.static('public');
 const cors = require('cors');
 const multer = require('multer');
 const upload = multer({ dest: 'public/images/'});
@@ -118,7 +118,10 @@ app.post('/api/createcompany', (req, res) => {
         email: req.body. email,
         phone: req.body.phone,
         youtubeLink: req.body.youtubeLink,
-        paypalLink: req.body.paypalLink
+        paypalLink: req.body.paypalLink,
+        location: req.body.location,
+        profile: req.body.profile,
+        linkedIn: req.body.linkedIn
     };
     createCompany(newCompanyObject)
         .then(company => res.json(company))
@@ -133,7 +136,7 @@ app.post('/api/createcompanypicture/:id', upload.single('picture'), (req, res) =
             console.log(err);
         }
     })
-    let imagePath = `public/images/${req.params.id}`;
+    let imagePath = `images/${req.params.id}`;
     let id = req.params.id;
     let companyObject = {
         _id: id,
@@ -159,7 +162,10 @@ app.post('/api/updatecompany/:id', (req, res) => {
         email: req.body. email,
         phone: req.body.phone,
         youtubeLink: req.body.youtubeLink,
-        paypalLink: req.body.paypalLink
+        paypalLink: req.body.paypalLink,
+        location: req.body.location,
+        profile: req.body.profile,
+        linkedIn: req.body.linkedIn
     };
     updateCompany(newCompanyObject)
         .then(company => res.json(company))
@@ -167,14 +173,50 @@ app.post('/api/updatecompany/:id', (req, res) => {
 });
 
 app.post('/api/updatecompanypicture/:id', upload.single('picture'), (req, res) => {
-    fs.rename(req.file.path, 
-    `public/images/${req.params.id}`, 
-    (err) => { 
-        if (err) {
-            console.log(err);
-        }
-    })
-    let imagePath = `public/images/${req.params.id}`;
+    // Need to delete old picture at public/images/:id before renaming old one
+    // Check DB to see if picture exists before trying to delete
+    // console.log(req.file);
+
+    fs.rename(req.file.path,
+        `public/images/${req.params.id}`,
+        (err) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+
+    // fs.exists(`public/images/${req.params.id}`, (exists) => {
+    //     console.log(exists);
+    //     if (exists === true) {
+    //         fs.rename(req.file.path,
+    //                     `public/images/${req.params.id}`, 
+    //                     (err) => { 
+    //                     if (err) {
+    //                         console.log(err);
+    //                         }
+    //                     });
+            // fs.unlink(`public/images/${req.params.id}`, () => {
+            //     console.log('renaming ' + req.file.path + ' to ' + req.params.id)
+            //     fs.rename(req.file.path, 
+            //     `public/images/${req.params.id}`, 
+            //     (err) => { 
+            //     if (err) {
+            //         console.log(err);
+            //         }
+            //     });
+            // });
+    //     } else {
+    //         fs.rename(req.file.path,
+    //         `public/images/${req.params.id}`,
+    //         (err) => {
+    //             if (err) {
+    //                 console.log(err);
+    //             }
+    //         });
+    //     }
+    // });
+
+    let imagePath = `images/${req.params.id}`;
     let id = req.params.id;
     let companyObject = {
         _id: id,

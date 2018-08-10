@@ -15,7 +15,7 @@ db.once('open', () => {
     console.log('Connected to mongodb!');
 });
 
- function createAdmin(name, password) {
+function createAdmin(name, password) {
     var user = new Admin({
         name: name,
         password: password
@@ -27,7 +27,7 @@ db.once('open', () => {
     });
 };
 
- function findAllAdmins() {
+function findAllAdmins() {
     return Admin.find(
         {},
         'name',
@@ -37,7 +37,7 @@ db.once('open', () => {
     });
 };
 
- function findOneAdmin(userId) {
+function findOneAdmin(userId) {
     return Admin
     .findById(userId)
     .select('name password')
@@ -48,7 +48,7 @@ db.once('open', () => {
     .catch(err => console.log(err));
 };
 
- function deleteAdmin(userId) {
+function deleteAdmin(userId) {
     return Admin
     .findByIdAndRemove(userId)
     .exec(admin => {
@@ -57,7 +57,7 @@ db.once('open', () => {
     .catch(err => console.log(err));
 };
 
- function createCompany(companyObject) {
+function createCompany(companyObject) {
     var company = new Company({
         name: companyObject.name,
         picture: companyObject.picture,
@@ -70,17 +70,15 @@ db.once('open', () => {
         email: companyObject. email,
         phone: companyObject.phone,
         youtubeLink: companyObject.youtubeLink,
-        paypalLink: companyObject.paypalLink
+        paypalLink: companyObject.paypalLink,
+        location: companyObject.location,
+        profile: req.body.profile,
+        linkedIn: req.body.linkedIn
     });
     return company.save()
-    // return company.save((err) => {
-    //     if (err) return err;
-    //     console.log('saved company');
-    //     return company
-    // });
 };
 
- function deleteCompany(companyId) {
+function deleteCompany(companyId) {
     return Company
     .findByIdAndRemove(companyId)
     .exec()
@@ -91,7 +89,7 @@ db.once('open', () => {
     .catch(err => console.log(err))
 };
 
- function findAllCompanies() {
+function findAllCompanies() {
     return Company
     .find()
     .exec()
@@ -101,7 +99,7 @@ db.once('open', () => {
     .catch(err => console.log(err));
 };
 
- function findOneCompany(userId) {
+function findOneCompany(userId) {
     return Company
     .findById(userId)
     .exec()
@@ -112,10 +110,10 @@ db.once('open', () => {
 };
 
 
- function updateCompany(CompanyObject){
+function updateCompany(CompanyObject){
     let modifications = {};
     modifications.name = CompanyObject.name; 
-    modifications.picture = CompanyObject.picture;
+    // modifications.picture = CompanyObject.picture;
     modifications.summary = CompanyObject.summary;
     modifications.industry = CompanyObject.industry;
     modifications.stage = CompanyObject.stage;
@@ -125,7 +123,10 @@ db.once('open', () => {
     modifications.email = CompanyObject.email;
     modifications.phone = CompanyObject.phone;
     modifications.youtubeLink = CompanyObject.youtubeLink;
-    modifications.paypalLink = CompanyObject.paypalLink;  
+    modifications.paypalLink = CompanyObject.paypalLink; 
+    modifications.location = CompanyObject.location; 
+    modifications.profile = CompanyObject.profile;
+    modifications.linkedIn = CompanyObject.linkedIn;
     console.log(CompanyObject._id);
     return Company 
         .findByIdAndUpdate(CompanyObject._id, {$set: modifications}, {new: true})
@@ -135,7 +136,7 @@ db.once('open', () => {
         }).catch(err => console.log(err));
 };
 
- function updateCompanyPhoto(CompanyObject) {
+function updateCompanyPhoto(CompanyObject) {
     let modifications = {};
     modifications.picture = CompanyObject.picture;
     return Company
@@ -149,7 +150,8 @@ db.once('open', () => {
             return company;
         }).catch(err => console.log(err));
 };
- function updateAdmin(AdminObject){
+
+function updateAdmin(AdminObject){
     let modifications = {};
     modifications.name = AdminObject.name;
     modifications.password = AdminObject.password;
@@ -161,8 +163,7 @@ db.once('open', () => {
         }).catch(err => console.log(err));
 };
 
-
- function findCompanyByIndustry(industryObject){
+function findCompanyByIndustry(industryObject){
     return Company
     .find()
     .where('industry').equals(industryObject)
@@ -173,7 +174,7 @@ db.once('open', () => {
     .catch(err => console.log(err));
 };
 
- function findCompanyByStage(stageObject){
+function findCompanyByStage(stageObject){
     return Company
     .find()
     .where('stage').equals(stageObject)
@@ -183,8 +184,6 @@ db.once('open', () => {
     })
     .catch(err => console.log(err));
 };
-
-
 
 // Mongoose functions
 // findById()
