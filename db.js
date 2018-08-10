@@ -72,8 +72,8 @@ function createCompany(companyObject) {
         youtubeLink: companyObject.youtubeLink,
         paypalLink: companyObject.paypalLink,
         location: companyObject.location,
-        profile: companyObject.body.profile,
-        linkedIn: companyObject.body.linkedIn
+        profile: companyObject.profile,
+        linkedIn: companyObject.linkedIn
     });
     return company.save()
 };
