@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './LandingPage.css';
 import {Link} from 'react-router-dom';
 // import Data from './Data';
+import Filter from './Filter';
 
 class API extends React.Component{
     constructor(props){
@@ -32,6 +33,7 @@ class API extends React.Component{
 
     const LandingPage=({companies})=>
     <div className="landingPage">
+    <Filter industry={companies.industry}/>
         {companies.map(function(companyData){
         return(
             <body>
