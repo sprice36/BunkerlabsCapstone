@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import NewForm from './NewForm';
+import React from 'react';
 import {Link} from 'react-router-dom';
+
 class adminPage extends React.Component {
     state = {
         companies: []
@@ -12,40 +12,47 @@ class adminPage extends React.Component {
         .then(companies => {
             console.log(companies)
             this.setState({companies});
-         })
-        
+        })
     }
-    _convertToCompany = (data) => {
-        return (
-           <li>
-               
-               <Link to={`/admin/companies/${data._id}/edit`}>
-                {data.companyNameForAdmin}
-               </Link>
 
-
-
-           </li>
+    _createOption = (company) =>{
+        return(
+            
+        <option value={company._id}>
+            {company.name}
+        </option>
         )
     };
-    
-        render() {
-            return ( 
-                <div>
-            {/* <ul>react router link tag that ajax request jsut that compnies data */}
-                    <ul>
-                        {this.state.companies.map(company => this._convertToCompany(company))}  
-                        <li><button onClick={this.state.NewForm}>www.google.com</button></li>
-                        
-                    </ul>
-                    
 
-                    
-                    <Link to={`admin/companies/new`}>
-                        <button>New Company</button>
-                    </Link>
-                    </div>
-            );
-        }
+    _convertToCompany = (data) => {
+        return (
+            <li>
+                <Link to={`/admin/companies/edit/${data._id}`}>
+                    {data.name}
+                </Link>
+            </li>
+        )
+    };
+
+    _handleCompanySelect = (event) => {
+        this.props.history.push(`/admin/companies/edit/${event.target.value}`)
     }
+
+    render() {
+        return (
+            <div>
+                <form>
+                    <select onChange={this._handleCompanySelect}>
+                        <option value="" defaultValue></option>
+                        {this.state.companies.map(company => this._createOption(company))}
+                    </select>
+                </form>
+                <Link to={`/admin/companies/new`}>
+                    <button>New Company</button>
+                </Link>
+            </div>
+            );
+    }
+}
+    
 export default adminPage;

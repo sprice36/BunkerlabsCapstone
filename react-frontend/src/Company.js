@@ -1,26 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Company.css';
-// import Data from './Data';
 
     const Company=({companyDetail})=>
                 <div className="div-Company">This is the description of a company:
                 <h3> 
-                <p>Company Name:{companyDetail.name}</p>
-                <p>Company Logo: {companyDetail.picture}</p>
+                <img src={`http://localhost:4000/${companyDetail.picture}`} alt=""/> 
+                <br/>               
                 <p>Summary:{companyDetail.summary}</p>
+                <p>Company Name:{companyDetail.name}</p>
                 <p>Industry:{companyDetail.industry}</p>
                 <p>Stage:{companyDetail.stage}</p>
                 <p>Product and Services:{companyDetail.productAndServices}</p>
                 <p>Top Three needs:
-                <li> {companyDetail.needs}</li>
-                <li>{companyDetail.needs}</li>
-                <li>{companyDetail.needs}</li>
+                <ul>
+                <li>{companyDetail.need1}</li>
+                <li>{companyDetail.need2}</li>
+                <li>{companyDetail.need3}</li>
+                </ul>
                 </p>
                 <p>Website:{companyDetail.website}</p>
                 <p>Email:{companyDetail.email}</p>
-                <p>Phone Numbers:{companyDetail.phone}</p>
+                <p>Phone:{companyDetail.phone}</p>
                 <p>YouTube:{companyDetail.youtubeLine}</p>
-                <p>Paypal:{companyDetail.paypalLink}</p>
+                {/* Donate to this business - legal review/disclaimer needed? */}
+                <p>Donate to this business:{companyDetail.paypalLink}</p>
                 </h3>
                 </div>
     
@@ -51,14 +54,16 @@ import './Company.css';
                     industry:'',
                     stage:'',
                     productAndServices:'',
-                    needs:'',
-                    needs:'',
-                    needs:'',
+                    need1:'',
+                    need2:'',
+                    need3:'',
                     website:'',
                     email:'',
                     phone:'',
                     youtubeLine:'',
-                    PaypalLink:''
+                    paypalLink:'',
+                    profile: '',
+                    linkedIn: ''
                 }
             }
         }
@@ -70,16 +75,34 @@ import './Company.css';
                 .then(company=>company.json())
                 .then(company=>{
                     this.setState({
-                        company
-                    })
-                })
+                        company: {
+                                _id: company._id,
+                                name: company.name,
+                                picture: company.picture,
+                                summary: company.summary,
+                                industry: company.industry,
+                                stage: company.stage,
+                                productAndServices: company.productAndServices,
+                                need1: company.needs[0],
+                                need2: company.needs[1],
+                                need3: company.needs[2],
+                                website: company.website,
+                                email: company.email,
+                                phone: company.phone,
+                                youtubeLine: company.youtubeLine,
+                                PaypalLink: company.paypalLink,
+                                profile: company.profile,
+                                linkedIn: company.linkedIn
+                        }
+                    });
+                    console.log(company);
+                });
         }
         
         render(){
         return(
             <Company companyDetail={this.state.company}/>
-        )
-    }
+        )}
     }
     
 

@@ -83,14 +83,12 @@ function createCompany(companyObject) {
         email: companyObject. email,
         phone: companyObject.phone,
         youtubeLink: companyObject.youtubeLink,
-        paypalLink: companyObject.paypalLink
+        paypalLink: companyObject.paypalLink,
+        location: companyObject.location,
+        profile: companyObject.profile,
+        linkedIn: companyObject.linkedIn
     });
     return company.save()
-    // return company.save((err) => {
-    //     if (err) return err;
-    //     console.log('saved company');
-    //     return company
-    // });
 };
 
 function deleteCompany(companyId) {
@@ -128,7 +126,7 @@ function findOneCompany(userId) {
 function updateCompany(CompanyObject){
     let modifications = {};
     modifications.name = CompanyObject.name; 
-    modifications.picture = CompanyObject.picture;
+    // modifications.picture = CompanyObject.picture;
     modifications.summary = CompanyObject.summary;
     modifications.industry = CompanyObject.industry;
     modifications.stage = CompanyObject.stage;
@@ -138,7 +136,11 @@ function updateCompany(CompanyObject){
     modifications.email = CompanyObject.email;
     modifications.phone = CompanyObject.phone;
     modifications.youtubeLink = CompanyObject.youtubeLink;
-    modifications.paypalLink = CompanyObject.paypalLink;  
+    modifications.paypalLink = CompanyObject.paypalLink; 
+    modifications.location = CompanyObject.location; 
+    modifications.profile = CompanyObject.profile;
+    modifications.linkedIn = CompanyObject.linkedIn;
+    console.log(CompanyObject._id);
     return Company 
         .findByIdAndUpdate(CompanyObject._id, {$set: modifications}, {new: true})
         .exec()
@@ -174,30 +176,27 @@ function updateAdmin(AdminObject){
         }).catch(err => console.log(err));
 };
 
-
 function findCompanyByIndustry(industryObject){
     return Company
-     .find()
-     .where('industry').equals(industryObject)
-     .exec()
-     .then(companies => {
+    .find()
+    .where('industry').equals(industryObject)
+    .exec()
+    .then(companies => {
             return companies;
     })
-     .catch(err => console.log(err));
+    .catch(err => console.log(err));
 };
 
 function findCompanyByStage(stageObject){
     return Company
-     .find()
-     .where('stage').equals(stageObject)
-     .exec()
-     .then(companies => {
-           return companies;
+    .find()
+    .where('stage').equals(stageObject)
+    .exec()
+    .then(companies => {
+        return companies;
     })
-     .catch(err => console.log(err));
+    .catch(err => console.log(err));
 };
-
-
 
 // Mongoose functions
 // findById()

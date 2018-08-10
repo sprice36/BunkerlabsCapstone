@@ -1,0 +1,42 @@
+.navbar-nav{
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    border-bottom-color: rgba(0,0,0,0.5);
+    background-color: black;
+    width:100%;
+    padding-top: 0px;
+}
+
+.image-nav{
+    margin-left: 0px;
+    margin-top: 0px;
+}
+ img{
+    width: 50%;
+    height: 50%;
+ }
+
+.navDropdown{
+    margin-left: 1320px;
+    margin-top: 10px;
+}
+
+.orange-area{
+    background-color: #e46326;
+    font-size: 12px;
+    color: #555555;
+    border-bottom-color: rgba(0,0,0,0.5);
+    height:50px;
+    width:100%;
+}
+.about{
+    line-height: 83px;
+    height: 86px;
+    color:#e46326;
+    display: flex;
+}
+
+a{
+    color:#e46326;
+}
