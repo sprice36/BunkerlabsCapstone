@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const mongooseUrl = 'mongodb://localhost:27017/Bunkerlabs';
 const Admin = require('./models/admin.js');
 const Company = require('./models/company.js')
+
 // Connect to mongodb
 mongoose.connect(mongooseUrl, 
 {useNewUrlParser: true});
@@ -47,6 +48,18 @@ function findOneAdmin(userId) {
     })
     .catch(err => console.log(err));
 };
+
+function findAdminByUsername(username) {
+    return Admin
+    .findOne({ 'username': username })
+    .select('username password')
+    .exec()
+    .then(admin => {
+        return admin;
+    })
+    .catch(err => console.log(err));
+ }
+
 
 function deleteAdmin(userId) {
     return Admin
@@ -209,7 +222,8 @@ module.exports = {
     findOneCompany,
     updateCompanyPhoto,
     findCompanyByIndustry,
-    findCompanyByStage
+    findCompanyByStage,
+    findAdminByUsername
 };
 
 // If you don 't specify a callback then the API will return a variable of type Query. You can use this query object to build up your query and then execute it (with a callback) later using the exec() method.
