@@ -316,7 +316,8 @@ class NewForm extends React.Component {
                 <input value={this.state.form.summary} type='text'
                 onChange={this.handlesummary}/>
                 <br/>
-
+                
+                <label htmlFor='Company Needs 1'>Need 1</label>
                 <select value={this.state.form.need1}
                 onChange={this.handleneed1}>
                 <option>Investing</option>
