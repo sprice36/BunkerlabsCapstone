@@ -22,7 +22,8 @@
     "react-modal": "^3.5.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
-    "react-social-badge": "^1.0.6"
+    "react-social-badge": "^1.0.6",
+    "reactstrap": "^6.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
