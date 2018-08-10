@@ -13,9 +13,9 @@ import './Company.css';
                 <p>Product and Services:{companyDetail.productAndServices}</p>
                 <p>Top Three needs:
                 <ul>
-                <li>{companyDetail.needs}</li>
-                <li>{companyDetail.needs}</li>
-                <li>{companyDetail.needs}</li>
+                <li>{companyDetail.need1}</li>
+                <li>{companyDetail.need2}</li>
+                <li>{companyDetail.need3}</li>
                 </ul>
                 </p>
                 <p>Website:{companyDetail.website}</p>
@@ -61,7 +61,9 @@ import './Company.css';
                     email:'',
                     phone:'',
                     youtubeLine:'',
-                    PaypalLink:''
+                    paypalLink:'',
+                    profile: '',
+                    linkedIn: ''
                 }
             }
         }
@@ -73,7 +75,25 @@ import './Company.css';
                 .then(company=>company.json())
                 .then(company=>{
                     this.setState({
-                        company
+                        company: {
+                                _id: company._id,
+                                name: company.name,
+                                picture: company.picture,
+                                summary: company.summary,
+                                industry: company.industry,
+                                stage: company.stage,
+                                productAndServices: company.productAndServices,
+                                need1: company.needs[0],
+                                need2: company.needs[1],
+                                need3: company.needs[2],
+                                website: company.website,
+                                email: company.email,
+                                phone: company.phone,
+                                youtubeLine: company.youtubeLine,
+                                PaypalLink: company.paypalLink,
+                                profile: company.profile,
+                                linkedIn: company.linkedIn
+                        }
                     });
                     console.log(company);
                 });

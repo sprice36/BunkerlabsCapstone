@@ -52,7 +52,9 @@ class EditPage extends React.Component {
                 picture: companyData.picture,
                 need1: companyData.needs[0],
                 need2: companyData.needs[1],
-                need3: companyData.needs[2]
+                need3: companyData.needs[2],
+                profile: companyData.profile,
+                linkedIn: companyData.linkedIn
             }
         });
         })  
@@ -423,36 +425,36 @@ class EditPage extends React.Component {
                 <option>Apparel</option>
                 <option>Banking</option>
                 <option>Media</option>
-                <option>  Construction</option>
-                <option> Civic</option>
-                <option> Real Estate</option>
-                <option> Gaming</option>
-                <option> Software</option>
-                <option> Hardware</option>
+                <option>Construction</option>
+                <option>Civic</option>
+                <option>Real Estate</option>
+                <option>Gaming</option>
+                <option>Software</option>
+                <option>Hardware</option>
                 <option>Security</option>
-                <option> Education</option>
+                <option>Education</option>
                 <option>Entertainment</option>
-                <option> Food/Beverage</option>
-                <option> Health/Fitness</option>
-                <option> IT</option>
-                <option> Insurance</option>
-                <option>  Legal Services</option>
-                <option> Leisure</option>
-                <option> Management/Consulting</option>
-                <option> Military</option>
-                <option> Music</option>
-                <option> News</option>
-                <option> Alternative Energy</option>
+                <option>Food/Beverage</option>
+                <option>Health/Fitness</option>
+                <option>IT</option>
+                <option>Insurance</option>
+                <option>Legal Services</option>
+                <option>Leisure</option>
+                <option>Management/Consulting</option>
+                <option>Military</option>
+                <option>Music</option>
+                <option>News</option>
+                <option>Alternative Energy</option>
                 <option>Public Relations</option>
                 <option>Manufacturing</option>
-                <option> Religion</option>
-                <option> Retail</option>
+                <option>Religion</option>
+                <option>Retail</option>
                 <option>Sporting Goods</option>
-                <option> Recruiting</option>
-                <option> Telecommunications</option>
-                <option>  Transportation</option>
-                <option> Warehousing</option>
-                <option> Venture Capitalism</option>
+                <option>Recruiting</option>
+                <option>Telecommunications</option>
+                <option>Transportation</option>
+                <option>Warehousing</option>
+                <option>Venture Capitalism</option>
                 </select>
                 <br/>
                 
@@ -466,7 +468,7 @@ class EditPage extends React.Component {
                     <option>Maturity</option>
                 </select>
                 <br/>
-  
+
                 <label htmlFor='Business Location'>Business Location</label>
                 <select value={this.state.form.location} 
                 onChange={this.location}

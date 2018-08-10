@@ -320,6 +320,7 @@ class NewForm extends React.Component {
                 <label htmlFor='Company Needs 1'>Need 1</label>
                 <select value={this.state.form.need1}
                 onChange={this.handleneed1}>
+                <option></option>
                 <option>Investing</option>
                 <option>Mentorship</option>
                 <option>Employees</option>
@@ -336,6 +337,7 @@ class NewForm extends React.Component {
                 <label htmlFor='Company Needs 2'>Need 2</label>
                 <select value={this.state.form.need2}
                 onChange={this.handleneed2}>
+                <option></option>
                 <option>Investing</option>
                 <option>Mentorship</option>
                 <option>Employees</option>
@@ -351,6 +353,7 @@ class NewForm extends React.Component {
                 <label htmlFor='Company Needs 3'>Need 3</label>
                 <select value={this.state.form.need3}
                 onChange={this.handleneed3}>
+                <option></option>
                 <option>Investing</option>
                 <option>Mentorship</option>
                 <option>Employees</option>
