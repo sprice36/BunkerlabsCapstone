@@ -252,7 +252,7 @@ class NewForm extends React.Component {
             profile: this.state.form.profile,
             linkedIn: this.state.form.linkedIn,
         };
-      
+        
         axios.post('http://localhost:4000/api/createcompany', companyObject)
         .then(res => {
             return res.data._id;
