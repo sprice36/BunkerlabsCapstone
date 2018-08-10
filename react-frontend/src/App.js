@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import LandingPage from './LandingPage';
 import Company from './Company';
-import {
-  BrowserRouter as Router,
-  Route, 
-} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import adminPage from './adminPage';
 import EditPage from './EditPage';
 import NewForm from './NewForm';
@@ -21,10 +18,10 @@ class App extends React.Component {
 
         <Route path='/' component={LandingPage} exact={true}/>
         <Route path='/company/:id' component={Company} exact={true}/>
+        <Route path='/aboutMarketplace' component={AboutMarketplace} exact={true}/>
         <Route path='/admin' component={ adminPage } exact={true}/>
         <Route path='/admin/companies/new' component={ NewForm } exact={true}/>
-        <Route path='/aboutMarketplace' component={AboutMarketplace} exact={true}/>
-        <Route path='/admin/companies/:id/edit' component={ EditPage } exact={true}/>
+        <Route path='/admin/companies/edit/:id' component={ EditPage } exact={true}/>
 
         <Footer />
                 

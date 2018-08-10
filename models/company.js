@@ -15,7 +15,10 @@ const CompanySchema = new Schema({
     email: String,
     phone: Number,
     youtubeLink: String,
-    paypalLink: String
+    paypalLink: String,
+    location: String,
+    linkedIn: String,
+    profile: String
 });
 
 const Company = mongoose.model('companies', CompanySchema);

@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Company.css';
-// import Data from './Data';
 
     const Company=({companyDetail})=>
                 <div className="div-Company">This is the description of a company:
                 <h3> 
-                <p>Company Name:{companyDetail.name}</p>
-                <p>Company Logo: {companyDetail.picture}</p>
-                <img src={'./'+companyDetail.picture+'.jpg'} alt=""/>
+                <img src={`http://localhost:4000/${companyDetail.picture}`} alt=""/> 
+                <br/>               
                 <p>Summary:{companyDetail.summary}</p>
+                <p>Company Name:{companyDetail.name}</p>
                 <p>Industry:{companyDetail.industry}</p>
                 <p>Stage:{companyDetail.stage}</p>
                 <p>Product and Services:{companyDetail.productAndServices}</p>
                 <p>Top Three needs:
                 <ul>
-                <li> {companyDetail.needs[0]}</li>
-                <li>{companyDetail.needs[1]}</li>
-                <li>{companyDetail.needs[2]}</li>
+                <li>{companyDetail.needs}</li>
+                <li>{companyDetail.needs}</li>
+                <li>{companyDetail.needs}</li>
                 </ul>
                 </p>
                 <p>Website:{companyDetail.website}</p>
                 <p>Email:{companyDetail.email}</p>
-                <p>Phone Numbers:{companyDetail.phone}</p>
+                <p>Phone:{companyDetail.phone}</p>
                 <p>YouTube:{companyDetail.youtubeLine}</p>
-                <p>Paypal:{companyDetail.paypalLink}</p>
+                {/* Donate to this business - legal review/disclaimer needed? */}
+                <p>Donate to this business:{companyDetail.paypalLink}</p>
                 </h3>
                 </div>
     
@@ -54,9 +54,9 @@ import './Company.css';
                     industry:'',
                     stage:'',
                     productAndServices:'',
-                    needs:'',
-                    needs:'',
-                    needs:'',
+                    need1:'',
+                    need2:'',
+                    need3:'',
                     website:'',
                     email:'',
                     phone:'',
@@ -74,15 +74,15 @@ import './Company.css';
                 .then(company=>{
                     this.setState({
                         company
-                    })
-                })
+                    });
+                    console.log(company);
+                });
         }
         
         render(){
         return(
             <Company companyDetail={this.state.company}/>
-        )
-    }
+        )}
     }
     
 

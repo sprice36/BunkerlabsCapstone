@@ -2,6 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
+import Modal from 'react-modal';
+import {
+    Link
+} from 'react-router-dom';
 
 class EditPage extends React.Component {
     constructor(){
@@ -15,15 +19,13 @@ class EditPage extends React.Component {
                 need2: '',
                 need3: '',
                 youtubeLink: '',
-                productsAndServices: '',
+                productAndServices: '',
                 phone: '',
                 email: '',
-                companyImageForAdmin: '',
                 industry: '',
                 stage: '',
-                BusinessLocationForAdmin: '',
-                picture: null,
                 location: '',
+                picture: null,
                 linkedIn: '',
                 profile: ''
             }
@@ -34,28 +36,44 @@ class EditPage extends React.Component {
     fetch(`http://localhost:4000/api/companies/${this.props.match.params.id}`)
     .then(res => res.json())
     .then(companyData => {
+        console.log(companyData);
         this.setState({
-            form: companyData
+            form: {
+                name: companyData.name,
+                website: companyData.website,
+                summary: companyData.summary,
+                youtubeLink: companyData.youtubeLink,
+                productAndServices: companyData.productAndServices,
+                phone: companyData.phone,
+                email: companyData.email,
+                industry: companyData.industry,
+                stage: companyData.stage,
+                location: companyData.location,
+                picture: companyData.picture,
+                need1: companyData.needs[0],
+                need2: companyData.needs[1],
+                need3: companyData.needs[2]
+            }
         });
         })  
     }
 
-    handlename= (event) => {
+    handlename = (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 name: event.target.value
             }
-        })
+        });
     }
 
-    handlewebsite= (event) => {
+    handlewebsite = (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 website: event.target.value
             }
-        })
+        });
     }
 
     handlelinkedIn= (event) => {
@@ -83,82 +101,79 @@ class EditPage extends React.Component {
                 ...this.state.form, 
                 summary: event.target.value
             }
-        })
+        });
     }
-    handleneed1= (event) => {
+
+    handleneed1 = (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 need1: event.target.value
             }
-        })
+        });
     }
-    handleneed2= (event) => {
+
+    handleneed2 = (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 need2: event.target.value
             }
-        })
-        console.log(this.state.form)
+        });
     }
-    handleneed3= (event) => {
+
+    handleneed3 = (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 need3: event.target.value
             }
-        })
-        console.log(this.state.form)
+        });
     }
-    handleyoutubeLink= (event) => {
+
+    handleyoutubeLink = (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 youtubeLink: event.target.value
             }
-        })
-        console.log(this.state.form)
+        });
     }
     
-    handleproductsAndServices =(event) => {
+    handleproductAndServices = (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
-                productsAndServices: event.target.value
+                productAndServices: event.target.value
             }
-        })
-        console.log(this.state.form)
+        });
     }
 
-    handlephone =(event) => {
+    handlephone = (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 phone: event.target.value
             }
-        })
-        console.log(this.state.form)
+        });
     }
 
-    handleemail =(event) => {
+    handleemail = (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 email: event.target.value
             }
-        })
-        console.log(this.state.form)
+        });
     }
 
-    handlePicture =(event) => {
+    handlePicture = (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 picture: event.target.files[0]
             }
         })
-        console.log(this.state.form)
         if (event.target.files && event.target.files[0]) {
             let reader = new FileReader();
             reader.onloadend = (e) => {
@@ -176,8 +191,7 @@ class EditPage extends React.Component {
                 ...this.state.form, 
                 industry: event.target.value
             }
-        })
-        console.log(this.state.form)
+        });
     }
 
     handlestage =(event) => {
@@ -186,22 +200,22 @@ class EditPage extends React.Component {
                 ...this.state.form, 
                 stage: event.target.value
             }
-        })
-        console.log(this.state.form)
+        });
     }
 
-    handleBusinessLocationForAdmin =(event) => {
+    handlelocation =(event) => {
         this.setState({
             form: {
                 ...this.state.form, 
-                BusinessLocationForAdmin: event.target.value
+                location: event.target.value
             }
-        })
-        console.log(this.state.form)
+        });
     }
 
     updateCompany = (event) => {
         event.preventDefault()
+        this.handleOpenModalUpdate();
+        
         let needs = [];
         if (this.state.form.need1 !== '') {
             needs.push(this.state.form.need1);
@@ -212,6 +226,10 @@ class EditPage extends React.Component {
         if (this.state.form.need3 !== '') {
             needs.push(this.state.form.need3);
         }; 
+
+        // needs.push(this.state.form.need1);
+        // needs.push(this.state.form.need2);
+        // needs.push(this.state.form.need3);
 
         let companyObject = {
             name: this.state.form.name,
@@ -225,50 +243,102 @@ class EditPage extends React.Component {
             phone: this.state.form.phone,
             youtubeLink: this.state.form.youtubeLink,
             paypalLink: this.state.form.paypalLink,
+            location: this.state.form.location,
             profile: this.state.form.profile,
             linkedIn: this.state.form.linkedIn,
-        }
+        };
+
         axios.post(`http://localhost:4000/api/updatecompany/${this.props.match.params.id}`, companyObject)
             .then(res => {
-                console.log(res);
-                // return r
+                // console.log(res);
+                return res.data._id
             })
-        // fetch(`http://localhost:4000/api/updatecompany/${this.props.match.params.id}`,
-        // {
-        //     method: 'POST',
-        //     body: JSON.stringify(companyObject)
-        //     })
-        // .then(res => (res.json()))
-            // .then(res => console.log(res.data._id))
-            // .then(console.log(res.data._id))
-    }
-        deleteCompany = (event) => {
-            event.preventDefault()
-            axios.post(`http://localhost:4000/api/deletecompany/${this.props.match.params.id}`, this.props.match.params.id)
+            .then((id) => {
+                let fd;
+                this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
+                fd = new FormData();
+                fd.append('picture', blob);
+                axios({
+                    method: 'post',
+                    url: `http://localhost:4000/api/updatecompanypicture/${id}`,
+                    data: fd,
+                    config: { headers: {'Content-Type': 'multipart/form-data' }}
+                })
             .then(res => {
-               console.log(res);
-            //    return res.data._id;
-             })
-        }
+                console.log(res)
+            })
+            .catch(err => console.log(err));
+            }); 
+        })
+        .catch(err => console.log(err));
+    }; 
+
+    deleteCompany = (event) => {
+        // event.preventDefault()
+        axios.post(`http://localhost:4000/api/deletecompany/${this.props.match.params.id}`, this.props.match.params.id)
+        .then(res => {
+            console.log(res);
+                return res.data._id;
+        });
+    }
+
+    _crop() {
+        // const dataUrl = this.refs.cropper.getCroppedCanvas().toDataURL();
+        this.setState({
+            croppedImage: this.refs.cropper.getCroppedCanvas().toDataURL()
+        });
+    };
+
+    handleOpenModal = () => {
+        this.setState({
+            showModal: true
+        });
+    }
+    
+    handleCloseModal = () => {
+        this.deleteCompany();
+        this.setState({
+            showModal: false,
+        });
+    }
+    
+    handleCloseModalCancel = () => {
+        this.setState({
+            showModal: false,
+        });
+    }
+
+    handleOpenModalUpdate = () => {
+        this.setState({
+            showModalUpdate: true
+        });
+    }
+    
+    handleCloseModalUpdate = () => {
+        this.setState({
+            showModalUpdate: false
+        });
+    }
 
     render() {
         return (
             <div>
             <form onSubmit={(e) => {this.updateCompany(e)}} >
-            
 
                 <label htmlFor='Company Name'>Company</label>
                 <input value={this.state.form.name} type='text'
                 onChange={this.handlename}/>
-
+                <br/>
 
                 <label htmlFor='Website Data'>Enter Company Website</label>
                 <input value={this.state.form.website} type='url'
                 onChange={this.handlewebsite}/>
+                <br/>
 
                 <label htmlFor='summary of company'>Company Summary</label>
                 <input value={this.state.form.summary} type='text'
                 onChange={this.handlesummary}/>
+                <br/>
 
                 <label htmlFor='Company Needs 1'>Need 1</label>
                 <select value={this.state.form.need1}
@@ -283,7 +353,7 @@ class EditPage extends React.Component {
                 <option>Legal Aide</option>
                 <option>IT Help</option>
                 </select>
-                
+                <br/>
                 
                 <label htmlFor='Company Needs 2'>Need 2</label>
                 <select value={this.state.form.need1}
@@ -298,6 +368,7 @@ class EditPage extends React.Component {
                 <option>Legal Aide</option>
                 <option>IT Help</option>
                 </select>
+                <br/>
                 
                 <label htmlFor='Company Needs 3'>Need 3</label>
                 <select value={this.state.form.need1}
@@ -312,31 +383,39 @@ class EditPage extends React.Component {
                 <option>Legal Aide</option>
                 <option>IT Help</option>
                 </select>
+                <br/>
+
                 
                 <label htmlFor='Pitch Video'>Pitch Link</label>
                 <input value={this.state.form.youtubeLink} type='url'
                 onChange={this.handleyoutubeLink}/>
+                <br/>
                 
                 <label htmlFor='Profile Picture'>Profile Picture</label>
                 <input value={this.state.form.profile} type='url'
                 onChange={this.handleprofile}/>
+                <br/>
 
-                 <label htmlFor='LinkedIn'>LinkedIn</label>
+                <label htmlFor='LinkedIn'>LinkedIn</label>
                 <input value={this.state.form.linkedIn} type='url'
                 onChange={this.handlelinkedIn}/>
+                <br/>
 
                 
                 <label htmlFor='Companies Products and Services'>Products and Services</label>
-                <input value={this.state.form.companyProductsandServices} type='text'
-                onChange={this.handleCompanyProductsAndServices} />
+                <input value={this.state.form.productAndServices} type='text'
+                onChange={this.handleproductAndServices} />
+                <br/>
 
                 <label htmlFor='Company Phone Number'>Company Phone Number</label>
                 <input value={this.state.form.phone} type='tel'
                 onChange={this.handlephone}/>
+                <br/>
 
                 <label htmlFor='Company Email'>Company Email</label>
                 <input value={this.state.form.email} type='email'
                 onChange={this.handleemail}/>
+                <br/>
                 
                 <label htmlFor='Industry'>Industry</label>
                 <select value={this.state.form.industry} 
@@ -375,37 +454,40 @@ class EditPage extends React.Component {
                 <option> Warehousing</option>
                 <option> Venture Capitalism</option>
                 </select>
+                <br/>
                 
                 <label htmlFor='Stage of Business'>Stage of Company</label>
                 <select value={this.state.form.stage}
-                onChange={this.handlestage}
-                >
+                onChange={this.handlestage}>
                     <option>StartUp</option>
                     <option>Growth</option>
                     <option>Establishment</option>
                     <option>Expansion</option>
                     <option>Maturity</option>
-                    </select>
-                
+                </select>
+                <br/>
+  
                 <label htmlFor='Business Location'>Business Location</label>
-                <input value={this.state.form.BusinessLocationForAdmin} type='text'
-                onChange={this.handleBusinessLocationForAdmin}/>
+                <input value={this.state.form.location} type='text'
+                onChange={this.handlelocation}/>
+                <br/>
                 
                 <label htmlFor=''>Company Image</label>
                 <input type='file' name='poi-thumbnail'
                         accept='.png, .jpg, .jpeg'
                 onChange={this.handlePicture}/>
                 
+                
                 <input type='submit' value='Save Changes' />
-                <button onClick={this.deleteCompany}>Delete Company</button>
             </form>
+                <button onClick={this.handleOpenModal}>Delete Company</button>
 
-            {/* <Cropper
+            <Cropper
                 ref='cropper'
                 src={this.state.imagePreview}
                 style={{height: 400, width: '100%'}}
                 // Cropper.js options
-                aspectRatio={16/9}
+                aspectRatio={8/6}
                 guides={false}
                 autoCropArea={0}
                 strict={false}
@@ -413,11 +495,31 @@ class EditPage extends React.Component {
                 dragCrop={true}
                 cropBoxMovable={true}
                 cropBoxResizable={false}
-                crop={this._crop.bind(this)} /> */}
+                crop={this._crop.bind(this)} />
                 <br/>
+
+            <Modal className=""
+            isOpen={this.state.showModalUpdate}
+            contentLabel="Minimal Modal Example">
+                {this.state.form.name} profile was updated successfully!
+                <Link to = "/admin" > 
+                <button onClick={this.handleCloseModalUpdate}>Continue</button>
+                </Link>
+            </Modal>   
+
+            <Modal className=""
+            isOpen={this.state.showModal}
+            contentLabel="Minimal Modal Example">
+                Are you sure you want to delete {this.state.form.name}'s profile?
+                <Link to = "/admin" > 
+                <button onClick={this.handleCloseModal}>Delete</button>
+                </Link>
+                <button onClick={this.handleCloseModalCancel}>Cancel</button>
+            </Modal>    
+            
             </div>
         );
-}
+    }
 }
 
 

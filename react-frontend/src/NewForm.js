@@ -20,15 +20,14 @@ class NewForm extends React.Component {
                 need2: '',
                 need3: '',
                 youtubeLink: '',
-                productsAndServices: '',
+                productAndServices: '',
                 phone: '',
                 email: '',
                 companyImageForAdmin: '',
                 industry: '',
                 stage: '',
-                BusinessLocationForAdmin: '',
-                picture: null,
                 location: '',
+                picture: null,
                 linkedIn: '',
                 profile: ''
             }
@@ -38,15 +37,16 @@ class NewForm extends React.Component {
     componentDidMount() {
         this.setState({
             baseFormState: this.state.form
-        })
+        });
     }
+
     handlename= (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 name: event.target.value
             }
-        })
+        });
     }
 
     handlewebsite= (event) => {
@@ -55,7 +55,7 @@ class NewForm extends React.Component {
                 ...this.state.form, 
                 website: event.target.value
             }
-        })
+        });
     }
 
     handlelinkedIn= (event) => {
@@ -82,71 +82,71 @@ class NewForm extends React.Component {
                 ...this.state.form, 
                 summary: event.target.value
             }
-        })
+        });
     }
+
     handleneed1= (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 need1: event.target.value
             }
-        })
+        });
     }
+
     handleneed2= (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 need2: event.target.value
             }
-        })
-        // console.log(this.state.form)
+        });
     }
+
     handleneed3= (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 need3: event.target.value
             }
-        })
-        // console.log(this.state.form)
+        });
     }
+
     handleyoutubeLink= (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 youtubeLink: event.target.value
             }
-        })
-        // console.log(this.state.form)
+        });
     }
     
-    handleproductsAndServices =(event) => {
+    handleproductAndServices =(event) => {
         this.setState({
             form: {
                 ...this.state.form, 
-                productsAndServices: event.target.value
+                productAndServices: event.target.value
             }
-        })
-        // console.log(this.state.form)
+        });
     }
+
     handlephone =(event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 phone: event.target.value
             }
-        })
-        // console.log(this.state.form)
+        });
     }
+
     handleemail =(event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 email: event.target.value
             }
-        })
-        // console.log(this.state.form)
-    }
+        });
+    };
 
     handlePicture =(event) => {
         this.setState({
@@ -155,7 +155,6 @@ class NewForm extends React.Component {
                 picture: event.target.files[0]
             },
         })
-        console.log(this.state.form)
         if (event.target.files && event.target.files[0]) {
             let reader = new FileReader();
             reader.onloadend = (e) => {
@@ -173,30 +172,30 @@ class NewForm extends React.Component {
                 ...this.state.form, 
                 industry: event.target.value
             }
-        })
-        // console.log(this.state.form)
+        });
     }
+
     handlestage =(event) => {
         this.setState({
             form: {
                 ...this.state.form, 
                 stage: event.target.value
             }
-        })
-        
+        });
     }
-    handleBusinessLocationForAdmin =(event) => {
+
+    handlelocation =(event) => {
         this.setState({
             form: {
                 ...this.state.form, 
-                BusinessLocationForAdmin: event.target.value
+                location: event.target.value
             }
-        })
-        // console.log(this.state.form)
+        });
     }
 
     _clearForm = (event) => {
-        console.log('clicked')
+        event.preventDefault();
+        // console.log('clicked')
         this.setState({
             form: {
                 name: '',
@@ -206,24 +205,23 @@ class NewForm extends React.Component {
                 need2: '',
                 need3: '',
                 youtubeLink: '',
-                productsAndServices: '',
+                productAndServices: '',
                 phone: '',
                 email: '',
-                companyImageForAdmin: '',
                 industry: '',
                 stage: '',
-                BusinessLocationForAdmin: '',
                 picture: null,
                 location: '',
                 linkedIn: '',
                 profile: ''
-            }})
+            }
+        });
     }
     
     handleEntry(event){
         event.preventDefault();
         this.handleOpenModal();
-   
+
         let needs = [];
         if (this.state.form.need1 !== '') {
             needs.push(this.state.form.need1);
@@ -234,6 +232,9 @@ class NewForm extends React.Component {
         if (this.state.form.need3 !== '') {
             needs.push(this.state.form.need3);
         }; 
+        // needs.push(this.state.form.need1);
+        // needs.push(this.state.form.need2);
+        // needs.push(this.state.form.need3);
 
         let companyObject = {
             name: this.state.form.name,
@@ -247,46 +248,41 @@ class NewForm extends React.Component {
             phone: this.state.form.phone,
             youtubeLink: this.state.form.youtubeLink,
             paypalLink: this.state.form.paypalLink,
+            location: this.state.form.location,
             profile: this.state.form.profile,
             linkedIn: this.state.form.linkedIn,
-        }
-         axios.post('http://localhost:4000/api/createcompany', companyObject)
+        };
+      
+        axios.post('http://localhost:4000/api/createcompany', companyObject)
         .then(res => {
-           console.log(res);
-           return res.data._id;
-         })
+            return res.data._id;
+        })
         .then((id) => {
             let fd;
             this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
-             fd = new FormData();
-             fd.append('picture', blob);
-             console.log('id',id);
-             console.log(fd)
-             axios({
-                 method: 'post',
-                 url: `http://localhost:4000/api/createcompanypicture/${id}`,
-                 data: fd,
-                 config: { headers: {'Content-Type': 'multipart/form-data' }}
-             })
-             .then(res => {
-                 console.log(res)
-             })
-             .catch(err => console.log(err));
-        }); 
-           
+            fd = new FormData();
+            fd.append('picture', blob);
+            axios({
+                method: 'post',
+                url: `http://localhost:4000/api/createcompanypicture/${id}`,
+                data: fd,
+                config: { headers: {'Content-Type': 'multipart/form-data' }}
             })
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => console.log(err));
+            }); 
+        })
         .catch(err => console.log(err));
-        } 
+    }; 
 
-        _crop() {
+    _crop() {
         // const dataUrl = this.refs.cropper.getCroppedCanvas().toDataURL();
         this.setState({
             croppedImage: this.refs.cropper.getCroppedCanvas().toDataURL()
         });  
-       console.log(this.state.croppedImage);
-       };  
-
-   
+    };  
 
     handleOpenModal = () => {
         this.setState({ 
@@ -309,17 +305,18 @@ class NewForm extends React.Component {
                 <label htmlFor='Company Name'>Company</label>
                 <input value={this.state.form.name} type='text'
                 onChange={this.handlename}/>
-
+                <br/>
 
                 <label htmlFor='Website Data'>Enter Company Website</label>
                 <input value={this.state.form.website} type='url'
                 onChange={this.handlewebsite}/>
+                <br/>
 
                 <label htmlFor='summary of company'>Company Summary</label>
                 <input value={this.state.form.summary} type='text'
                 onChange={this.handlesummary}/>
+                <br/>
 
-                <label htmlFor='Company Needs 1'>Need 1</label>
                 <select value={this.state.form.need1}
                 onChange={this.handleneed1}>
                 <option>Investing</option>
@@ -332,6 +329,7 @@ class NewForm extends React.Component {
                 <option>Legal Aide</option>
                 <option>IT Help</option>
                 </select>
+                <br/>
                 
                 
                 <label htmlFor='Company Needs 2'>Need 2</label>
@@ -347,7 +345,7 @@ class NewForm extends React.Component {
                 <option>Legal Aide</option>
                 <option>IT Help</option>
                 </select>
-                
+                <br/>
                 
                 <label htmlFor='Company Needs 3'>Need 3</label>
                 <select value={this.state.form.need3}
@@ -362,32 +360,37 @@ class NewForm extends React.Component {
                 <option>Legal Aide</option>
                 <option>IT Help</option>
                 </select>
-                
+                <br/>
                 
                 <label htmlFor='Pitch Video'>Pitch Link</label>
                 <input value={this.state.form.youtubeLink} type='url'
                 onChange={this.handleyoutubeLink}/>
+                <br/>
                 
                 <label htmlFor='Profile Picture'>Profile Picture</label>
                 <input value={this.state.form.profile} type='url'
                 onChange={this.handleprofile}/>
+                <br/>
 
                 <label htmlFor='LinkedIn'>LinkedIn</label>
                 <input value={this.state.form.linkedIn} type='url'
                 onChange={this.handlelinkedIn}/>
+                <br/>
                 
-
                 <label htmlFor='Companies Products and Services'>Products and Services</label>
-                <input value={this.state.form.productsAndServices} type='text'
-                onChange={this.handleproductsAndServices} />
+                <input value={this.state.form.productAndServices} type='text'
+                onChange={this.handleproductAndServices} />
+                <br/>
 
                 <label htmlFor='Company Phone Number'>Company Phone Number</label>
                 <input value={this.state.form.phone} type='tel'
                 onChange={this.handlephone}/>
+                <br/>
 
                 <label htmlFor='Company Email'>Company Email</label>
                 <input value={this.state.form.email} type='email'
                 onChange={this.handleemail}/>
+                <br/>
                 
                 <label htmlFor='Industry'>Industry</label>
                 <select value={this.state.form.industry} 
@@ -426,22 +429,23 @@ class NewForm extends React.Component {
                 <option> Warehousing</option>
                 <option> Venture Capitalism</option>
                 </select>
-                
+                <br/>
                 
                 <label htmlFor='Stage of Business'>Stage of Company</label>
                 <select value={this.state.form.stage}
-                onChange={this.handlestage}
-                >
+                onChange={this.handlestage}>
                     <option>StartUp</option>
                     <option>Growth</option>
                     <option>Establishment</option>
                     <option>Expansion</option>
                     <option>Maturity</option>
-                    </select>
+                </select>
+                <br/>
                 
                 <label htmlFor='Business Location'>Business Location</label>
-                <input value={this.state.form.BusinessLocationForAdmin} type='text'
-                onChange={this.handleBusinessLocationForAdmin}/>
+                <input value={this.state.form.location} type='text'
+                onChange={this.handlelocation}/>
+                <br/>
                 
                 <label htmlFor=''>Company Image</label>
                 <input type='file' name='poi-thumbnail'
@@ -459,7 +463,7 @@ class NewForm extends React.Component {
                 src={this.state.imagePreview}
                 style={{height: 400, width: '100%'}}
                 // Cropper.js options
-                aspectRatio={16/9}
+                aspectRatio={8/6}
                 guides={false}
                 autoCropArea={0}
                 strict={false}
@@ -470,19 +474,19 @@ class NewForm extends React.Component {
                 crop={this._crop.bind(this)} />
                 <br/>
 
-            <Modal className="create-company-modal"
+            <Modal className=""
             isOpen={this.state.showModal}
             contentLabel="Minimal Modal Example">
-                {this.state.name} profile created!
+                {this.state.form.name} profile created!
                 <Link to = "/admin" > 
-                <button onClick={this.handleCloseModal}>Accept</button>
+                <button onClick={this.handleCloseModal}>Continue</button>
                 </Link>
             </Modal>
                 {/* <h4>Cropped Preview</h4>
                 <img src={this.state.croppedImage} alt='' className='imgstyle' /> */}
             </div>
         );
-}
+    }
 }
 
 export default NewForm;
