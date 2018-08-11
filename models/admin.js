@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 // Create Schema and Model
 
 const AdminSchema = new Schema({
-    name: String,
-    password: String
+    username: String,
+    password: String,
+    superUser: Boolean
 });
 
 const Admin = mongoose.model('admins', AdminSchema);

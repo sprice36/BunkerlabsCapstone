@@ -26,7 +26,8 @@ const {
     findOneCompany,
     updateCompanyPhoto,
     findCompanyByIndustry,
-    findCompanyByStage 
+    findCompanyByStage ,
+    findAdminByUsername
 } = require('./db.js');
 
 
@@ -184,37 +185,6 @@ app.post('/api/updatecompanypicture/:id', upload.single('picture'), (req, res) =
                 console.log(err);
             }
         });
-
-    // fs.exists(`public/images/${req.params.id}`, (exists) => {
-    //     console.log(exists);
-    //     if (exists === true) {
-    //         fs.rename(req.file.path,
-    //                     `public/images/${req.params.id}`, 
-    //                     (err) => { 
-    //                     if (err) {
-    //                         console.log(err);
-    //                         }
-    //                     });
-            // fs.unlink(`public/images/${req.params.id}`, () => {
-            //     console.log('renaming ' + req.file.path + ' to ' + req.params.id)
-            //     fs.rename(req.file.path, 
-            //     `public/images/${req.params.id}`, 
-            //     (err) => { 
-            //     if (err) {
-            //         console.log(err);
-            //         }
-            //     });
-            // });
-    //     } else {
-    //         fs.rename(req.file.path,
-    //         `public/images/${req.params.id}`,
-    //         (err) => {
-    //             if (err) {
-    //                 console.log(err);
-    //             }
-    //         });
-    //     }
-    // });
 
     let imagePath = `images/${req.params.id}`;
     let id = req.params.id;

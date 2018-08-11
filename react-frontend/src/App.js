@@ -9,6 +9,7 @@ import NewForm from './NewForm';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import AboutMarketplace from './AboutMarketplace';
+import Homepage from './Homepage';
 
 class App extends React.Component {
   render() {
@@ -16,7 +17,7 @@ class App extends React.Component {
         <div className="App">
         <Navbar />
 
-        <Route path='/' component={LandingPage} exact={true}/>
+        <Route path='/' component={Homepage} exact={true}/>
         <Route path='/company/:id' component={Company} exact={true}/>
         <Route path='/aboutMarketplace' component={AboutMarketplace} exact={true}/>
         <Route path='/admin' component={ adminPage } exact={true}/>

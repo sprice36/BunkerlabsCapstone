@@ -329,22 +329,19 @@ class EditPage extends React.Component {
 
                 <label htmlFor='Company Name'>Company</label>
                 <input value={this.state.form.name} type='text'
-                onChange={this.handlename}/>
-                <br/>
-
-                <label htmlFor='Website Data'>Enter Company Website</label>
-                <input value={this.state.form.website} type='url'
-                onChange={this.handlewebsite}/>
+                onChange={this.handlename} required placeholder="Enter your company name"/>
                 <br/>
 
                 <label htmlFor='summary of company'>Company Summary</label>
-                <input value={this.state.form.summary} type='text'
-                onChange={this.handlesummary}/>
+                <textarea name="summary" cols="30" rows="3" onChange={this.handlesummary}
+                value={this.state.form.summary} placeholder="Enter your company summary" maxLength='150'></textarea>
+                {/* <input value={this.state.form.summary} type='text'
+                onChange={this.handlesummary} required /> */}
                 <br/>
 
                 <label htmlFor='Company Needs 1'>Need 1</label>
                 <select value={this.state.form.need1}
-                onChange={this.handleneed1}>
+                onChange={this.handleneed1} required>
                 <option>Investing</option>
                 <option>Mentorship</option>
                 <option>Employees</option>
@@ -387,41 +384,40 @@ class EditPage extends React.Component {
                 </select>
                 <br/>
 
-                
-                <label htmlFor='Pitch Video'>Pitch Link</label>
-                <input value={this.state.form.youtubeLink} type='url'
-                onChange={this.handleyoutubeLink}/>
-                <br/>
-                
-                <label htmlFor='Profile Picture'>Profile Picture</label>
-                <input value={this.state.form.profile} type='url'
-                onChange={this.handleprofile}/>
-                <br/>
-
-                <label htmlFor='LinkedIn'>LinkedIn</label>
-                <input value={this.state.form.linkedIn} type='url'
-                onChange={this.handlelinkedIn}/>
-                <br/>
-
-                
-                <label htmlFor='Companies Products and Services'>Products and Services</label>
-                <input value={this.state.form.productAndServices} type='text'
-                onChange={this.handleproductAndServices} />
-                <br/>
-
                 <label htmlFor='Company Phone Number'>Company Phone Number</label>
                 <input value={this.state.form.phone} type='tel'
-                onChange={this.handlephone}/>
+                onChange={this.handlephone} required placeholder="555-555-5555"/>
                 <br/>
 
                 <label htmlFor='Company Email'>Company Email</label>
                 <input value={this.state.form.email} type='email'
-                onChange={this.handleemail}/>
+                onChange={this.handleemail} required placeholder="yourname@mycompany.com" />
                 <br/>
-                
+
+                <label htmlFor='Website Data'>Enter Company Website</label>
+                <input value={this.state.form.website} type='url'
+                onChange={this.handlewebsite} placeholder="https://www.mycompany.com"/>
+                <br/>
+
+                <label htmlFor='Profile Picture'>Profile Picture</label>
+                <input value={this.state.form.profile} type='url'
+                onChange={this.handleprofile} placeholder="https://www.imgur.com/yourphoto/"/>
+                <br/>
+
+                <label htmlFor='LinkedIn'>LinkedIn Profile</label>
+                <input value={this.state.form.linkedIn} type='url'
+                onChange={this.handlelinkedIn} placeholder="https://www.linkedin.com/in/yourprofile/"/>
+                <br/>
+
+                {/* <label htmlFor='Companies Products and Services'>Products and Services</label>
+                <input value={this.state.form.productAndServices} type='text'
+                onChange={this.handleproductAndServices} />
+                <br/> */}
+
                 <label htmlFor='Industry'>Industry</label>
                 <select value={this.state.form.industry} 
-                onChange={this.handleindustry}>
+                onChange={this.handleindustry} required>
+                <option></option>
                 <option>Apparel</option>
                 <option>Banking</option>
                 <option>Media</option>
@@ -460,7 +456,8 @@ class EditPage extends React.Component {
                 
                 <label htmlFor='Stage of Business'>Stage of Company</label>
                 <select value={this.state.form.stage}
-                onChange={this.handlestage}>
+                onChange={this.handlestage} required>
+                    <option></option>
                     <option>StartUp</option>
                     <option>Growth</option>
                     <option>Establishment</option>
@@ -471,8 +468,7 @@ class EditPage extends React.Component {
 
                 <label htmlFor='Business Location'>Business Location</label>
                 <select value={this.state.form.location} 
-                onChange={this.location}
-                >
+                onChange={this.location} required>
                 <option>Atlanta, GA</option>
                 <option>Austin, TX</option>
                 <option>Bozeman, MT</option>
@@ -491,7 +487,11 @@ class EditPage extends React.Component {
                 <option>Seattle, WA</option>
                 <option>Washington D.C.</option>
                 </select>
-                
+                <br/>
+
+                <label htmlFor='Pitch Video'>Pitch Link</label>
+                <input value={this.state.form.youtubeLink} type='url'
+                onChange={this.handleyoutubeLink} placeholder="https://youtube.com/yourpathhere"/>
                 <br/>
                 
                 <label htmlFor=''>Company Image</label>
@@ -500,7 +500,7 @@ class EditPage extends React.Component {
                 onChange={this.handlePicture}/>
                 
                 
-                <input type='submit' value='Save Changes' />
+                <input type='submit' value='Save Changes'/>
             </form>
                 <button onClick={this.handleOpenModal}>Delete Company</button>
 

@@ -15,10 +15,11 @@ db.once('open', () => {
     console.log('Connected to mongodb!');
 });
 
-function createAdmin(name, password) {
+function createAdmin(username, password, superUser=true) {
     var user = new Admin({
-        name: name,
-        password: password
+        username: username,
+        password: password,
+        superUser: superUser
     });
 
     return user.save((err) => {
@@ -30,7 +31,7 @@ function createAdmin(name, password) {
 function findAllAdmins() {
     return Admin.find(
         {},
-        'name',
+        'username',
         (err, admins) => {
         if (err) return console.log(err);
         return admins;
@@ -40,13 +41,25 @@ function findAllAdmins() {
 function findOneAdmin(userId) {
     return Admin
     .findById(userId)
-    .select('name password')
+    .select('username password')
     .exec()
     .then(admin => {
         return admin;
     })
     .catch(err => console.log(err));
 };
+
+function findAdminByUsername(username) {
+    return Admin
+    .findOne({ 'username': username })
+    .select('username password')
+    .exec()
+    .then(admin => {
+        return admin;
+    })
+    .catch(err => console.log(err));
+}
+// create fn to findbyusername
 
 function deleteAdmin(userId) {
     return Admin
@@ -153,7 +166,7 @@ function updateCompanyPhoto(CompanyObject) {
 
 function updateAdmin(AdminObject){
     let modifications = {};
-    modifications.name = AdminObject.name;
+    modifications.username = AdminObject.username;
     modifications.password = AdminObject.password;
     return Admin 
         .findByIdAndUpdate(AdminObject._id, {$set: modifications}, {new: true})
@@ -209,7 +222,8 @@ module.exports = {
     findOneCompany,
     updateCompanyPhoto,
     findCompanyByIndustry,
-    findCompanyByStage
+    findCompanyByStage,
+    findAdminByUsername
 };
 
 // If you don 't specify a callback then the API will return a variable of type Query. You can use this query object to build up your query and then execute it (with a callback) later using the exec() method.
