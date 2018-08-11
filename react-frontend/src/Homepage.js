@@ -41,7 +41,7 @@ class Homepage extends React.Component{
 }
 
     function renderLogo(picture) {
-        if (picture !== null || picture !== '') {
+        if (picture) {
             return (
                 <img src={`http://localhost:4000/${picture}`} alt=""/>
             )
