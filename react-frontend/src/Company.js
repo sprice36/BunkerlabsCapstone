@@ -1,11 +1,22 @@
 import React from 'react';
 import './Company.css';
 
+    function renderLogo(picture) {
+        if (picture !== null || picture !== '') {
+            return (
+                <img src={`http://localhost:4000/${picture}`} alt=""/>
+            )
+        } else {
+            return (
+                <img src={`http://localhost:4000/images/nologo.jpg`} alt=""/>
+            )
+        }
+    }
     
     const Company=({companyDetail})=>
                 <div className="div-Company">This is the description of a company:
                 <h3> 
-                {/* <img src={`http://localhost:4000/${companyDetail.picture}`} alt=""/>  */}
+                {renderLogo(companyDetail.picture)}
                 <br/>               
                 <p>Company Name:{companyDetail.name}</p>
                 <p>Summary:{companyDetail.summary}</p>
@@ -30,7 +41,6 @@ import './Company.css';
                 </h3>
                 </div>
     
-
     //currying  pattern-to customize and preset a component
     
     // const withRouter=(Component)=>(props)=>{
@@ -73,7 +83,7 @@ import './Company.css';
 
         componentDidMount(){
             const url=`http://localhost:4000/api/companies/${this.props.match.params.id}`;
-            console.log(url);
+            // console.log(url);
             fetch(url)
                 .then(company=>company.json())
                 .then(company=>{
@@ -98,7 +108,7 @@ import './Company.css';
                                 linkedIn: company.linkedIn
                         }
                     });
-                    console.log(company);
+                    // console.log(company);
                 });
         }
         
