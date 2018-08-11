@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import adminPage from './adminPage';
 import EditPage from './EditPage';
 import NewForm from './NewForm';
+import adminLogin from './adminLogin';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import AboutMarketplace from './AboutMarketplace';
@@ -17,7 +18,14 @@ class App extends React.Component {
         <div className="App">
         <Navbar />
 
+
         <Route path='/' component={Homepage} exact={true}/>
+
+
+        <Route path='/login' component={ adminLogin } exact={true}/>
+        <Route path='/admin/companies/:id/edit' component={ EditPage } exact={true}/>
+//         <Route path='/' component={LandingPage} exact={true}/>
+
         <Route path='/company/:id' component={Company} exact={true}/>
         <Route path='/aboutMarketplace' component={AboutMarketplace} exact={true}/>
         <Route path='/admin' component={ adminPage } exact={true}/>

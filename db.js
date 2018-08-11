@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const mongooseUrl = 'mongodb://localhost:27017/Bunkerlabs';
 const Admin = require('./models/admin.js');
 const Company = require('./models/company.js')
+
 // Connect to mongodb
 mongoose.connect(mongooseUrl, 
 {useNewUrlParser: true});
@@ -58,8 +59,12 @@ function findAdminByUsername(username) {
         return admin;
     })
     .catch(err => console.log(err));
-}
-// create fn to findbyusername
+
+
+
+ }
+
+
 
 function deleteAdmin(userId) {
     return Admin
