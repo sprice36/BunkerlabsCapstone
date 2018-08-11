@@ -11,7 +11,7 @@ import './Company.css';
                 <p>Industry:{companyDetail.industry}</p>
                 <p>Stage:{companyDetail.stage}</p>
                 <p>Product and Services:{companyDetail.productAndServices}</p>
-                <p>Top Three needs:
+                <p>Company Needs:
                 <ul>
                 <li>{companyDetail.need1}</li>
                 <li>{companyDetail.need2}</li>

@@ -16,10 +16,11 @@ db.once('open', () => {
     console.log('Connected to mongodb!');
 });
 
-function createAdmin(name, password) {
+function createAdmin(username, password, superUser=true) {
     var user = new Admin({
-        name: name,
-        password: password
+        username: username,
+        password: password,
+        superUser: superUser
     });
 
     return user.save((err) => {
@@ -31,7 +32,7 @@ function createAdmin(name, password) {
 function findAllAdmins() {
     return Admin.find(
         {},
-        'name',
+        'username',
         (err, admins) => {
         if (err) return console.log(err);
         return admins;
@@ -41,7 +42,7 @@ function findAllAdmins() {
 function findOneAdmin(userId) {
     return Admin
     .findById(userId)
-    .select('name password')
+    .select('username password')
     .exec()
     .then(admin => {
         return admin;
@@ -58,7 +59,11 @@ function findAdminByUsername(username) {
         return admin;
     })
     .catch(err => console.log(err));
+
+
+
  }
+
 
 
 function deleteAdmin(userId) {
@@ -166,7 +171,7 @@ function updateCompanyPhoto(CompanyObject) {
 
 function updateAdmin(AdminObject){
     let modifications = {};
-    modifications.name = AdminObject.name;
+    modifications.username = AdminObject.username;
     modifications.password = AdminObject.password;
     return Admin 
         .findByIdAndUpdate(AdminObject._id, {$set: modifications}, {new: true})

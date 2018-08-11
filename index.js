@@ -37,7 +37,10 @@ const {
     findOneCompany,
     updateCompanyPhoto,
     findCompanyByIndustry,
-    findCompanyByStage,
+
+    findCompanyByStage ,
+    findAdminByUsername
+
 } = require('./db.js');
 
 
