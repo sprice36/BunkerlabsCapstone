@@ -1,14 +1,3 @@
-h3{
-    background-color: aquamarine
-}
-
 .div-Company{
     background-color: green;
-}
-
-h3, .div-Company{
-    margin-left: 15px;
-    margin-top: 20px;
-    border-color: black;
-    border-style:solid;
 }

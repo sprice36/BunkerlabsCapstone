@@ -1,21 +1,111 @@
 import React from 'react';
 import './Company.css';
 
-    function renderLogo(picture) {
-        if (picture !== null || picture !== '') {
+    function renderneed2(need2) {
+        if (need2 !== null && need2 !== ''){
             return (
-                <img src={`http://localhost:4000/${picture}`} alt=""/>
+                <li>
+                    {need2}
+                </li>
             )
         } else {
+            return null
+        }
+    }
+
+    function renderneed3(need3) {
+        if (need3 !== null && need3 !== ''){
             return (
-                <img src={`http://localhost:4000/images/nologo.jpg`} alt=""/>
+            <li>
+                {need3}
+            </li>
             )
+        } else {
+            return null
+        }
+    }
+
+    function renderwebsite(website) {
+        if (website !== null && website !== ''){
+            return (
+                <div>
+                    {website}
+                </div>
+            )
+        } else {
+            return null
+        }
+    }
+
+    function renderyoutubelink(youtubelink) {
+        if (youtubelink !== null && youtubelink !== ''){
+            return (
+                <div>{youtubelink}</div>
+            )
+        } else {
+            return null
+        }
+    }
+
+    function renderpaypallink(paypallink) {
+        if (paypallink !== null && paypallink !== ''){
+            return (
+                <div>
+                    {paypallink}
+                </div>
+            )
+        } else {
+            return null
+        }
+    }
+
+    function renderlinkedin(linkedin) {
+        if (linkedin !== null && linkedin !== ''){
+            return (
+                <div>
+                    {linkedin}
+                </div>
+            )
+        } else {
+            return null
         }
     }
     
+    function renderpicture(picture) {
+        if (picture) {
+            return (
+                <div>
+                    <img src={`http://localhost:4000/${picture}`} alt=""/>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <img src={`http://localhost:4000/images/noprofileimage2.png`} alt=""/>
+                </div>
+            )
+        }
+    }
+
+    function renderLogo(logo) {
+        if (logo) {
+            return (
+                <div>
+                <img src={`http://localhost:4000/${logo}`} alt=""/>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                <img src={`http://localhost:4000/images/noimageavailable.jpg`} alt=""/>
+                </div>
+            )
+        }
+    }
+
+
     const Company=({companyDetail})=>
                 <div className="div-Company">This is the description of a company:
-                <h3> 
                 {renderLogo(companyDetail.picture)}
                 <br/>               
                 <p>Company Name:{companyDetail.name}</p>
@@ -24,21 +114,21 @@ import './Company.css';
                 <p>Stage:{companyDetail.stage}</p>
                 {/* <p>Product and Services:{companyDetail.productAndServices}</p> */}
                 <p>Company Needs:
+                </p>
                 <ul>
                 <li>{companyDetail.need1}</li>
-                {/* <li>{companyDetail.need2}</li> */}
-                {/* <li>{companyDetail.need3}</li> */}
+                {renderneed2(companyDetail.need2)}
+                {renderneed3(companyDetail.need3)}
                 </ul>
-                </p>
-                {/* <p>Website:{companyDetail.website}</p> */}
+                {/* </p> */}
+                {renderwebsite(companyDetail.website)}
                 <p>Email:{companyDetail.email}</p>
                 <p>Phone:{companyDetail.phone}</p>
-                {/* <p>YouTube:{companyDetail.youtubeLine}</p> */}
+                {renderyoutubelink(companyDetail.youtubelink)}
                 {/* Donate to this business - legal review/disclaimer needed? */}
-                {/* <p>Donate to this business:{companyDetail.paypalLink}</p> */}
-                {/* render for profile image */}
-                {/* render for linkedIn */}
-                </h3>
+                {renderpaypallink(companyDetail.paypallink)}
+                {renderpicture(companyDetail.profile)}
+                {renderlinkedin(companyDetail.linkedin)}
                 </div>
     
     //currying  pattern-to customize and preset a component
@@ -108,7 +198,6 @@ import './Company.css';
                                 linkedIn: company.linkedIn
                         }
                     });
-                    // console.log(company);
                 });
         }
         
