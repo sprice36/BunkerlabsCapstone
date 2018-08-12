@@ -18,14 +18,33 @@ class Footer extends React.Component{
             </footer>
                 <div className="black">@2018 Bunker Labs NFP. All Rights Reserved. |
                     <a className="footer-class" href="https://bunkerlabs.org/privacy-policy/" data-wpel-link="internal">Privacy Policy</a> | Terms of Use	
-                <div className="social-media">
-                    <div className="media1"><a  href="https://www.linkedin.com/company/bunkerlabs"><i class="fab fa-linkedin-in"></i></a></div> 
-                    <div className="media"><a  href="https://www.facebook.com/thebunkerlabs"><i class="fab fa-facebook-f"></i></a></div>
-                    <div className="media"><a  href="https://www.instagram.com/thebunkerlabs/"><i class="fab fa-instagram"></i></a></div>
-                    <div className="media"><a  href="https://twitter.com/TheBunkerLabs" ><i class="fab fa-twitter"></i></a></div>
+                {/* <div className="social-media">
+                    <div className="media1">
+                        <a  href="https://www.linkedin.com/company/bunkerlabs">
+                            <i className="fab fa-linkedin-in"></i>
+                        </a>
+                    </div> 
+                    <div className="media">
+                        <a  href="https://www.facebook.com/thebunkerlabs">
+                            <i className="fab fa-facebook-f">
+                            </i>
+                        </a>
+                    </div>
+                    <div className="media">
+                        <a  href="https://www.instagram.com/thebunkerlabs/">
+                            <i className="fab fa-instagram">
+                            </i>
+                        </a>
+                    </div>
+                    <div className="media">
+                        <a  href="https://twitter.com/TheBunkerLabs" >
+                            <i className="fab fa-twitter">
+                            </i>
+                        </a>
+                    </div> 
+                    </div> */}
                 </div>
             </div>
-        </div>
         );
     };
 }
