@@ -3,6 +3,9 @@ import './LandingPage.css';
 import {Link} from 'react-router-dom';
 // import Data from './Data';
 import Filter from './Filter';
+import { Column, Row } from 'simple-flexbox';
+import FlexView from 'react-flexview';
+
 
 class API extends React.Component{
     constructor(props){
@@ -25,29 +28,45 @@ class API extends React.Component{
 
     render(){
     return(
+       
+       
         <LandingPage companies={this.state.companies}/>
+        
         )
     }
 }
 
     const LandingPage=({companies})=>
-    <div className="landingPage">
-    <Filter industry={companies.industry}/>
+    
+    <div className="companyContainer">
+   
+
+    { <Filter industry={companies.industry}/> }
+    
         {companies.map(function(companyData){
         return(
-            <div key={companyData._id}>
+       
+            <div className='companyIndividual' key={companyData._id}>
+               
                 <Link to={`/company/${companyData._id}`}>
+                
                 <img src={`http://localhost:4000/${companyData.picture}`} alt=""/>
-                <h1>{companyData.name}</h1>
+                <h1 className='companyContainer'>{companyData.name}</h1>
                 </Link>
+                
             </div>
+            
+           
             )}
         )}
-
+        
+        
         <Link to={'/admin'} >
             <button>Admin Panel</button>
         </Link>
-    </div>    
+    </div>   
     
+     
+   
 
 export default API;

@@ -16,7 +16,7 @@ class CompanyList extends React.Component {
         );
         
         return (
-            <div className="">
+            <div className="company-container">
                     {companies}
             </div>
         );
