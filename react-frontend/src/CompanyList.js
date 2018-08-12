@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-
+import './companyList.css'
 
 class CompanyList extends React.Component {
     render() {
