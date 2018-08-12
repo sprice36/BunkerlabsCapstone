@@ -1,3 +1,4 @@
+
 .landingPage{
     background-color: lightblue;
     margin-left: 15px;
@@ -9,4 +10,25 @@
 .filter-container {
     display: flex;
     justify-content: center;
+
+}
+.companyIndividual {
+    background-color: white;
+    width: 200px;
+    height:100px;
+    border: 1px solid pink;
+
+};
+
+
+
+.companyContainer {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid purple;
+    width: 800px;
+    background-color: orchid
+
+
 }

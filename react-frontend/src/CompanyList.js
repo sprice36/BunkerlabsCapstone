@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-
+import './companyList.css'
 
 class CompanyList extends React.Component {
     render() {
@@ -16,7 +16,7 @@ class CompanyList extends React.Component {
         );
         
         return (
-            <div className="">
+            <div className="company-container">
                     {companies}
             </div>
         );
