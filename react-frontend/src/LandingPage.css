@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 .landingPage{
     background-color: lightblue;
     margin-left: 15px;
@@ -10,7 +10,8 @@
 .filter-container {
     display: flex;
     justify-content: center;
-=======
+
+}
 .companyIndividual {
     background-color: white;
     width: 200px;
@@ -29,5 +30,5 @@
     width: 800px;
     background-color: orchid
 
->>>>>>> Stashed changes
+
 }

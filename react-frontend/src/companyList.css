@@ -12,12 +12,4 @@
     flex: 1;
     display: inline-flex;
     border: 1px solid #ddd;
-    flex-direction: row;
-    flex-wrap: wrap;
-    /* align-content: center;
-    justify-content: space-between;
-    align-content: flex-start; */
-    height: 75%;
-    width: 95%;
-    /* width: auto; */
 }

@@ -3,8 +3,8 @@ import './LandingPage.css';
 import {Link} from 'react-router-dom';
 // import Data from './Data';
 import Filter from './Filter';
-import { Column, Row } from 'simple-flexbox';
-import FlexView from 'react-flexview';
+
+
 
 
 class API extends React.Component{
