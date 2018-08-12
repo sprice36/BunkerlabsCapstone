@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 const signature = process.env.JWT_SECRET;
 const {createAdmin, findAdminByUsername} = require('../db');
 const jwt = require('jsonwebtoken');
