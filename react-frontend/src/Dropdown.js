@@ -1,4 +1,4 @@
-import React, { Component, Fragment} from 'react';
+import React, { Fragment} from 'react';
 import {Dropdown, DropdownToggle, DropdownMenu,DropdownItem} from 'reactstrap';
 
 
@@ -20,8 +20,8 @@ class Menu extends React.Component{
         render(){
             return(
                 <Dropdown direction={this.props.direction} isOpen={this.state.btnDropright} toggle={() =>
-                     { this.setState({ btnDropright: !this.state.btnDropright }); }}>
-                     <DropdownToggle caret>
+                    { this.setState({ btnDropright: !this.state.btnDropright }); }}>
+                    <DropdownToggle caret>
                         {this.props.text}
                     </DropdownToggle>
 

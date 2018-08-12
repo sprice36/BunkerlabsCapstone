@@ -18,21 +18,19 @@ class App extends React.Component {
         <div className="App">
         <Navbar />
 
-
+        <div className="main-app-container">
         <Route path='/' component={Homepage} exact={true}/>
-
-
         <Route path='/login' component={ adminLogin } exact={true}/>
         <Route path='/admin/companies/:id/edit' component={ EditPage } exact={true}/>
-//         <Route path='/' component={LandingPage} exact={true}/>
-
+        <Route path='/landing' component={LandingPage} exact={true}/>
         <Route path='/company/:id' component={Company} exact={true}/>
         <Route path='/aboutMarketplace' component={AboutMarketplace} exact={true}/>
         <Route path='/admin' component={ adminPage } exact={true}/>
         <Route path='/admin/companies/new' component={ NewForm } exact={true}/>
         <Route path='/admin/companies/edit/:id' component={ EditPage } exact={true}/>
+        </div>
 
-        <Footer />
+        <Footer className='footer-class'/>
                 
         </div>
       

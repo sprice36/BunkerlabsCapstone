@@ -5,3 +5,8 @@
     border-color: black;
     border-style:solid;
 }
+
+.filter-container {
+    display: flex;
+    justify-content: center;
+}
