@@ -1,0 +1,44 @@
+
+.form-outer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid red; */
+}
+
+.form-container {
+    width: 65%;
+    border: 2px solid black;
+    padding: 10px;
+    padding-right: 65px;
+    justify-content: center;
+    min-width: 350px;
+    /* border-radius: 2%; */
+    background-color: #212C35;
+    /* background-color: darkslategrey; */
+    color: white;
+    
+
+}
+
+.form-button-container {
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    /* border: 1px solid blue; */
+}
+
+.form-button {
+    width: 175px;
+}
+
+.modal-container {
+    position: relative;
+}
+
+.modal-container .modal,
+.modal-container .modal-backdrop {
+    position: absolute;
+}
