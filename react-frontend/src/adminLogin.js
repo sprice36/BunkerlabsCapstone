@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
-// const {
-//     getLoginBody
-// } = require('../models/admin');
 
 class adminLogin extends React.Component {
     constructor(props){
         super(props);
     
-     this.state =  {
-         username : '',
-         password : ''
-     } 
+    this.state =  {
+        username : '',
+        password : ''
+    } 
 }
 
 handleUsername = (event) => {
@@ -37,7 +34,7 @@ handleLogin = () => {
 
     fetch(serverRequest, {
         headers: new Headers({
-           "Content-type" : "application/json"  
+            "Content-type" : "application/json"  
         }),
         body: JSON.stringify(loginBody) , 
         method : "POST"
@@ -45,8 +42,9 @@ handleLogin = () => {
     .then((data) => data.text()
     )
     .then((data) => {
-         console.log(data);
-         //store in local Storage
+        console.log(data);
+        //store in local Storage
+        // then redirect to admin homepage... at admin homepage and all routes after check in localstorage for token.. if no token redirect back to login
     })
     // .then((data) =>
     //   getLoginBody(data)  
@@ -55,26 +53,26 @@ handleLogin = () => {
 
 
 render(){ 
-   return (
-       <div>
-           <div>username</div>
-           <input onChange={this.handleUsername}
-           type="text"
-           value={this.state.username}
-           />
+    return (
+        <div>
+            <div>username</div>
+            <input onChange={this.handleUsername}
+            type="text"
+            value={this.state.username}
+            />
             
             <div>password </div>
             <input onChange={this.handlePassword}
-           type="text"
-           value={this.state.password}
-           />
+            type="password"
+            value={this.state.password}
+            />
             
             <br></br>
             
             <button onClick={this.handleLogin}>Login</button>
 
-           </div>
-   );
+        </div>
+    );
 };
 
 }

@@ -10,7 +10,6 @@ class adminPage extends React.Component {
         fetch('http://localhost:4000/api/companies')
         .then(res => res.json())
         .then(companies => {
-            console.log(companies)
             this.setState({companies});
         })
     }
@@ -18,7 +17,7 @@ class adminPage extends React.Component {
     _createOption = (company) =>{
         return(
             
-        <option value={company._id}>
+        <option value={company._id} key={company._id}>
             {company.name}
         </option>
         )

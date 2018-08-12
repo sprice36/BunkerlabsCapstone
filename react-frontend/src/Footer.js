@@ -6,7 +6,7 @@ class Footer extends React.Component{
     render(){
         return(
 
-            <div className="outer-div">
+            <div className="footer-class">
             <footer className="footer" >
                 <p>
                     Bunker Labs
@@ -18,7 +18,7 @@ class Footer extends React.Component{
             </footer>
                 <div className="black">@2018 Bunker Labs NFP. All Rights Reserved. |
                     <a className="footer-class" href="https://bunkerlabs.org/privacy-policy/" data-wpel-link="internal">Privacy Policy</a> | Terms of Use	
-                {/* <div className="social-media">
+                <div className="social-media">
                     <div className="media1">
                         <a  href="https://www.linkedin.com/company/bunkerlabs">
                             <i className="fab fa-linkedin-in"></i>
@@ -42,7 +42,7 @@ class Footer extends React.Component{
                             </i>
                         </a>
                     </div> 
-                    </div> */}
+                    </div>
                 </div>
             </div>
         );

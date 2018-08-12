@@ -55,22 +55,6 @@ class Homepage extends React.Component{
         });
     }
 
-    _retrieveCompaniesBySearch = () => {
-        // Is there search text? 
-        // If so, filter
-        // If not, return all
-        if (this.state.searchText !== '') {
-            let filteredCompanies = this.state.companies.filter(company => {
-                let doesNameMatch = company.name.toLowerCase().includes(this.state.searchText.toLowerCase());
-                // let doesContentMatch = note.content.toLowerCase().includes(this.state.searchText.toLowerCase());
-                return doesNameMatch
-            });
-            return filteredCompanies
-        } else {
-            return this.state.companies
-        }
-    }
-
     _updateIndustryFilter = (newIndustryFilter) => {
         this.setState({
             industryFilter: newIndustryFilter
@@ -83,13 +67,14 @@ class Homepage extends React.Component{
         })
     }
 
-    _retrieveCompaniesByFilter = () => {
+    _retrieveCompaniesByFilterAndSearch = () => {
         // Is there a filter ? 
         // If so, filter
         // If not, return all
+        let doesSearchMatchName
         let doesIndustryMatch;
         let doesStageMatch;
-        if (this.state.industryFilter !== 'All' || this.state.stageFilter !== 'All') {
+        if (this.state.industryFilter !== 'All' || this.state.stageFilter !== 'All' || this.state.searchText !== '') {
             let filteredCompanies = this.state.companies.filter(company => {
                 if (this.state.industryFilter === 'All') {
                     doesIndustryMatch = true
@@ -101,7 +86,12 @@ class Homepage extends React.Component{
                 } else {
                     doesStageMatch = company.stage.toLowerCase().includes(this.state.stageFilter.toLowerCase());
                 }
-                return doesIndustryMatch && doesStageMatch
+                if (this.state.searchText === '') {
+                    doesSearchMatchName = true
+                } else {
+                    doesSearchMatchName = company.name.toLowerCase().includes(this.state.searchText.toLowerCase());
+                }
+                return doesIndustryMatch && doesStageMatch && doesSearchMatchName
             });
             return filteredCompanies
         } else {
@@ -122,14 +112,16 @@ class Homepage extends React.Component{
                 <Link to={'/admin'} >
                     <button>Admin Panel</button>
                 </Link>
-                
+
                 <SearchBar text={this.state.searchText} 
                 handleChange={this._updateSearchText} />
                 
-                <FilterBy type='industry' listItems={this.state.industryList} value={this.state.industryFilter} handleChange={this._updateIndustryFilter}/>
-                <FilterBy type='stage' listItems={this.state.stageList} value={this.state.stageFilter} handleChange={this._updateStageFilter}/>
+                <div className='filter-container'>
+                    <FilterBy type='industry' listItems={this.state.industryList} value={this.state.industryFilter} handleChange={this._updateIndustryFilter}/>
+                    <FilterBy type='stage' listItems={this.state.stageList} value={this.state.stageFilter} handleChange={this._updateStageFilter}/>
+                </div>
 
-                <CompanyList filteredCompanies={this._retrieveCompaniesByFilter()} />
+                <CompanyList filteredCompanies={this._retrieveCompaniesByFilterAndSearch()} />
 
                 <div className="companyContainer">
                 {/* {this.state.companies.map(this._renderSingleCompany)} */}

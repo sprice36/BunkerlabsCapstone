@@ -3,7 +3,7 @@
     -ms-flex-direction: row;
     flex-direction: row;
     border-bottom-color: rgba(0,0,0,0.5);
-    background-color: black;
+    background-color: rgba(0,0,0,0.9);
     width:100%;
     padding-top: 0px;
 }
@@ -12,10 +12,15 @@
     margin-left: 0px;
     margin-top: 0px;
 }
- img{
+
+NavItem:hover {
+    background-color: black;
+}
+
+.navbar-logo{
     width: 50%;
     height: 50%;
- }
+}
 
 .navDropdown{
     margin-left: 1320px;
@@ -33,10 +38,7 @@
 .about{
     line-height: 83px;
     height: 86px;
-    color:#e46326;
+    color: white;
     display: flex;
 }
 
-a{
-    color:#e46326;
-}
