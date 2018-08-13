@@ -412,12 +412,13 @@ class EditPage extends React.Component {
                         </Col>
                     </FormGroup>
 
-                    <FormGroup controlId="formHorizontalEmail">
+                    <FormGroup controlId="formHorizontalTel">
                         <Col componentClass={ControlLabel} sm={2}>
                             Phone Number*
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="text" placeholder="Phone Number" value={this.state.form.phone} onChange={this.handlephone} required />
+                            <FormControl type="text" placeholder="Phone Number" value={this.state.form.phone} onChange={this.handlephone} required
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
                         </Col>
                     </FormGroup>
 

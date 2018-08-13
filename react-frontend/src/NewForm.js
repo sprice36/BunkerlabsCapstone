@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import { Button, Form, FormGroup, FormControl, Col, ControlLabel, Modal } from 'react-bootstrap';
 import './form.css';
+import NumberFormat from 'react-number-format';
 
 class NewForm extends React.Component {
     constructor(){
@@ -390,12 +391,13 @@ class NewForm extends React.Component {
                         </Col>
                     </FormGroup>
 
-                    <FormGroup controlId="formHorizontalEmail">
+                    <FormGroup controlId="formHorizontalNumber">
                         <Col componentClass={ControlLabel} sm={2}>
                             Phone Number*
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="tel" placeholder="Phone Number" value={this.state.form.phone} onChange={this.handlephone} required />
+                            {/* <FormControl type="number" placeholder="Phone Number" value={this.state.form.phone} onChange={this.handlephone} required
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" /> */}
                         </Col>
                     </FormGroup>
 
@@ -544,6 +546,7 @@ class NewForm extends React.Component {
                     
                 </Form>
     </div>
+    <NumberFormat format="(###) ###-####" mask="_" placeholder="Phone Number" value={this.state.form.phone} onChange={this.handlephone}/>
             
             <Cropper
                 ref='cropper'
