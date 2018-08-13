@@ -295,7 +295,7 @@ class EditPage extends React.Component {
                     config: { headers: {'Content-Type': 'multipart/form-data', ...headers }}
                 })
             .then(res => {
-                console.log(res)
+                // console.log(res)
             })
             .catch(err => console.log(err));
             }); 
@@ -310,7 +310,7 @@ class EditPage extends React.Component {
         };
         return axios.post(`http://localhost:4000/api/deletecompany/${this.props.match.params.id}`, this.props.match.params.id, {headers})
         .then(res => {
-            console.log(res);
+            // console.log(res);
                 return res.data._id;
         });
     }

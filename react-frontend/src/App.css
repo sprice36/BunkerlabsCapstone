@@ -116,8 +116,8 @@ i{
   height: 29px;
   width: 110px;
   /* float: right; */
-  margin-top: 0px;
-  margin-right: -410px;
+  /* margin-top: 0px; */
+  /* margin-right: -410px; */
   color: white;
   color: white;
   border: #191919;
@@ -125,9 +125,9 @@ i{
 }
 
 .admin{
-  margin-top: -100px;
+  /* margin-top: -100px;
   margin-bottom: 100px;
-  margin-right: -640px;
+  margin-right: -640px; */
 
 }
 

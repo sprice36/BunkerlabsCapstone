@@ -1,6 +1,5 @@
 import React from 'react';
-import NewForm from './NewForm';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class adminPage extends React.Component {
     constructor(props) {

@@ -99,24 +99,22 @@ class Homepage extends React.Component{
         }
     }
 
-    // _renderSingleCompany = (company) => {
-    //     return (
-    //             <SingleCompany companyInfo={company} key={company._id}/>
-    //     )
-    // }
-
     render(){
-    
-    return(
+
+        
+        return(
             <div>
-                <div className="admin">
-                <Link to={'/admin'} >
-                    <button className="Admin-panel">ADMIN PANEL</button>
-                </Link>
-                </div>
+                <div className="homepage-container">
+            {/* This should be moved to the navbar component */}
+                    <Link to={'/login'} >
+                        <button className="Admin-panel">ADMIN PANEL</button>
+                    </Link>
+            { /* This should be moved to the navbar component */ }
+
                 <div>
                 <SearchBar text={this.state.searchText} 
                 handleChange={this._updateSearchText} />
+                </div>
                 
                 <div className='filter-container'>
                     <FilterBy type='industry' listItems={this.state.industryList} value={this.state.industryFilter} handleChange={this._updateIndustryFilter}/>
@@ -125,9 +123,6 @@ class Homepage extends React.Component{
 
                 <CompanyList filteredCompanies={this._retrieveCompaniesByFilterAndSearch()} />
 
-                <div className="companyContainer">
-                {/* {this.state.companies.map(this._renderSingleCompany)} */}
-                </div>
                 </div>
             </div>
         )
