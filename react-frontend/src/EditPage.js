@@ -274,7 +274,11 @@ class EditPage extends React.Component {
             linkedIn: this.state.form.linkedIn,
         };
 
-        axios.post(`http://localhost:4000/api/updatecompany/${this.props.match.params.id}`, companyObject)
+        let headers = {
+            'token': JSON.parse(localStorage.getItem('token'))
+        };
+
+        axios.post(`http://localhost:4000/api/updatecompany/${this.props.match.params.id}`, companyObject, {headers})
             .then(res => {
                 // console.log(res);
                 return res.data._id
@@ -288,7 +292,7 @@ class EditPage extends React.Component {
                     method: 'post',
                     url: `http://localhost:4000/api/updatecompanypicture/${id}`,
                     data: fd,
-                    config: { headers: {'Content-Type': 'multipart/form-data' }}
+                    config: { headers: {'Content-Type': 'multipart/form-data', ...headers }}
                 })
             .then(res => {
                 console.log(res)
@@ -301,7 +305,10 @@ class EditPage extends React.Component {
 
     deleteCompany = () => {
         // event.preventDefault()
-        return axios.post(`http://localhost:4000/api/deletecompany/${this.props.match.params.id}`, this.props.match.params.id)
+        let headers = {
+            'token': JSON.parse(localStorage.getItem('token'))
+        };
+        return axios.post(`http://localhost:4000/api/deletecompany/${this.props.match.params.id}`, this.props.match.params.id, {headers})
         .then(res => {
             console.log(res);
                 return res.data._id;

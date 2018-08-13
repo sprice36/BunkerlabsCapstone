@@ -51,15 +51,19 @@ let verifyToken = async (req, res, next) => {
     let payload; 
     try {
         payload= await jwt.verify(token, signature)
+        // console.log('payload',payload);
     } catch (error){
-        console.log(error);
-    }
-        if (payload.superUser === true){
+        // console.log(error);
+        res.send('unverified user');
+    }   
+        // *******Need help seeing why payload is undefined here***********
+        // console.log('payload',payload);
+        // if (payload.superUser == true){
         req.jwt = payload;
         next();
-        } else {
-            res.send('unverified user')
-        }
+        // } else {
+            // res.send('unverified user')
+        // }
     }
 
 module.exports = {

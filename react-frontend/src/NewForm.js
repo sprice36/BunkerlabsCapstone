@@ -282,8 +282,11 @@ class NewForm extends React.Component {
             linkedIn: this.state.form.linkedIn,
             ownerName: this.state.form.ownerName
         };
+        let headers = {
+            'token': JSON.parse(localStorage.getItem('token'))
+        };
         
-        axios.post('http://localhost:4000/api/createcompany', companyObject)
+        axios.post('http://localhost:4000/api/createcompany', companyObject, {headers})
         .then(res => {
             return res.data._id;
         })
@@ -296,7 +299,7 @@ class NewForm extends React.Component {
                 method: 'post',
                 url: `http://localhost:4000/api/createcompanypicture/${id}`,
                 data: fd,
-                config: { headers: {'Content-Type': 'multipart/form-data' }}
+                headers: {'Content-Type': 'multipart/form-data', ...headers }
             })
             .then(res => {
                 console.log(res)

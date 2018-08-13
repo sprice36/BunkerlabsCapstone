@@ -9,10 +9,10 @@ class adminLogin extends React.Component {
     constructor(props){
         super(props);
     
-     this.state =  {
-         username : '',
-         password : ''
-     } 
+    this.state =  {
+        username : '',
+        password : ''
+    } 
 }
 
 handleUsername = (event) => {
@@ -34,11 +34,10 @@ handleLogin = () => {
         username : this.state.username,
         password : this.state.password 
     }
-    console.log(loginBody)
 
     fetch(serverRequest, {
         headers: new Headers({
-           "Content-type" : "application/json"  
+            "Content-type" : "application/json"  
         }),
         body: JSON.stringify(loginBody) , 
         method : "POST"
@@ -46,40 +45,38 @@ handleLogin = () => {
     .then((data) => data.text()
     )
     .then((data) => {
-         //if password is correct store token in local storage
+        //if password is correct store token in local storage
         if (this.state.password !== data){
-         //store in local Storage
-         localStorage.setItem('token', JSON.stringify(data))
-         this.props.history.push('./admin')
+        //store in local Storage
+        localStorage.setItem('token', JSON.stringify(data))
+        this.props.history.push('./admin')
         }
     })
-   
 }
 
 
 render(){ 
-   return (
-       <div>
-           <div>username</div>
-           <input onChange={this.handleUsername}
-           type="text"
-           value={this.state.username}
-           />
+    return (
+        <div>
+            <div>username</div>
+                <input onChange={this.handleUsername}
+                type="text"
+                value={this.state.username}
+                />
             
-            <div>password </div>
-            <input onChange={this.handlePassword}
-           type="text"
-           value={this.state.password}
-           />
+                <div>password </div>
+                <input onChange={this.handlePassword}
+                type="text"
+                value={this.state.password}
+                />
             
-            <br></br>
+                <br></br>
             
-            <button onClick={this.handleLogin}>Login</button>
+                <button onClick={this.handleLogin}>Login</button>
 
-           </div>
-   );
-};
-
+            </div>
+        );
+    };
 }
 
 export default adminLogin;

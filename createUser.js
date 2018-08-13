@@ -3,4 +3,4 @@ const {
 } = require('./db');
 
 
-createAdmin("testAdmin", "testpassword")
+createAdmin("smj", "smj")

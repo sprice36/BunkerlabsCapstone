@@ -68,16 +68,15 @@ app.use(cors({
     credentials: true
 }));
 
-app.post('/createAccount', createAccount)
-
+// app.post('/createAccount', createAccount)
 
 //public routes
 // Returns JSON data for all companies
-// app.get('/api/companies/', (req, res) => {
-//     findAllCompanies()
-//         .then(companies => res.json(companies))
-//         .catch((err) => res.send(err));
-// });
+app.get('/api/companies/', (req, res) => {
+    findAllCompanies()
+        .then(companies => res.json(companies))
+        .catch((err) => res.send(err));
+});
 
 // Returns JSON data for specific company
 app.get('/api/companies/:id', (req, res) => {
@@ -125,7 +124,22 @@ app.get('/api/company/byStage/:stage', (req, res) => {
 //routes ONLY if authentication is verified
 // Returns JSON of name/userId of all admins
 app.post('/api/admin/', verifyUser) 
-    //put authentication part
+
+app.use(verifyToken, admin)
+
+//404 message for nonexistent routes
+app.get('*', function (req, res) {
+    res.send('page not found', 404);
+});
+app.listen(port, () => {
+    console.log(`Your server is running at http://localhost:${port}`);
+});
+
+
+
+////// MOVED TO ADMIN.JS
+
+//put authentication part
 
 
 // app.get('/api/admins/', (req, res) => {
@@ -248,13 +262,3 @@ app.post('/api/admin/', verifyUser)
 //         .then(company => res.json(company))
 //         .catch((err) => res.send(err));
 // });
-
-app.use(verifyToken, admin)
-
-//404 message for nonexistent routes
-app.get('*', function (req, res) {
-    res.send('page not found', 404);
-});
-app.listen(port, () => {
-    console.log(`Your server is running at http://localhost:${port}`);
-});
