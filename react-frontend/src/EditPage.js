@@ -27,12 +27,22 @@ class EditPage extends React.Component {
                 location: '',
                 picture: null,
                 linkedIn: '',
-                profile: ''
-            }
+                profile: '',
+                ownerName: ''
+            },
+            token: ""
         }
     }
 
     componentDidMount() {
+    let localToken = localStorage.getItem('token');
+        if (localToken){
+            this.setState({
+                token: localToken
+            })} 
+            else {
+                this.props.history.push('/login')
+            }  
     fetch(`http://localhost:4000/api/companies/${this.props.match.params.id}`)
     .then(res => res.json())
     .then(companyData => {
@@ -53,10 +63,12 @@ class EditPage extends React.Component {
                 need2: companyData.needs[1],
                 need3: companyData.needs[2],
                 profile: companyData.profile,
-                linkedIn: companyData.linkedIn
+                linkedIn: companyData.linkedIn,
+                ownerName: companyData.ownerName
             }
         });
-        })  
+        })
+    .catch(() => this.props.history.push('/admin'))
     }
 
     handlename = (event) => {
@@ -85,16 +97,6 @@ class EditPage extends React.Component {
             }
         })
     }
-
-    handleprofile= (event) => {
-        this.setState({
-            form: {
-                ...this.state.form, 
-                profile: event.target.value
-            }
-        })
-    }
-
 
     handlesummary= (event) => {
         this.setState({
@@ -168,6 +170,15 @@ class EditPage extends React.Component {
         });
     }
 
+    handleownerName = (event) => {
+        this.setState({
+            form: {
+                ...this.state.form,
+                ownerName: event.target.value
+            }
+        })
+    }
+
     handlePicture = (event) => {
         this.setState({
             form: {
@@ -180,6 +191,24 @@ class EditPage extends React.Component {
             reader.onloadend = (e) => {
                 this.setState({
                     imagePreview: e.target.result
+                });
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        };
+    }
+
+    handleProfile = (event) => {
+        this.setState({
+            form: {
+                ...this.state.form,
+                picture: event.target.files[0]
+            },
+        })
+        if (event.target.files && event.target.files[0]) {
+            let reader = new FileReader();
+            reader.onloadend = (e) => {
+                this.setState({
+                    imageProfilePreview: e.target.result
                 });
             };
             reader.readAsDataURL(event.target.files[0]);
@@ -270,9 +299,9 @@ class EditPage extends React.Component {
         .catch(err => console.log(err));
     }; 
 
-    deleteCompany = (event) => {
+    deleteCompany = () => {
         // event.preventDefault()
-        axios.post(`http://localhost:4000/api/deletecompany/${this.props.match.params.id}`, this.props.match.params.id)
+        return axios.post(`http://localhost:4000/api/deletecompany/${this.props.match.params.id}`, this.props.match.params.id)
         .then(res => {
             console.log(res);
                 return res.data._id;
@@ -292,11 +321,17 @@ class EditPage extends React.Component {
         });
     }
     
+    // add a new function to handle onclick delete button
     handleCloseModal = () => {
-        this.deleteCompany();
-        this.setState({
-            showModal: false,
-        });
+        this.deleteCompany()
+            .then(this.props.history.push('/admin'))
+        // .then(react router redirect)
+    //     this.setState({
+    //         showModal: false,
+    //     },
+    //     // react router redirect
+    // );
+
     }
     
     handleCloseModalCancel = () => {
@@ -412,12 +447,13 @@ class EditPage extends React.Component {
                         </Col>
                     </FormGroup>
 
-                    <FormGroup controlId="formHorizontalEmail">
+                    <FormGroup controlId="formHorizontalTel">
                         <Col componentClass={ControlLabel} sm={2}>
                             Phone Number*
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="text" placeholder="Phone Number" value={this.state.form.phone} onChange={this.handlephone} required />
+                            <FormControl type="text" placeholder="Phone Number" value={this.state.form.phone} onChange={this.handlephone} required
+                            />
                         </Col>
                     </FormGroup>
 
@@ -436,6 +472,15 @@ class EditPage extends React.Component {
                         </Col>
                         <Col sm={10}>
                             <FormControl type="url" placeholder="https://www.mycompany.com" value={this.state.form.website} onChange={this.handlewebsite} />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup controlId="formHorizontalText">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            CEO*
+                        </Col>
+                        <Col sm={10}>
+                            <FormControl type="text" placeholder="John Smith" value={this.state.form.ownerName} onChange={this.handleownerName} required />
                         </Col>
                     </FormGroup>
 
@@ -559,6 +604,15 @@ class EditPage extends React.Component {
                         </Col>
                     </FormGroup>
 
+                    <FormGroup controlId="formHorizontalFile">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            CEO photo
+                        </Col>
+                        <Col sm={10}>
+                            <FormControl type="file" onChange={this.handleProfile} accept='.png, .jpg, .jpeg' />
+                        </Col>
+                    </FormGroup>
+
                     <div className="form-button-container">
                             <Button className="form-button" bsStyle="primary" bsSize="large" type="submit">Save Changes</Button>
                             <Button className="form-button" bsStyle="danger" bsSize="large" onClick={this.handleOpenModal}>Delete Company</Button>
@@ -609,9 +663,7 @@ class EditPage extends React.Component {
                             <h4>Are you sure you want to delete {this.state.form.name}'s profile?</h4>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Link to = "/admin" > 
                                 <Button className="form-button" bsStyle="danger" bsSize="" onClick={this.handleCloseModal}>Delete</Button>
-                            </Link>
                                 <Button className="form-button" bsStyle="primary" bsSize="" onClick={this.handleCloseModalCancel}>Cancel</Button>
                         </Modal.Footer>
                     </Modal>

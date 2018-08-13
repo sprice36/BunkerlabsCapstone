@@ -1,12 +1,30 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import NewForm from './NewForm';
+import {Link, Redirect} from 'react-router-dom';
 
 class adminPage extends React.Component {
-    state = {
-        companies: []
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            companies: [],
+            token : "",
+            redirect : false
+        }
     }
 
     componentDidMount() {
+        //check local storage for token and if its there setState to token : token
+        //if it doesnt exists or expired redirect to login
+        let localToken = localStorage.getItem('token');
+        if (localToken) {
+            this.setState({
+                token: localToken
+            })
+        } else {
+            this.props.history.push('/login');
+        }
+
         fetch('http://localhost:4000/api/companies')
         .then(res => res.json())
         .then(companies => {
