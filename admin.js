@@ -20,33 +20,39 @@ const {
     updateCompany,
     updateCompanyPhoto,
 } = require('./db.js');
+
 //header needs a token 
 //admin routes go here 
 //routes ONLY if authentication is verified
 // Returns JSON of name/userId of all admins
+
 admin.get('/api/admins/', (req, res) => {
     findAllAdmins()
         .then(admins => res.json(admins))
         .catch((err) => res.send(err));
 });
+
 // Returns JSON of name/userId for specific admin
 admin.get('/api/admins/:id', (req, res) => {
     findOneAdmin(req.params.id)
         .then(company => res.json(company))
         .catch((err) => res.send(err));
 });
+
 admin.post('/api/deletecompany/:id', (req, res) => {
     let companyId = req.params.id;
     deleteCompany(companyId)
         .then(company => res.json(company))
         .catch((err) => res.send(err));
 })
+
 // updates name/userId for specific admin
 admin.post('/api/updateadmins/:id', (req, res) => {
     updateAdmin(req.body)
         .then(admin => res.json(admin))
         .catch((err) => res.send(err));
 });
+
 // create new company
 admin.post('/api/createcompany', (req, res) => {
     // console.log(req.body)
@@ -64,12 +70,14 @@ admin.post('/api/createcompany', (req, res) => {
         paypalLink: req.body.paypalLink,
         location: req.body.location,
         profile: req.body.profile,
-        linkedIn: req.body.linkedIn
+        linkedIn: req.body.linkedIn,
+        ownerName: req.body.ownerName
     };
     createCompany(newCompanyObject)
         .then(company => res.json(company))
         .catch((err) => res.send(err));
 });
+
 admin.post('/api/createcompanypicture/:id', upload.single('picture'), (req, res) => {
     fs.rename(req.file.path,
         `public/images/${req.params.id}`,
@@ -88,9 +96,10 @@ admin.post('/api/createcompanypicture/:id', upload.single('picture'), (req, res)
         .then(company => res.json(company))
         .catch((err) => res.send(err));
 });
+
 //updates specific company 
 admin.post('/api/updatecompany/:id', (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     let newCompanyObject = {
         _id: req.params.id,
         name: req.body.name,
@@ -106,12 +115,14 @@ admin.post('/api/updatecompany/:id', (req, res) => {
         paypalLink: req.body.paypalLink,
         location: req.body.location,
         profile: req.body.profile,
-        linkedIn: req.body.linkedIn
+        linkedIn: req.body.linkedIn,
+        ownerName: req.body.ownerName
     };
     updateCompany(newCompanyObject)
         .then(company => res.json(company))
         .catch((err) => res.send(err));
 });
+
 admin.post('/api/updatecompanypicture/:id', upload.single('picture'), (req, res) => {
     // Need to delete old picture at public/images/:id before renaming old one
     // Check DB to see if picture exists before trying to delete
@@ -133,4 +144,5 @@ admin.post('/api/updatecompanypicture/:id', upload.single('picture'), (req, res)
         .then(company => res.json(company))
         .catch((err) => res.send(err));
 });
+
 module.exports = admin;

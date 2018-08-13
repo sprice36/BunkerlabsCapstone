@@ -38,7 +38,7 @@ function createAdmin(username, password, superUser=true) {
 function findAllAdmins() {
     return Admin.find(
         {},
-        'username',
+        'username superUser',
         (err, admins) => {
         if (err) return console.log(err);
         return admins;
@@ -92,7 +92,8 @@ function createCompany(companyObject) {
         paypalLink: companyObject.paypalLink,
         location: companyObject.location,
         profile: companyObject.profile,
-        linkedIn: companyObject.linkedIn
+        linkedIn: companyObject.linkedIn,
+        ownerName: companyObject.ownerName
     });
     return company.save()
 };
@@ -146,6 +147,7 @@ function updateCompany(CompanyObject){
     modifications.location = CompanyObject.location; 
     modifications.profile = CompanyObject.profile;
     modifications.linkedIn = CompanyObject.linkedIn;
+    modifications.ownerName = CompanyObject.ownerName;
     console.log(CompanyObject._id);
     return Company 
         .findByIdAndUpdate(CompanyObject._id, {$set: modifications}, {new: true})
@@ -174,6 +176,7 @@ function updateAdmin(AdminObject){
     let modifications = {};
     modifications.username = AdminObject.username;
     modifications.password = AdminObject.password;
+    modifications.superUser = AdminObject.superUser;
     return Admin 
         .findByIdAndUpdate(AdminObject._id, {$set: modifications}, {new: true})
         .exec()
