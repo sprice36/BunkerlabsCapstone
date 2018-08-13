@@ -16,7 +16,7 @@ class App extends React.Component {
     return (
         <div className="App">
         <Navbar />
-
+        
         <div className="main-app-container">
         <Route path='/' component={Homepage} exact={true}/>
         <Route path='/login' component={ adminLogin } exact={true}/>
@@ -28,7 +28,7 @@ class App extends React.Component {
         <Route path='/admin/companies/edit/:id' component={ EditPage } exact={true}/>
         </div>
 
-        <Footer className="footer"/>
+        <Footer className="footer-app"/>
                 
         </div>
       
