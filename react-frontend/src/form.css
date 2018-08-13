@@ -4,6 +4,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-width: 360px;
     /* border: 1px solid red; */
 }
 
@@ -15,9 +16,10 @@
     justify-content: center;
     min-width: 350px;
     /* border-radius: 2%; */
-    background-color: #212C35;
+    /* background-color: #212C35; */
     /* background-color: darkslategrey; */
-    color: white;
+    background-color: #DCDCDC;
+    /* color: white; */
     
 
 }

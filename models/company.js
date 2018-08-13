@@ -18,7 +18,8 @@ const CompanySchema = new Schema({
     paypalLink: String,
     location: String,
     linkedIn: String,
-    profile: String
+    profile: String,
+    ownerName: String
 });
 
 const Company = mongoose.model('companies', CompanySchema);

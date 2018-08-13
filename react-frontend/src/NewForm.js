@@ -2,18 +2,15 @@ import React from 'react';
 import axios from 'axios';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
-// import Modal from 'react-modal';
 import {
     Link
 } from 'react-router-dom';
 import { Button, Form, FormGroup, FormControl, Col, ControlLabel, Modal } from 'react-bootstrap';
 import './form.css';
-import NumberFormat from 'react-number-format';
 
 class NewForm extends React.Component {
     constructor(){
         super();
-        // this.handleEntry = this.handleEntry()
         this.state={
             form:{
                 name: '',
@@ -32,12 +29,24 @@ class NewForm extends React.Component {
                 location: 'Atlanta, GA',
                 picture: null,
                 linkedIn: '',
-                profile: ''
+                profile: null,
+                ownerName: ''
             },
+            token: ""
         }
     }
 
     componentDidMount() {
+        //check local storage for token and if its there setState to token : token
+        //if it doesnt exists or expired redirect to login
+        let localToken = localStorage.getItem('token');
+        if (localToken){
+            this.setState({
+                token: localToken
+            })} 
+            else {
+                this.props.history.push('/login')
+                }
         this.setState({
             baseFormState: this.state.form,
             showModal: false
@@ -71,11 +80,11 @@ class NewForm extends React.Component {
         })
     }
 
-    handleprofile= (event) => {
+    handleownerName = (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
-                profile: event.target.value
+                ownerName: event.target.value
             }
         })
     }
@@ -170,6 +179,24 @@ class NewForm extends React.Component {
         };
     }
 
+    handleProfile =(event) => {
+        this.setState({
+            form: {
+                ...this.state.form, 
+                picture: event.target.files[0]
+            },
+        })
+        if (event.target.files && event.target.files[0]) {
+            let reader = new FileReader();
+            reader.onloadend = (e) => {
+                this.setState({
+                    imageProfilePreview: e.target.result
+                });
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        };
+    }
+
     handleindustry =(event) => {
         this.setState({
             form: {
@@ -204,7 +231,7 @@ class NewForm extends React.Component {
                 name: '',
                 website: '',
                 summary: '',
-                need1: 'Investing',
+                need1: '',
                 need2: '',
                 need3: '',
                 youtubeLink: '',
@@ -216,9 +243,11 @@ class NewForm extends React.Component {
                 picture: null,
                 location: '',
                 linkedIn: '',
-                profile: ''
-            }
-        });
+                profile: null,
+                ownerName: ''
+            },
+            imagePreview: null
+        });        
     }
     
     handleEntry(event){
@@ -251,6 +280,7 @@ class NewForm extends React.Component {
             location: this.state.form.location,
             profile: this.state.form.profile,
             linkedIn: this.state.form.linkedIn,
+            ownerName: this.state.form.ownerName
         };
         
         axios.post('http://localhost:4000/api/createcompany', companyObject)
@@ -396,8 +426,7 @@ class NewForm extends React.Component {
                             Phone Number*
                         </Col>
                         <Col sm={10}>
-                            {/* <FormControl type="number" placeholder="Phone Number" value={this.state.form.phone} onChange={this.handlephone} required
-                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" /> */}
+                            <FormControl type="tel" format="(###) ###-####" mask="_" placeholder="Phone Number" value={this.state.form.phone} onChange={this.handlephone} />
                         </Col>
                     </FormGroup>
 
@@ -425,6 +454,15 @@ class NewForm extends React.Component {
                         </Col>
                         <Col sm={10}>
                             <FormControl type="url" placeholder="https://www.linkedin.com/in/yourprofile/" value={this.state.form.linkedIn} onChange={this.handlelinkedIn} />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup controlId="formHorizontalText">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            CEO*
+                        </Col>
+                        <Col sm={10}>
+                            <FormControl type="text" placeholder="John Smith" value={this.state.form.ownerName} onChange={this.handleownerName} required />
                         </Col>
                     </FormGroup>
 
@@ -539,6 +577,15 @@ class NewForm extends React.Component {
                         </Col>
                     </FormGroup>
 
+                    <FormGroup controlId="formHorizontalFile">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            CEO photo
+                        </Col>
+                        <Col sm={10}>
+                            <FormControl type="file" onChange={this.handleProfile} accept='.png, .jpg, .jpeg' />
+                        </Col>
+                    </FormGroup>
+
                     <div className="form-button-container">
                             <Button className="form-button" bsStyle="primary" bsSize="large" type="submit">Create</Button>
                             <Button className="form-button" bsSize="large" onClick={this._clearForm}>Clear Form</Button>
@@ -546,7 +593,7 @@ class NewForm extends React.Component {
                     
                 </Form>
     </div>
-    <NumberFormat format="(###) ###-####" mask="_" placeholder="Phone Number" value={this.state.form.phone} onChange={this.handlephone}/>
+    {/* <NumberFormat format="(###) ###-####" mask="_" placeholder="Phone Number" value={this.state.form.phone} onChange={this.handlephone}/> */}
             
             <Cropper
                 ref='cropper'
