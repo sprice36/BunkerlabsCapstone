@@ -35,14 +35,25 @@ class EditPage extends React.Component {
     }
 
     componentDidMount() {
-    let localToken = localStorage.getItem('token');
-        if (localToken){
-            this.setState({
-                token: localToken
-            })} 
-            else {
-                this.props.history.push('/login')
-            }  
+
+    let serverRequest = 'http://localhost:4000/api/verifyToken';
+    let localToken = JSON.parse(localStorage.getItem('token'))
+
+    axios({
+            method: 'post',
+            url: serverRequest,
+            headers: {
+                token: localToken,
+            }
+        })
+    .then(data => {
+            if (data.data !== 'OK') {
+                this.props.history.push('login');
+            }
+            return
+        })
+    .catch(error => console.log(error));
+
     fetch(`http://localhost:4000/api/companies/${this.props.match.params.id}`)
     .then(res => res.json())
     .then(companyData => {
@@ -301,6 +312,7 @@ class EditPage extends React.Component {
                         }
                     })
                     .catch(err => console.log(err));
+                return
             }
         })
         .then(() => this.handleOpenModalUpdate())
@@ -365,7 +377,7 @@ class EditPage extends React.Component {
 
     render() {
         return (
-            <div class="form-outer-container">
+            <div className="form-outer-container">
                 <div className="form-container">
                 <h2>Edit or Delete {this.state.form.name}'s Profile</h2>
                 <p>* Indicates required field</p>

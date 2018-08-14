@@ -53,7 +53,7 @@ function renderLogo(picture) {
         } else {
             return (
                 <div className="company-image-container">
-                    <img className="company-list-image" src={`http://localhost:4000/images/noimageavailable.jpg`} alt=""/>
+                    <img className="company-list-image" src={`http://localhost:4000/images/default/noimageavailable.jpg`} alt=""/>
                 </div>
             )
         }

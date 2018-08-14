@@ -93,7 +93,7 @@ import './Company.css';
         } else {
             return (
                 <div>
-                    <img className="company-picture" src={`http://localhost:4000/images/noprofileimage2.png`} alt=""/>
+                    <img className="company-picture" src={`http://localhost:4000/images/default/noprofileimage2.png`} alt=""/>
                 </div>
             )
         }
@@ -109,7 +109,7 @@ import './Company.css';
         } else {
             return (
                 <div>
-                <img className="company-renderLogo" src={`http://localhost:4000/images/noimageavailable.jpg`} alt=""/>
+                  <img className="company-renderLogo" src={`http://localhost:4000/images/default/noimageavailable.jpg`} alt=""/>
                 </div>
             )
         }
