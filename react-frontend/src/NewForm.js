@@ -309,6 +309,7 @@ class NewForm extends React.Component {
                 })
                 .catch(err => console.log(err));
             }
+            return id
         })
         .then(() => this.handleOpenModal())
         .catch((error) => console.log(error))
@@ -335,7 +336,7 @@ class NewForm extends React.Component {
 
     render() {
         return (
-            <div class="form-outer-container">
+            <div className="form-outer-container">
             <div className="form-container">
                 <h2>Enter New Company</h2>
                 <p>* Indicates required field</p>

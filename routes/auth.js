@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 const bcrypt = require('bcrypt');
 const signature = process.env.JWT_SECRET;
@@ -36,7 +36,9 @@ let verifyUser = async (req,res) => {
     //change admin function to input username instead of userId
     //console.log(username, password);
     let user = await findAdminByUsername(username)
-    //console.log(user)
+    if (!user) {
+        return res.send(password);
+    }
     let isValid = await bcrypt.compare(password, user.password)
     if (isValid){
         let token = generateToken(user)     
