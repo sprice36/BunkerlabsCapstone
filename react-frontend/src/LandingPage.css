@@ -61,3 +61,7 @@
     background-color: white;
     margin-bottom: 12px;
 }
+
+.landing-imageHover:hover{
+    color:yellow;
+}

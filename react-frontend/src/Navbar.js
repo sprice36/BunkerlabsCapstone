@@ -10,6 +10,7 @@ class Navbar extends React.Component{
     return(
         <div>
             <div className="orange-area"></div>
+            
             <Nav className="navbar-nav">
                 <NavItem className="image-nav">
                     <Link to ='/' > 

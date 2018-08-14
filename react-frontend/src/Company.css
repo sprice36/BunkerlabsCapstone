@@ -1,3 +1,69 @@
 .div-Company{
-    background-color: green;
+    /* background-color: green; */
+    display:flex;
+    flex-direction: column;
+    /* border:1px solid pink; */
+    /* width:75%; */
+    align-items: flex-start;
+    font-size: 16px;
+    background-color: red;
+
+}
+.company-renderLogo{
+    width: 260px;
+    padding: 0;
+    box-shadow: 5px 5px 28px 20px #9d9d9d;
+}
+
+.company-picture{
+    height: 75%;
+    width: 50%;
+    padding: 0;
+    box-shadow: 5px 5px 28px 20px #9d9d9d;
+
+}
+
+.company-outercontainer{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+
+}
+
+.company-name{
+    margin-top: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom:25px;
+}
+
+.company-summary,.company-stage,.comapny-industry,.company-needs,.company-email,
+.company-phone,.company-youtube,.company-paypal,
+.company-profile,.company-linkein,.company-website{
+    margin-bottom: 10px;
+    margin-top:10px;
+}
+.company-profile{
+    background-color: yellow;
+}
+
+.company-phone:hover,.company-email:hover, .company-website:hover{
+    color:#D66A38;
+}
+@media screen and (min-width:600px){
+    .company-outercontainer{
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .company-profile{
+        margin: 0;
+        
+    }
+    .div-Company{
+        margin-left: 30px;
+    }
+
+
 }
