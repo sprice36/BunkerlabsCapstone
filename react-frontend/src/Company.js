@@ -70,18 +70,30 @@ import './Company.css';
             return null
         }
     }
+
+    function renderwebsite(website) {
+        if (website !== null && website !== ''){
+            return (
+                <div>
+                    {website}
+                </div>
+            )
+        } else {
+            return null
+        }
+    }
     
     function renderprofile(picture) {
         if (picture) {
             return (
                 <div>
-                    <img src={`http://localhost:4000/${picture}`} alt=""/>
+                    <img className="company-picture" src={`http://localhost:4000/${picture}`} alt=""/>
                 </div>
             )
         } else {
             return (
                 <div>
-                    <img src={`http://localhost:4000/images/default/noprofileimage2.png`} alt=""/>
+                    <img className="company-picture" src={`http://localhost:4000/images/default/noprofileimage2.png`} alt=""/>
                 </div>
             )
         }
@@ -90,45 +102,51 @@ import './Company.css';
     function renderLogo(logo) {
         if (logo) {
             return (
-                <div>
-                <img src={`http://localhost:4000/${logo}`} alt=""/>
+                <div >
+                <img className="company-renderLogo" src={`http://localhost:4000/${logo}`} alt=""/>
                 </div>
             )
         } else {
             return (
                 <div>
-                <img src={`http://localhost:4000/images/default/noimageavailable.jpg`} alt=""/>
+                  <img className="company-renderLogo" src={`http://localhost:4000/images/default/noimageavailable.jpg`} alt=""/>
                 </div>
             )
         }
     }
 
-
+   
     const Company=({companyDetail})=>
-                <div className="div-Company">This is the description of a company:
-                {renderLogo(companyDetail.picture)}
-                <br/>               
-                <p>Company Name:{companyDetail.name}</p>
-                <p>Summary:{companyDetail.summary}</p>
-                <p>Industry:{companyDetail.industry}</p>
-                <p>Stage:{companyDetail.stage}</p>
+            <div className="company-outercontainer">
+                <div className="div-Company"> {renderLogo(companyDetail.picture)}
+                <br/>   
+                <div className="company-box">           
+                <div className="company-name">Company Name:{companyDetail.name}</div>
+                <div className="company-summary">Summary:{companyDetail.summary}</div>
+                <div className="company-industry">Industry:{companyDetail.industry}</div>
+                <div className="company-stage">Stage:{companyDetail.stage}</div>
                 {/* <p>Product and Services:{companyDetail.productAndServices}</p> */}
-                <p>Company Needs:
-                </p>
+                <div className="company-needs">Company Needs:
+                </div>
                 <ul>
                 <li>{companyDetail.need1}</li>
                 {renderneed2(companyDetail.need2)}
                 {renderneed3(companyDetail.need3)}
                 </ul>
                 {/* </p> */}
-                {renderwebsite(companyDetail.website)}
-                <p>Email:{companyDetail.email}</p>
-                <p>Phone:{companyDetail.phone}</p>
-                {renderyoutubelink(companyDetail.youtubelink)}
+               
+                <div className="company-website"><a href={`${companyDetail.website}`}> {renderwebsite(companyDetail.website)}</a></div>
+                <div className="company-email"><a href={`mailto:${companyDetail.email}`}>{companyDetail.email}</a></div>
+                <div className="company-phone"><a href={`tel:${companyDetail.phone}`}>Phone:{companyDetail.phone}</a></div>
+                <div className="company-youtube"><a href={`${companyDetail.youtubelink}`}>{renderyoutubelink(companyDetail.youtubelink)}</a></div>
                 {/* Donate to this business - legal review/disclaimer needed? */}
-                {renderpaypallink(companyDetail.paypallink)}
-                {renderprofile(companyDetail.profile)}
-                {renderlinkedin(companyDetail.linkedin)}
+                <div className="company-paypal"> <a href={`${companyDetail.paypallink}`}>{renderpaypallink(companyDetail.paypallink)}</a></div>
+                <div className="company-linkedin"><a href={`${companyDetail.linkedin}`}>{renderlinkedin(companyDetail.linkedin)}</a></div>
+                </div>
+                </div>
+                <div className="company-profile"> {renderprofile(companyDetail.profile)}</div>
+          
+
                 </div>
     
     //currying  pattern-to customize and preset a component
@@ -143,6 +161,13 @@ import './Company.css';
     // //as all the props from the parent to child will be passed no matter what
     //          <Component {...props} companyDetail={oneCompanyMatch}/>
     //     )
+
+    // }
+
+    // const resize=()=>{
+    //     if($(window).width()>480){
+    //         $("company-profile").insertAfter("company-renderLogo");
+    //     }
 
     // }
     class API extends React.Component{

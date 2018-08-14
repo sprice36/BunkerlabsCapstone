@@ -5,12 +5,13 @@
     border-bottom-color: rgba(0,0,0,0.5);
     background-color: rgba(0,0,0,0.9);
     width:100%;
-    padding: 1em;
+    padding: 3em;
     margin:0px;
     align-items: center;
     justify-content:space-between;
     /* border: 1px solid green; */
-    display:flex;
+    /* display:flex;
+    /*  */
 }
 
 /* .About-BL{
@@ -96,15 +97,16 @@ NavItem:hover {
 
 @media screen and (min-width:415px){
     .navbar-logo{
-    width: 47%;
+    width: 60%;
     height: 47%;
     /* float: left; */
     align-content: flex-start;
     display: flex;
     justify-content: flex-start;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     /* margin-left: -105px; */
     flex-direction: row;
+    margin-top: -5px;
     }
 }
     .nav>li{
@@ -117,4 +119,7 @@ NavItem:hover {
 
        
     }
-
+    .nav>li {
+        text-align: left;
+        position: absolute;
+    }

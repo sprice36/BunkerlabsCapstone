@@ -50,7 +50,7 @@ class API extends React.Component{
                
                 <Link to={`/company/${companyData._id}`}>
                 
-                <img src={`http://localhost:4000/${companyData.picture}`} alt=""/>
+                <img className="landing-imageHover" src={`http://localhost:4000/${companyData.picture}`} alt=""/>
                 <h1 className='companyContainer'>{companyData.name}</h1>
                 </Link>
                 

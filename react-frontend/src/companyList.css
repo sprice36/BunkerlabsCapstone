@@ -44,3 +44,7 @@
     /* border: 1px solid green; */
 }
 
+.company-list-image:hover{
+    color:yellow;
+}
+
