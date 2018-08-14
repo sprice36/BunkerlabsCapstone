@@ -121,6 +121,10 @@ app.get('/api/company/byStage/:stage', (req, res) => {
 
 });
 
+app.post('/api/verifyToken', verifyToken, (req,res) => {
+    res.send('OK')
+})
+
 //routes ONLY if authentication is verified
 // Returns JSON of name/userId of all admins
 app.post('/api/admin/', verifyUser) 
