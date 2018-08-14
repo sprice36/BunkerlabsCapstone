@@ -17,13 +17,11 @@ class Footer extends React.Component{
         
         <div className="footer-class">
         </div>
-
              <footer className="footer" >
                 <div className="detail-footer-class">@2018 Bunker Labs NFP. All Rights Reserved. |
                     <a className="footer-a-class" href="https://bunkerlabs.org/privacy-policy/" data-wpel-link="internal">Privacy Policy</a> 
                     | Terms of Use	
-                </div>
-                    
+                </div>    
                 <div className="social-media">
                     <div className="media1">
                         <a  href="https://www.linkedin.com/company/bunkerlabs">

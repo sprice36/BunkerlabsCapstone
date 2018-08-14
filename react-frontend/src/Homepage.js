@@ -106,9 +106,9 @@ class Homepage extends React.Component{
             <div>
                 <div className="homepage-container">
             {/* This should be moved to the navbar component */}
-                    <Link to={'/login'} >
+                    {/* <Link to={'/login'} >
                         <button className="Admin-panel">ADMIN PANEL</button>
-                    </Link>
+                    </Link> */}
             { /* This should be moved to the navbar component */ }
 
                 <div>

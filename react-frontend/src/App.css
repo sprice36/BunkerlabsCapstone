@@ -8,6 +8,7 @@ html {
  html, body, #root,.App {
   width: 100%;
   height: 100%;
+  min-width: 360px;
 }
 
 /* USED FOR STICKY FOOTER */
@@ -78,39 +79,40 @@ html {
 
 .detail-footer-class{
   background-color: black;
-  height:100%;
-  width:100%;
+  height: 100%;
+  width: 100%;
   color: #8c8989;
-  font-size:12px;
-  padding-left:30px;
-  margin-top: 30px;
+  font-size: 12px;
+  padding-left: 0px;
+  margin-left: 8px;
+  margin-top: 23px;
   margin-bottom: 110px;
-  text-align: left
+  text-align: left;
+  align-items: flex-start;
 } 
 
 .social-media{
   margin-top: 10px;
-  margin-right:30px;
+  margin-right:13px;
 }
-
 
 i{
   margin-left: 5px;
   margin-right: 5px;
 }
 
-.Admin-panel{
+/* .Admin-panel{
   margin-bottom: 15px;
   height: 29px;
-  width: 110px;
+  width: 110px; */
   /* float: right; */
   /* margin-top: 0px; */
   /* margin-right: -410px; */
-  color: white;
+  /* color: white;
   color: white;
   border: #191919;
   background-color:#191919;
-}
+} */
 
 .admin{
   /* margin-top: -100px;
@@ -156,6 +158,9 @@ a:hover {
   margin-left: 10px;
   font-size: 14px;
   display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  
 }
 
 .media1{
