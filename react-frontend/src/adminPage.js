@@ -1,5 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {
+    Button,
+    Form,
+    FormGroup,
+    FormControl,
+    ControlLabel,
+} from 'react-bootstrap';
+import './adminPage.css';
 
 class adminPage extends React.Component {
     constructor(props) {
@@ -18,16 +26,20 @@ class adminPage extends React.Component {
         let localToken = localStorage.getItem('token');
         if (localToken) {
             this.setState({
-                token: localToken
+                token: localToken,
+                companies: []
             })
         } else {
             this.props.history.push('/login');
         }
+        
 
         fetch('http://localhost:4000/api/companies')
         .then(res => res.json())
         .then(companies => {
-            this.setState({companies});
+            this.setState({
+                companies: companies
+            });
         })
     }
 
@@ -56,16 +68,27 @@ class adminPage extends React.Component {
 
     render() {
         return (
-            <div>
-                <form>
-                    <select onChange={this._handleCompanySelect}>
-                        <option value="" defaultValue></option>
-                        {this.state.companies.map(company => this._createOption(company))}
-                    </select>
-                </form>
-                <Link to={`/admin/companies/new`}>
-                    <button>New Company</button>
-                </Link>
+            <div className="admin-outer-container">
+                <div className="admin-inner-container">
+                    <div className="create-companybutton">
+                    <Link to={`/admin/companies/new`}>
+                        <Button bsStyle="primary" bsSize="large">
+                            Create New Company
+                        </Button>
+                    </Link>
+                </div>
+                    <div className="company-list-form">
+                    <Form onChange={this._handleCompanySelect}>
+                        <FormGroup controlId="formControlsSelect">
+                            <ControlLabel>Edit or Delete a Company:</ControlLabel>
+                                <FormControl componentClass="select" placeholder="select">
+                                    <option value="">Select a company</option>
+                                    {this.state.companies.map(company => this._createOption(company))}
+                                </FormControl>
+                        </FormGroup>
+                    </Form>
+                    </div>
+                </div>
             </div>
             );
     }

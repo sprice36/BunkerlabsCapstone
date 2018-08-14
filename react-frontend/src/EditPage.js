@@ -301,6 +301,7 @@ class EditPage extends React.Component {
                         }
                     })
                     .catch(err => console.log(err));
+                return
             }
         })
         .then(() => this.handleOpenModalUpdate())
@@ -365,7 +366,7 @@ class EditPage extends React.Component {
 
     render() {
         return (
-            <div class="form-outer-container">
+            <div className="form-outer-container">
                 <div className="form-container">
                 <h2>Edit or Delete {this.state.form.name}'s Profile</h2>
                 <p>* Indicates required field</p>

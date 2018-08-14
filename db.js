@@ -1,5 +1,8 @@
+require('dotenv').config();
+
+const dbPort = process.env.DB_PORT;
 const mongoose = require('mongoose');
-const mongooseUrl = 'mongodb://localhost:27017/Bunkerlabs';
+const mongooseUrl = `mongodb://localhost:${dbPort}/Bunkerlabs`;
 const Admin = require('./models/admin.js');
 const Company = require('./models/company.js');
 const bcrypt = require('bcrypt');
@@ -64,7 +67,9 @@ function findAdminByUsername(username) {
     .then(admin => {
         return admin;
     })
-    .catch(err => console.log(err));
+    .catch((error) => {
+        return false;
+    })
 }
 
 function deleteAdmin(userId) {
