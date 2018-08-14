@@ -27,7 +27,7 @@ class EditPage extends React.Component {
                 location: '',
                 picture: null,
                 linkedIn: '',
-                profile: '',
+                profile: null,
                 ownerName: ''
             },
             token: ""
@@ -170,7 +170,7 @@ class EditPage extends React.Component {
         });
     }
 
-    handleownerName = (event) => {
+    handleOwnerName = (event) => {
         this.setState({
             form: {
                 ...this.state.form,
@@ -199,10 +199,7 @@ class EditPage extends React.Component {
 
     handleProfile = (event) => {
         this.setState({
-            form: {
-                ...this.state.form,
-                picture: event.target.files[0]
-            },
+            ownerPhoto: event.target.files[0]
         })
         if (event.target.files && event.target.files[0]) {
             let reader = new FileReader();
@@ -244,18 +241,8 @@ class EditPage extends React.Component {
 
     updateCompany = (event) => {
         event.preventDefault()
-        this.handleOpenModalUpdate();
         
-        let needs = [];
-        if (this.state.form.need1 !== '') {
-            needs.push(this.state.form.need1);
-        };
-        if (this.state.form.need2 !== '') {
-            needs.push(this.state.form.need2);
-        };
-        if (this.state.form.need3 !== '') {
-            needs.push(this.state.form.need3);
-        }; 
+        let needs =[this.state.form.need1, this.state.form.need2, this.state.form.need2];
         
         let companyObject = {
             name: this.state.form.name,
@@ -270,8 +257,8 @@ class EditPage extends React.Component {
             youtubeLink: this.state.form.youtubeLink,
             paypalLink: this.state.form.paypalLink,
             location: this.state.form.location,
-            profile: this.state.form.profile,
             linkedIn: this.state.form.linkedIn,
+            ownerName: this.state.form.ownerName
         };
 
         let headers = {
@@ -280,28 +267,45 @@ class EditPage extends React.Component {
 
         axios.post(`http://localhost:4000/api/updatecompany/${this.props.match.params.id}`, companyObject, {headers})
             .then(res => {
-                // console.log(res);
                 return res.data._id
             })
-            .then((id) => {
-                let fd;
-                this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
-                fd = new FormData();
-                fd.append('picture', blob);
-                axios({
-                    method: 'post',
-                    url: `http://localhost:4000/api/updatecompanypicture/${id}`,
-                    data: fd,
-                    config: { headers: {'Content-Type': 'multipart/form-data', ...headers }}
+        .then((id) => {
+            if (this.state.imagePreview) {
+            let fd;
+            this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
+            fd = new FormData();
+            fd.append('picture', blob);
+            axios({
+                method: 'post',
+                url: `http://localhost:4000/api/updatecompanypicture/${id}`,
+                data: fd,
+                headers: {'Content-Type': 'multipart/form-data', ...headers }
                 })
-            .then(res => {
-                // console.log(res)
-            })
-            .catch(err => console.log(err));
-            }); 
+                .catch(err => console.log(err));
+                })
+            }
+            return id
         })
+        .then((id) => {
+            if (this.state.ownerPhoto) {
+                let fd;
+                fd = new FormData();
+                fd.append('picture', this.state.ownerPhoto)
+                axios({
+                        method: 'post',
+                        url: `http://localhost:4000/api/createownerphoto/${id}`,
+                        data: fd,
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            ...headers
+                        }
+                    })
+                    .catch(err => console.log(err));
+            }
+        })
+        .then(() => this.handleOpenModalUpdate())
         .catch(err => console.log(err));
-    }; 
+    }
 
     deleteCompany = () => {
         // event.preventDefault()
@@ -487,7 +491,7 @@ class EditPage extends React.Component {
                             CEO*
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="text" placeholder="John Smith" value={this.state.form.ownerName} onChange={this.handleownerName} required />
+                            <FormControl type="text" placeholder="John Smith" value={this.state.form.ownerName} onChange={this.handleOwnerName} required />
                         </Col>
                     </FormGroup>
 
@@ -604,19 +608,19 @@ class EditPage extends React.Component {
 
                     <FormGroup controlId="formHorizontalFile">
                         <Col componentClass={ControlLabel} sm={2}>
-                            Company Logo
+                            CEO photo
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="file" onChange={this.handlePicture} accept='.png, .jpg, .jpeg' />
+                            <FormControl type="file" onChange={this.handleProfile} accept='.png, .jpg, .jpeg' />
                         </Col>
                     </FormGroup>
 
                     <FormGroup controlId="formHorizontalFile">
                         <Col componentClass={ControlLabel} sm={2}>
-                            CEO photo
+                            Company Logo
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="file" onChange={this.handleProfile} accept='.png, .jpg, .jpeg' />
+                            <FormControl type="file" onChange={this.handlePicture} accept='.png, .jpg, .jpeg' />
                         </Col>
                     </FormGroup>
 
@@ -654,7 +658,7 @@ class EditPage extends React.Component {
                         </Modal.Body>
                         <Modal.Footer>
                             <Link to = "/admin" > 
-                                <button onClick={this.handleCloseModalUpdate}>Continue</button>
+                                <Button className="form-button" bsStyle="success" onClick={this.handleCloseModalCancel}>Continue</Button>
                             </Link>
                         </Modal.Footer>
                     </Modal>
@@ -670,8 +674,8 @@ class EditPage extends React.Component {
                             <h4>Are you sure you want to delete {this.state.form.name}'s profile?</h4>
                         </Modal.Body>
                         <Modal.Footer>
-                                <Button className="form-button" bsStyle="danger" bsSize="" onClick={this.handleCloseModal}>Delete</Button>
-                                <Button className="form-button" bsStyle="primary" bsSize="" onClick={this.handleCloseModalCancel}>Cancel</Button>
+                                <Button className="form-button" bsStyle="danger" onClick={this.handleCloseModal}>Delete</Button>
+                                <Button className="form-button" bsStyle="primary" onClick={this.handleCloseModalCancel}>Cancel</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>

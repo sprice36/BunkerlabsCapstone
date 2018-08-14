@@ -80,7 +80,7 @@ class NewForm extends React.Component {
         })
     }
 
-    handleownerName = (event) => {
+    handleOwnerName = (event) => {
         this.setState({
             form: {
                 ...this.state.form, 
@@ -181,10 +181,7 @@ class NewForm extends React.Component {
 
     handleProfile =(event) => {
         this.setState({
-            form: {
-                ...this.state.form, 
-                picture: event.target.files[0]
-            },
+            ownerPhoto: event.target.files[0]
         })
         if (event.target.files && event.target.files[0]) {
             let reader = new FileReader();
@@ -252,18 +249,8 @@ class NewForm extends React.Component {
     
     handleEntry(event){
         event.preventDefault();
-        this.handleOpenModal();
-
-        let needs = [];
-        if (this.state.form.need1 !== '') {
-            needs.push(this.state.form.need1);
-        };
-        if (this.state.form.need2 !== '') {
-            needs.push(this.state.form.need2);
-        };
-        if (this.state.form.need3 !== '') {
-            needs.push(this.state.form.need3);
-        }; 
+        
+        let needs = [this.state.form.need1, this.state.form.need2, this.state.form.need2];
         
         let companyObject = {
             name: this.state.form.name,
@@ -278,7 +265,6 @@ class NewForm extends React.Component {
             youtubeLink: this.state.form.youtubeLink,
             paypalLink: this.state.form.paypalLink,
             location: this.state.form.location,
-            profile: this.state.form.profile,
             linkedIn: this.state.form.linkedIn,
             ownerName: this.state.form.ownerName
         };
@@ -292,22 +278,40 @@ class NewForm extends React.Component {
         })
         .then((id) => {
             let fd;
-            this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
-            fd = new FormData();
-            fd.append('picture', blob);
-            axios({
-                method: 'post',
-                url: `http://localhost:4000/api/createcompanypicture/${id}`,
-                data: fd,
-                headers: {'Content-Type': 'multipart/form-data', ...headers }
-            })
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => console.log(err));
-            }); 
+            if (this.state.imagePreview) {
+                this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
+                    fd = new FormData();
+                    fd.append('picture', blob);
+                    axios({
+                        method: 'post',
+                        url: `http://localhost:4000/api/createcompanypicture/${id}`,
+                        data: fd,
+                        headers: {'Content-Type': 'multipart/form-data', ...headers }
+                    })
+                    .catch(err => console.log(err));
+                })
+            }
+            return id
         })
-        .catch(err => console.log(err));
+        .then((id) => {
+            if (this.state.ownerPhoto) {
+                let fd;
+                fd = new FormData();
+                fd.append('picture', this.state.ownerPhoto)
+                axios({
+                    method: 'post',
+                    url: `http://localhost:4000/api/createownerphoto/${id}`,
+                    data: fd,
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        ...headers
+                    }
+                })
+                .catch(err => console.log(err));
+            }
+        })
+        .then(() => this.handleOpenModal())
+        .catch((error) => console.log(error))
     }; 
 
     _crop() {
@@ -465,7 +469,7 @@ class NewForm extends React.Component {
                             CEO*
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="text" placeholder="John Smith" value={this.state.form.ownerName} onChange={this.handleownerName} required />
+                            <FormControl type="text" placeholder="John Smith" value={this.state.form.ownerName} onChange={this.handleOwnerName} required />
                         </Col>
                     </FormGroup>
 
@@ -573,19 +577,19 @@ class NewForm extends React.Component {
 
                     <FormGroup controlId="formHorizontalFile">
                         <Col componentClass={ControlLabel} sm={2}>
-                            Company Logo
+                            CEO photo
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="file" onChange={this.handlePicture} accept='.png, .jpg, .jpeg' />
+                            <FormControl type="file" onChange={this.handleProfile} accept='.png, .jpg, .jpeg' />
                         </Col>
                     </FormGroup>
 
                     <FormGroup controlId="formHorizontalFile">
                         <Col componentClass={ControlLabel} sm={2}>
-                            CEO photo
+                            Company Logo
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="file" onChange={this.handleProfile} accept='.png, .jpg, .jpeg' />
+                            <FormControl type="file" onChange={this.handlePicture} accept='.png, .jpg, .jpeg' />
                         </Col>
                     </FormGroup>
 
@@ -624,7 +628,7 @@ class NewForm extends React.Component {
                         </Modal.Body>
                         <Modal.Footer>
                             <Link to = "/admin" > 
-                                <Button bsStyle="primary" onClick={this.handleCloseModal}>Continue</Button>
+                                <Button bsStyle="success" onClick={this.handleCloseModal}>Continue</Button>
                             </Link>
                         </Modal.Footer>
                     </Modal>

@@ -71,7 +71,7 @@ import './Company.css';
         }
     }
     
-    function renderpicture(picture) {
+    function renderprofile(picture) {
         if (picture) {
             return (
                 <div>
@@ -127,7 +127,7 @@ import './Company.css';
                 {renderyoutubelink(companyDetail.youtubelink)}
                 {/* Donate to this business - legal review/disclaimer needed? */}
                 {renderpaypallink(companyDetail.paypallink)}
-                {renderpicture(companyDetail.profile)}
+                {renderprofile(companyDetail.profile)}
                 {renderlinkedin(companyDetail.linkedin)}
                 </div>
     
@@ -197,7 +197,7 @@ import './Company.css';
                                 profile: company.profile,
                                 linkedIn: company.linkedIn
                         }
-                    });
+                    })
                 });
         }
         
