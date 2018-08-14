@@ -19,6 +19,7 @@ const {
     updateAdmin,
     updateCompany,
     updateCompanyPhoto,
+    updateProfilePhoto
 } = require('./db.js');
 
 //header needs a token 
@@ -69,7 +70,6 @@ admin.post('/api/createcompany', (req, res) => {
         youtubeLink: req.body.youtubeLink,
         paypalLink: req.body.paypalLink,
         location: req.body.location,
-        profile: req.body.profile,
         linkedIn: req.body.linkedIn,
         ownerName: req.body.ownerName
     };
@@ -97,6 +97,27 @@ admin.post('/api/createcompanypicture/:id', upload.single('picture'), (req, res)
         .catch((err) => res.send(err));
 });
 
+// creates an owner profile picture
+admin.post('/api/createownerphoto/:id', upload.single('picture'), (req, res) => {
+    console.log(req.file);
+    fs.rename(req.file.path,
+        `public/images/owners/${req.params.id}`,
+        (err) => {
+            if (err) {
+                console.log(err);
+            }
+        })
+    let imagePath = `images/owners/${req.params.id}`;
+    let id = req.params.id;
+    let companyObject = {
+        _id: id,
+        profile: imagePath
+    };
+    updateProfilePhoto(companyObject)
+        .then(company => res.json(company))
+        .catch((err) => res.send(err));
+});
+
 //updates specific company 
 admin.post('/api/updatecompany/:id', (req, res) => {
     // console.log(req.body)
@@ -114,7 +135,6 @@ admin.post('/api/updatecompany/:id', (req, res) => {
         youtubeLink: req.body.youtubeLink,
         paypalLink: req.body.paypalLink,
         location: req.body.location,
-        profile: req.body.profile,
         linkedIn: req.body.linkedIn,
         ownerName: req.body.ownerName
     };

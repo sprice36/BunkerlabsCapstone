@@ -91,7 +91,6 @@ function createCompany(companyObject) {
         youtubeLink: companyObject.youtubeLink,
         paypalLink: companyObject.paypalLink,
         location: companyObject.location,
-        profile: companyObject.profile,
         linkedIn: companyObject.linkedIn,
         ownerName: companyObject.ownerName
     });
@@ -103,7 +102,7 @@ function deleteCompany(companyId) {
     .findByIdAndRemove(companyId)
     .exec()
     .then(company => {
-        console.log(`Company ${companyId} deleted.`);
+        // console.log(`Company ${companyId} deleted.`);
         return company
     })
     .catch(err => console.log(err))
@@ -145,10 +144,9 @@ function updateCompany(CompanyObject){
     modifications.youtubeLink = CompanyObject.youtubeLink;
     modifications.paypalLink = CompanyObject.paypalLink; 
     modifications.location = CompanyObject.location; 
-    modifications.profile = CompanyObject.profile;
     modifications.linkedIn = CompanyObject.linkedIn;
     modifications.ownerName = CompanyObject.ownerName;
-    console.log(CompanyObject._id);
+    // console.log(CompanyObject._id);
     return Company 
         .findByIdAndUpdate(CompanyObject._id, {$set: modifications}, {new: true})
         .exec()
@@ -157,11 +155,31 @@ function updateCompany(CompanyObject){
         }).catch(err => console.log(err));
 };
 
-function updateCompanyPhoto(CompanyObject) {
+function updateCompanyPhoto(companyObject) {
     let modifications = {};
-    modifications.picture = CompanyObject.picture;
+    modifications.picture = companyObject.picture;
+    console.log('Logo', modifications);
+
     return Company
-        .findByIdAndUpdate(CompanyObject._id, {
+        .findByIdAndUpdate(companyObject._id, {
+            $set: modifications
+        }, {
+            new: true
+        })
+        .exec()
+        .then(company => {
+            return company;
+        }).catch(err => console.log(err));
+};
+
+function updateProfilePhoto(companyObject) {
+    let modifications = {};
+    console.log(companyObject);
+    modifications.profile = companyObject.profile;
+    console.log('ownerphoto',modifications);
+
+    return Company
+        .findByIdAndUpdate(companyObject._id, {
             $set: modifications
         }, {
             new: true
@@ -232,7 +250,8 @@ module.exports = {
     updateCompanyPhoto,
     findCompanyByIndustry,
     findCompanyByStage,
-    findAdminByUsername
+    findAdminByUsername,
+    updateProfilePhoto
 };
 
 // If you don 't specify a callback then the API will return a variable of type Query. You can use this query object to build up your query and then execute it (with a callback) later using the exec() method.

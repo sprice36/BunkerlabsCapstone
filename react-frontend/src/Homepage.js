@@ -128,28 +128,5 @@ class Homepage extends React.Component{
         )
     }
 }
-
-    // function renderLogo(picture) {
-    //     if (picture) {
-    //         return (
-    //             <img src={`http://localhost:4000/${picture}`} alt=""/>
-    //         )
-    //     } else {
-    //         return (
-    //             <img src={`http://localhost:4000/images/nologo.jpg`} alt=""/>
-    //         )
-    //     }
-    // }
-
-    // const SingleCompany = (props) => {
-    //     return (
-    //         <Link to={`/company/${props.companyInfo._id}`}>
-    //             <div className="individualCompany">
-    //                 {renderLogo(props.companyInfo.picture)}
-    //                 <h3>{props.companyInfo.name}</h3>
-    //             </div>
-    //         </Link>
-    //     )
-    // }
     
 export default Homepage;
