@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import LandingPage from './LandingPage';
 import Company from './Company';
 import { Route } from 'react-router-dom';
 import adminPage from './adminPage';
@@ -17,12 +16,11 @@ class App extends React.Component {
     return (
         <div className="App">
         <Navbar />
-
+        
         <div className="main-app-container">
         <Route path='/' component={Homepage} exact={true}/>
         <Route path='/login' component={ adminLogin } exact={true}/>
         <Route path='/admin/companies/:id/edit' component={ EditPage } exact={true}/>
-        <Route path='/landing' component={LandingPage} exact={true}/>
         <Route path='/company/:id' component={Company} exact={true}/>
         <Route path='/aboutMarketplace' component={AboutMarketplace} exact={true}/>
         <Route path='/admin' component={ adminPage } exact={true}/>
@@ -30,7 +28,7 @@ class App extends React.Component {
         <Route path='/admin/companies/edit/:id' component={ EditPage } exact={true}/>
         </div>
 
-        <Footer className="footer"/>
+        <Footer className="footer-app"/>
                 
         </div>
       

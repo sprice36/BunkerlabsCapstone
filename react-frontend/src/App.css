@@ -10,15 +10,18 @@ html {
   height: 100%;
 }
 
+/* USED FOR STICKY FOOTER */
 .App {
   text-align: center;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* background-color: rgba(255,255,255,0);
-  background-image: url(https://28nu861p2y3b17e6g5d5nzgv-wpengine.netdna-ssl.com/wp-content/uploads/2015/07/camo_cloth_universal_pattern-LIGHT-300x300.jpg);
-  background-position: center center;
-  background-repeat: repeat; */
+}
+
+/* USED FOR STICKY FOOTER */
+.main-app-container {
+  flex: 1;
+  margin-top: 25px;
 }
 
 .App-logo {
@@ -39,17 +42,6 @@ html {
 
 .App-intro {
   font-size: large;
-}
-
-.imgstyle {
-  width: 300px;
-}
-
-.create-company-modal {
-  width: 50%;
-  height: 50px;
-  background-color: cornflowerblue;
-  display: flex;
 }
 
  .footer{
@@ -96,10 +88,6 @@ html {
   text-align: left
 } 
 
-.main-app-container {
-  margin-top: 25px;
-}
-
 .social-media{
   margin-top: 10px;
   margin-right:30px;
@@ -116,8 +104,8 @@ i{
   height: 29px;
   width: 110px;
   /* float: right; */
-  margin-top: 0px;
-  margin-right: -410px;
+  /* margin-top: 0px; */
+  /* margin-right: -410px; */
   color: white;
   color: white;
   border: #191919;
@@ -125,10 +113,10 @@ i{
 }
 
 .admin{
-  margin-top: -100px;
+  /* margin-top: -100px;
   margin-bottom: 100px;
-  margin-right: -640px;
-
+  margin-right: -640px; */
+  color: white;
 }
 
 .select-filterby{

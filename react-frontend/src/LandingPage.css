@@ -31,3 +31,11 @@
 
 
 }
+
+.homepage-container {
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}

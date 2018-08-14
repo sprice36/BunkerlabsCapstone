@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import React from 'react';
 
 // const {
 //     getLoginBody
@@ -14,6 +13,15 @@ class adminLogin extends React.Component {
         password : ''
     } 
 }
+
+componentDidMount() {
+        //check local storage for token and if its there setState to token : token
+        //if it doesnt exists or expired redirect to login
+        let localToken = localStorage.getItem('token');
+        if (localToken) {
+            this.props.history.push('admin');
+        } 
+    }
 
 handleUsername = (event) => {
     this.setState({
