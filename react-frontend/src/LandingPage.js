@@ -58,11 +58,6 @@ class API extends React.Component{
             )}
         )}
         
-        <div className="Admin-panel">
-        <Link to={'/admin'} >
-            <button>ADMIN PANEL</button>
-        </Link>
-        </div>
     </div>   
     
      
