@@ -39,18 +39,26 @@ class NewForm extends React.Component {
     componentDidMount() {
         //check local storage for token and if its there setState to token : token
         //if it doesnt exists or expired redirect to login
-        let localToken = localStorage.getItem('token');
-        if (localToken){
-            this.setState({
-                token: localToken
-            })} 
-            else {
-                this.props.history.push('/login')
+        let serverRequest = 'http://localhost:4000/api/verifyToken';
+        let localToken = JSON.parse(localStorage.getItem('token'))
+        
+
+        axios({
+                method: 'post',
+                url: serverRequest,
+                headers: {
+                    token: localToken,
                 }
-        this.setState({
-            baseFormState: this.state.form,
-            showModal: false
-        });
+            })
+            .then(data => {
+                if (data.data !== 'OK') {
+                    this.props.history.push('/login');
+                }
+                return
+            })
+            .catch(error => {
+                this.props.history.push('/login');
+            })
     }
 
     handlename= (event) => {

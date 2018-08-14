@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, FormGroup, FormControl, Col, ControlLabel, Modal } from 'react-bootstrap';
 import './adminLogin.css'
+import axios from 'axios';
 
 class adminLogin extends React.Component {
     constructor(props){
@@ -16,10 +17,23 @@ class adminLogin extends React.Component {
     componentDidMount() {
             //check local storage for token and if its there setState to token : token
             //if it doesnt exists or expired redirect to login
-            let localToken = localStorage.getItem('token');
-            if (localToken) {
-                this.props.history.push('admin');
-            } 
+            let serverRequest = 'http://localhost:4000/api/verifyToken';
+            let localToken = JSON.parse(localStorage.getItem('token'))
+
+            axios({
+                method: 'post',
+                url: serverRequest,
+                headers: {
+                    token: localToken,
+                }
+            })
+                .then(data => {
+                    if (data.data === 'OK') {
+                        this.props.history.push('admin');
+                    }
+                    return
+                })
+                .catch(error => console.log(error));
         }
 
     handleUsername = (event) => {

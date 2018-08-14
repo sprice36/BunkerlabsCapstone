@@ -8,6 +8,7 @@ import {
     ControlLabel,
 } from 'react-bootstrap';
 import './adminPage.css';
+import axios from 'axios';
 
 class adminPage extends React.Component {
     constructor(props) {
@@ -23,15 +24,23 @@ class adminPage extends React.Component {
     componentDidMount() {
         //check local storage for token and if its there setState to token : token
         //if it doesnt exists or expired redirect to login
-        let localToken = localStorage.getItem('token');
-        if (localToken) {
-            this.setState({
-                token: localToken,
-                companies: []
+        let serverRequest = 'http://localhost:4000/api/verifyToken';
+        let localToken = JSON.parse(localStorage.getItem('token'))
+
+        axios({
+                method: 'post',
+                url: serverRequest,
+                headers: {
+                    token: localToken,
+                }
             })
-        } else {
-            this.props.history.push('/login');
-        }
+            .then(data => {
+                if (data.data !== 'OK') {
+                    this.props.history.push('login');
+                }
+                return
+            })
+            .catch(error => console.log(error));
         
 
         fetch('http://localhost:4000/api/companies')
@@ -40,7 +49,7 @@ class adminPage extends React.Component {
             this.setState({
                 companies: companies
             });
-        })
+        });
     }
 
     _createOption = (company) =>{
