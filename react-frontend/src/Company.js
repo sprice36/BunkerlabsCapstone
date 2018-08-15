@@ -67,7 +67,8 @@ import ReactPlayer from 'react-player';
                    <ReactPlayer
                    url='https://www.youtube.com/watch?v=Ez5-7yozuNg'
                    width='100%'
-                   height='100%'
+                   height='420px'
+                   
                    />
                    
                    
@@ -160,16 +161,15 @@ import ReactPlayer from 'react-player';
    
     const Company=({companyDetail})=>
             <div className="company-outercontainer">
-               
+                <div className='please'>
                 <div className="div-Company"> {renderLogo(companyDetail.picture)}
-                <br/>   
+                <div className="company-name">{companyDetail.name}</div>
                 <div className='owner-name'> {renderowner(companyDetail.owner)}</div>
                 <div className="company-box">           
-                <div className="company-name">Company Name:{companyDetail.name}</div>
                 <div className='summary-border'>
-                <div className="company-summary">Summary:{companyDetail.summary}</div>
-                <div className="company-industry">Industry:{companyDetail.industry}</div>
-                <div className="company-stage">Stage:{companyDetail.stage}</div>
+                <div className="company-summary">{companyDetail.summary}</div>
+                <div className="company-industry">{companyDetail.industry}</div>
+                <div className="company-stage">{companyDetail.stage}</div>
                 {/* <p>Product and Services:{companyDetail.productAndServices}</p> */}
                 <div className="company-needs">Company Needs:
                 </div>
@@ -183,7 +183,7 @@ import ReactPlayer from 'react-player';
                 <div className="company-website"><a href={`${companyDetail.website}`}> {renderwebsite(companyDetail.website)}</a></div>
                 <div className="company-email"><a href={`mailto:${companyDetail.email}`}>{companyDetail.email}</a></div>
                 <div className="company-phone"><a href={`tel:${companyDetail.phone}`}>Phone:{companyDetail.phone}</a></div>
-                
+                </div>
                 {/* Donate to this business - legal review/disclaimer needed? */}
                 <div className="company-paypal"> <a href={`${companyDetail.paypallink}`}>{renderpaypallink(companyDetail.paypallink)}</a></div>
                 <div className="company-linkedin"><a href={`${companyDetail.linkedin}`}>{renderlinkedin(companyDetail.linkedin)}</a></div>
@@ -192,7 +192,10 @@ import ReactPlayer from 'react-player';
                 </div>
                 <div className='column-video'>
                 <div className="company-profile"> {renderprofile(companyDetail.profile)}</div>
-                <div>
+                <div className="company-youtube">{renderyoutubelink(companyDetail.youtubelink)}</div>
+                </div>
+                <div className="twitter-biggersize">
+                
                 <Timeline className='twitter-feed'
                     dataSource={{
                         sourceType: 'profile',
@@ -206,11 +209,6 @@ import ReactPlayer from 'react-player';
                     }}
                         onLoad={() => console.log('Timeline is loaded')}
                         />
-                </div>
-                </div>
-                <div className="twitter-biggersize">
-                <div className="company-youtube">{renderyoutubelink(companyDetail.youtubelink)}</div>
-                
 
                 </div>
                 </div>

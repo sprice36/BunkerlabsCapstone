@@ -33,13 +33,13 @@
     flex-direction: column;
     align-items: flex-start;
     margin-left: 20px;
-    border:10px solid red;
+    /* border:10px solid red; */
     
 
 }
 
 .company-box{
-    border:10px solid pink;
+    /* background-color: */
 
 }
 .company-name{
@@ -47,6 +47,7 @@
     font-size: 20px;
     font-weight: bold;
     margin-bottom:25px;
+    flex-direction: column;
 }
 
 .company-summary,.company-stage,.comapny-industry,.company-needs,.company-email,
@@ -56,7 +57,7 @@
     margin-top:10px;
 }
 .company-profile{
-    background-color: yellow;
+   display: flex;
 }
 
 .company-phone:hover,.company-email:hover, .company-website:hover{
@@ -77,11 +78,11 @@
     }
 }
 
-@media screen and (min-width:500) {
+/* @media screen and (min-width:500) {
     .twitter-feed, .youtube-embed, .summary-border, .company-outercontainer, .div-Company, .company-profile, .company-name {
         justify-content: center;
     }
-}
+} */
 
 @media screen and (max-width: 499px) {
     .twitter-feed, .youtube-embed, .summary-border, .company-outercontainer, .div-Company, .company-profile, .company-name {
@@ -90,11 +91,11 @@
     }
 }
 
-@media screen and (max-width: 860px) {
+/* @media screen and (max-width: 860px) {
     .youtube-embed {
         flex-direction: initial;
     }
-}
+} */
 
 .twitter-feed {
     border: 3px solid black;
@@ -103,6 +104,9 @@
 .youtube-embed {
     display: flex;
     border: 3px solid black;
+    height: '800px';
+    align-items: center;
+    
    
 }
 
@@ -110,19 +114,27 @@
     border: 5px solid #D66A38;
     background-color: lightgray;
     width: 260px;
-    height: 400px;
+    height: 430px;
+    display: block;
+    flex-direction: inherit;
+    padding: 15px;
 
 }
 
 .column-video {
     margin-left:46px;
     margin-right: 46px;
+    /* border: 2px solid black; */
+    flex-direction: column;
+    padding: 10px;
+    background-color: #F2F2F2;
 
 
 }
 
 .container-image{
     margin-bottom:30px;
+
 }
 
 @media screen and (min-width:1100px){
@@ -157,4 +169,12 @@
         justify-content: center;
     }
 
+}
+
+.please {
+    /* border: 1px solid black; */
+    flex-direction: column;
+    display: block;
+    padding-right: 20px;
+    background-color: #F2F2F2;
 }
