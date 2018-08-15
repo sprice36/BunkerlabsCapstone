@@ -56,9 +56,9 @@ The About Bunker Labs Marketplace, displayed as an icon, redirects the user to a
 * Even thoght the team considered features for the application that will make the Marketplace better, we had to settle on delivering a product that serves the  needs of the stakeholder, due to time constraints.
 * Using Json Web Tokens for server authentification of admin login was a new concept we first tackled for this project and it was challenging at first. 
 * We wanted to ensure that the login and the stored personal information will be safe so we decided to used a SSL Certification. This process was a task that any of the team members have performed before,so it was time consuming.Some the steps involed are:
-** The stakeholder purchased a domain so we can point it at the IP address hosted on Linode. 
-** For the documentation of the process, in order to automatically enable HTTPS on the website, certbot was used.
-** Edit the root and SSH profiles to point the domain at the right IP address.
+- The stakeholder purchased a domain so we can point it at the IP address hosted on Linode. 
+- For the documentation of the process, in order to automatically enable HTTPS on the website, certbot was used.
+-Edit the root and SSH profiles to point the domain at the right IP address.
 
 
 
