@@ -697,7 +697,7 @@ class EditPage extends React.Component {
                             </Link>
                         </Modal.Footer>
                     </Modal>
-                </div>;
+                </div>
             
             {/* delete modal */}
             <div className="static-modal">
@@ -716,7 +716,7 @@ class EditPage extends React.Component {
                 </div>
             
             </div>
-        );
+        )
     }
 }
 
