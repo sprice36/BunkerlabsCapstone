@@ -29,6 +29,18 @@ import ReactPlayer from 'react-player';
         }
     }
 
+    function renderowner(owner) {
+        if (owner !== null && owner !== ''){
+            return (
+            <div>
+                {owner}
+            </div>
+            )
+        } else {
+            return null
+        }
+    }
+
     function renderwebsite(website) {
         if (website !== null && website !== ''){
             return (
@@ -54,8 +66,8 @@ import ReactPlayer from 'react-player';
                 <div className='youtube-embed'>
                    <ReactPlayer
                    url='https://www.youtube.com/watch?v=Ez5-7yozuNg'
-                   width='240px'
-                   height='434px'
+                   width='100%'
+                   height='100%'
                    />
                    
                    
@@ -151,6 +163,7 @@ import ReactPlayer from 'react-player';
                
                 <div className="div-Company"> {renderLogo(companyDetail.picture)}
                 <br/>   
+                <div className='owner-name'> {renderowner(companyDetail.owner)}</div>
                 <div className="company-box">           
                 <div className="company-name">Company Name:{companyDetail.name}</div>
                 <div className='summary-border'>
