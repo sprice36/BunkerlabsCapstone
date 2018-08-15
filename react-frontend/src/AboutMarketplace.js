@@ -1,18 +1,20 @@
 import React from 'react';
+import './AboutMarketplace.css'
 
 
 class AboutMarketplace extends React.Component{
 
     render(){
         return(
-        <h3>
-            BUNKER LABS IS A NATIONAL NOT-FOR-PROFIT 501(C)(3) ORGANIZATION BUILT BY MILITARY VETERAN ENTREPRENEURS TO EMPOWER OTHER MILITARY VETERANS AS LEADERS IN INNOVATION.
-            <br/>
-            Through local chapters organized in cities across the U.S. and our online platforms, Bunker Labs provides educational programming, mentors, events, and thriving local communities to help veterans, transitioning service members, and military spouses succeed and thrive as entrepreneurs. We recognize the entrepreneurial potential of the military experience and work to ensure that every member of the military community has the network and resources to realize this potential.
-            <br/>
-            We work to Inspire, Equip, and Connect veterans with the right resources and people locally to be successful, while also providing national tools and resources like Launch Lab Online or our Community Mobile App to support aspiring entrepreneurs where ever they may currently live or be stationed.
-            <br/> 
-        </h3>          
+        <div className="aboutMarketplace">
+            <p>Bunker Labs Marketplace Atlanta represents a nonprofit organization that caters to military veteran entrepreneurs. It represents an online platform that desires to provide a designated online hosting  place for the veteran's business.
+            </p><br/>
+           <p> As part of Bunker Labs,Bunker Labs Atlanta Marketplace thrives to "Inspire, Equip, and Connect " transitioning service members to ensure the success in the competitive business environment.
+            As part of the Marketplace, business owners can receive help ranging from networking to funding based on their business needs.
+            </p><br/>
+            
+            <p>The Marketplace serves as a platform that serves as a link that will not only provide networking opportunities, but also will serve as a delivery system in order to ensure the success of our veteran entrepreneurs. 
+        </p></div>          
     )}
 }
 

@@ -14,7 +14,9 @@ class Navbar extends React.Component{
             <Nav className="navbar-nav">
                 <NavItem className="image-nav">
                     <Link to ='/' > 
+                    <div className="Navbar-imageSizing">
                         <img className="navbar-logo" src={require('./BunkerLogo.png')} alt="BunkerLabs Logo"/>
+                    </div>   
                     </Link>
                 </NavItem>
 

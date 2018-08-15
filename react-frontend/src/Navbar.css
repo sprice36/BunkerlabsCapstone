@@ -53,10 +53,16 @@ NavItem:hover {
 }
 
 .navbar-logo{
-    width:42%;
-    height: 42%;
+    width:100%;
+    height:100%;
+    object-fit: contain;
     /* float: left; */
     /* border:1px solid red; */
+}
+
+.Navbar-imageSizing{
+    width:42%;
+    height: 42%;
 }
 
 /* .navDropdown{
@@ -95,20 +101,20 @@ NavItem:hover {
     box-shadow: 5px 5px 28px 20px #9d9d9d;
 }
 
-@media screen and (min-width:415px){
-    .navbar-logo{
+/* @media screen and (min-width:415px){
+    /* .navbar-logo{
     width: 60%;
-    height: 47%;
+    height: 47%; */
     /* float: left; */
-    align-content: flex-start;
-    display: flex;
-    justify-content: flex-start;
+    /* align-content: flex-start;
+    display: flex; */
+    /* justify-content: flex-start; */
     /* border: 1px solid red; */
     /* margin-left: -105px; */
-    flex-direction: row;
+    /* flex-direction: row;
     margin-top: -5px;
-    }
-}
+    } */
+/* } */ */
     .nav>li{
         text-align: left;
     } 
@@ -116,10 +122,15 @@ NavItem:hover {
     .navbar-nav>li>a {
       padding:0px;
        margin:0px;
+       background-clip: #181818;
 
        
     }
     .nav>li {
         text-align: left;
-        position: absolute;
+        /* position: absolute; */
+    }
+    .nav>li>a{
+        display: block;
+        position: static;
     }
