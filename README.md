@@ -17,33 +17,47 @@ BunkerLabs Marketplace represents not only the capstone project for Digital Craf
 * Node.js
 * MongoDB
 * Express
-
+* Robo3T/ MongoCompass
+* Postman
 
 ## Site walkthrough 
 The BunkerLabs Marketplace Atlanta website serves as a launching platform for veterans to present their startup businesses and elicit support in order to have a healthy growth and be successful in a competitive market.
 
+
 ### Landing Page
-The Landing Page displays the Logo of the companies and their names.The user can search a company by name and sort by industry type and stage of the bussiness. After all the previous steps are executed, the user is presented with a grid of logos that match the desired criterias.
+The Landing Page displays the Logo of the companies and their names.The user can both search a company by name and also sort by industry type and by stage of the bussiness. After all the previous steps are executed, the user is presented with a grid of logos that match the selected criterias.
 
 <img src="readme/landingPage.png">
 
 ### Company Detail Page
-The user can click on the desired Company Logo and it will be redirected to a Company Detail Page where one can find more information about the startup that peek their interest.The extra information provided on this page ranges from company logo and name, to the  image of the company owner, and a link to the website.Also, the top three needs of the business are displayed and the social network addresses for the respective company.
+The user can click on the Company Logo and it will be redirected to a Company Detail Page. On this page, one can find more information about the startup ranging from Logo and company name, to the  image of the entrepreneur.Also, the top three needs of the business are displayed and the social network addresses for the respective company.
+
+<img src="readme/Company.png">
 
 
 ### Admin Page
-The Admin Page has two main components: the Admin Panel Login Page and the Admin Home Panel Page. The Admin Page was created having both security and ease of use when entering, editing or deleting a company information.
+The Admin Page has two main components: the Admin Panel Login Page and the Admin Home Panel Page. The Admin Page was created having both security and ease of use  in mind. On this page, the admin can enter data for a company, edit the information of the business or delete a company profile.
+
+<img src="readme/AdminPage">
+          
 
 #### Admin Panel Login Page
-On the Admin Panel Login Page, the administrator has to enter a username and password to be granted access to the Admin Home Panel.
+On the Admin Panel Login Page, the administrator must enter a username and password to be granted access to the Admin Home Panel.Only after the login credentials are valided, the Admin can access the page and start making changes.
+
+<img src="readme/Login">
 
 #### Admin Home Panel Page
-Once granted login priviledges, the administrator can access the Admin Home Panel Page and choose from a dropdown the company desired to be added in the application or update some content or be removed from the database.
+Once granted login priviledges, the administrator can access the Admin Home Panel Page and choose from a dropdown to perform tasks such as: add a new company, update an existing  or be removed from the database.
 
-## About Page
-In the About Page, when the user clicks the dropdown menu and it selects About Bunker Labs Marketplace it will be redirected to the page containing information about what Bunker Labs Marketplace is and why there was a need for it.
+## About Page 
+The About Bunker Labs Marketplace, displayed as an icon, redirects the user to a new page that explains the purpose of this application, its intended users and outcome.
 
 ## Challenges
+* Even thoght the team considered features for the application that will make the Marketplace better, we had to settle on delivering a product that serves the  needs of the stakeholder, due to time constraints.
+* Using Json Web Tokens for server authentification of admin login was a new concept we first tackled for this project and it was challenging at first. 
+* We wanted to ensure that the login and the stored personal information will be safe so we decided to used a SSL Certification. The process was a task that any of the team members have performed before so it was time consuming.
+The stakeholder purchased a domain so we can point it at the IP address hosted on Linode. For the documentation of the process, in order to automatically enable HTTPS on the website, certbot was used.
+
 
 ## SSL Certification
 We made sure to get an SSL certificate to keep the website secure. Veterans will be loading their personal information on the website and we want to make sure that it is safe. We used CertBot for documentation for the process. This was the first time any of us aquired an SSL certificate. We had to edit the root and ssh profiles to point the domain at the right IP address. After the React component was finished we were able to upload the application to the website.
