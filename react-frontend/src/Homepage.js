@@ -1,6 +1,5 @@
 import React from 'react';
 import './LandingPage.css';
-import {Link} from 'react-router-dom';
 import SearchBar from './SearchBar';
 import CompanyList from './CompanyList';
 import FilterBy from './FilterBy';
@@ -105,12 +104,6 @@ class Homepage extends React.Component{
         return(
             <div>
                 <div className="homepage-container">
-            {/* This should be moved to the navbar component */}
-                    {/* <Link to={'/login'} >
-                        <button className="Admin-panel">ADMIN PANEL</button>
-                    </Link> */}
-            { /* This should be moved to the navbar component */ }
-
                 <div>
                 <SearchBar text={this.state.searchText} 
                 handleChange={this._updateSearchText} />

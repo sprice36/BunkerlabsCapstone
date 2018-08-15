@@ -9,7 +9,8 @@
 }
 
 .form-container {
-    width: 65%;
+    /* width: 65%; */
+    width: 360px;
     border: 2px solid black;
     padding: 10px;
     padding-right: 65px;
@@ -20,12 +21,13 @@
     /* background-color: darkslategrey; */
     background-color: #DCDCDC;
     /* color: white; */
+    /* min-width: 340px; */
     
 
 }
 
 .form-button-container {
-    margin: 10px;
+    /* margin: 10px; */
     justify-content: center;
     align-items: center;
     padding: 15px;
