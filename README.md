@@ -46,6 +46,9 @@ On the Admin Panel Login Page, the administrator must enter a username and passw
 
 #### Admin Home Panel Page
 Once granted login priviledges, the administrator can access the Admin Home Panel Page and choose from a dropdown to perform tasks such as: add a new company, update an existing  or be removed from the database.
+
+<img src="readme/create.png">
+
 For safety purposes, on this page it will be displayed create a new user form and it will be displayed bellow.
 
 <img src="readme/AdminPage.png">
