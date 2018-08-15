@@ -52,6 +52,8 @@ Once granted login priviledges, the administrator can access the Admin Home Pane
 ## About Page 
 The About Bunker Labs Marketplace, displayed as an icon, redirects the user to a new page that explains the purpose of this application, its intended users and outcome.
 
+<img src= "readme/About">
+
 ## Challenges
 * Even thoght the team considered features for the application that will make the Marketplace better, we had to settle on delivering a product that serves the  needs of the stakeholder, due to time constraints.
 * Using Json Web Tokens for server authentification of admin login was a new concept we first tackled for this project and it was challenging at first. 
