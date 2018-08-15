@@ -33,7 +33,8 @@ class NewForm extends React.Component {
                 profile: null,
                 ownerName: ''
             },
-            token: ""
+            token: "",
+            cropperIsHidden: true
         }
     }
 
@@ -60,6 +61,12 @@ class NewForm extends React.Component {
             .catch(error => {
                 this.props.history.push('/login');
             })
+    }
+
+    toggleCropperHidden() {
+        this.setState({
+            cropperIsHidden: false
+        })
     }
 
     handlename= (event) => {
@@ -185,6 +192,7 @@ class NewForm extends React.Component {
                 });
             };
             reader.readAsDataURL(event.target.files[0]);
+            this.toggleCropperHidden();
         };
     }
 
@@ -624,8 +632,7 @@ class NewForm extends React.Component {
                     
                 </Form>
     </div>
-    {/* <NumberFormat format="(###) ###-####" mask="_" placeholder="Phone Number" value={this.state.form.phone} onChange={this.handlephone}/> */}
-            
+            {!this.state.cropperIsHidden &&
             <Cropper
                 ref='cropper'
                 src={this.state.imagePreview}
@@ -639,8 +646,7 @@ class NewForm extends React.Component {
                 dragCrop={true}
                 cropBoxMovable={true}
                 cropBoxResizable={false}
-                crop={this._crop.bind(this)} />
-                <br/>
+                crop={this._crop.bind(this)} />}
 
                 <div className="static-modal">
                     <Modal show={this.state.showModal} onHide={this.handleCloseModal}>

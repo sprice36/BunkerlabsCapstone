@@ -9,6 +9,7 @@
     flex-wrap: wrap;
     /* flex-basis: 33%; */
     width: 85%;
+    height: 60vh;
     justify-content: center;
     /* border: 1px solid black; */
     margin-top: 5px;
@@ -36,6 +37,7 @@
     align-items: center;
     width: 250px;
     height: 188px;
+    background-color: white;
 }
 
 .company-list-image {
