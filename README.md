@@ -43,7 +43,10 @@ Once granted login priviledges, the administrator can access the Admin Home Pane
 ## About Page
 In the About Page, when the user clicks the dropdown menu and it selects About Bunker Labs Marketplace it will be redirected to the page containing information about what Bunker Labs Marketplace is and why there was a need for it.
 
-## Challeges
+## Challenges
+
+## SSL Certification
+We made sure to get an SSL certificate to keep the website secure. Veterans will be loading their personal information on the website and we want to make sure that it is safe. We used CertBot for documentation for the process. This was the first time any of us aquired an SSL certificate. We had to edit the root and ssh profiles to point the domain at the right IP address. After the React component was finished we were able to upload the application to the website.
 
 
 ## Phase Two
