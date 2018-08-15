@@ -1,5 +1,7 @@
 import React from 'react';
 import './Company.css';
+import { Timeline } from 'react-twitter-widgets';
+import YoutubeEmbedVideo from 'youtube-embed-video';
 
     function renderneed2(need2) {
         if (need2 !== null && need2 !== ''){
@@ -36,16 +38,31 @@ import './Company.css';
             return null
         }
     }
+    const opts ={
+        height: '390',
+        width: '640',
+        playerVars: {
+            autoplay: 1
+        }
+    }
 
     function renderyoutubelink(youtubelink) {
         if (youtubelink !== null && youtubelink !== ''){
             return (
-                <div>{youtubelink}</div>
+                <div>
+                    <YoutubeEmbedVideo 
+                    videoId='jgsPJVZY5pM'
+                    suggestions={false}
+                    />
+                    </div>
             )
         } else {
             return null
         }
-    }
+       
+        }
+    
+    
 
     function renderpaypallink(paypallink) {
         if (paypallink !== null && paypallink !== ''){
@@ -145,7 +162,18 @@ import './Company.css';
                 </div>
                 </div>
                 <div className="company-profile"> {renderprofile(companyDetail.profile)}</div>
-          
+                <Timeline className='twitter-feed'
+                    dataSource={{
+                        sourceType: 'profile',
+                        screenName: 'TheBunkerLabs'
+                    }}
+                    options={{
+                        username: 'TheBunkerLabs',
+                        height: '800'
+                        
+                    }}
+                        onLoad={() => console.log('Timeline is loaded')}
+                        />
 
                 </div>
     
