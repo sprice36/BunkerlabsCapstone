@@ -6,6 +6,8 @@ import {
     Link
 } from 'react-router-dom';
 import { Button, Form, FormGroup, FormControl, Col, ControlLabel, Modal } from 'react-bootstrap';
+import PhoneInput from 'react-phone-number-input/basic-input';
+import 'react-phone-number-input/style.css'
 
 class EditPage extends React.Component {
     constructor(){
@@ -475,8 +477,21 @@ class EditPage extends React.Component {
                             Phone Number*
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="text" placeholder="Phone Number" value={this.state.form.phone} onChange={this.handlephone} required
-                            />
+                            <PhoneInput className="form-control"
+                            country="US"
+                            value = {
+                                this.state.form.phone
+                            }
+                            onChange={ value => 
+                                {
+                                    this.setState({
+                                        form: { ...this.state.form,
+                                                phone: value
+                                        }
+                                    })
+                                }
+                                }
+                            placeholder="Phone Number" maxLength='14' />
                         </Col>
                     </FormGroup>
 

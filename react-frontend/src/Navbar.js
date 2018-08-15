@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Nav, NavItem,NavDropdown,MenuItem } from 'react-bootstrap';
+import { Nav, NavItem } from 'react-bootstrap';
 import './Navbar.css';
 import {Link} from 'react-router-dom';
 
@@ -32,7 +32,7 @@ class Navbar extends React.Component{
                 <NavItem className="">
                     <Link to ='/' > 
                     <div>
-                 <Link to='/aboutMarketplace'><i class="fas fa-info"></i></Link>
+                    <Link to='/aboutMarketplace'><i class="fas fa-info"></i></Link>
                 </div>
                     </Link>
                 </NavItem>

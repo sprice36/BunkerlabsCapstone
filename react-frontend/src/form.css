@@ -17,13 +17,9 @@
     justify-content: center;
     min-width: 350px;
     border-radius: 1%;
-    /* background-color: #212C35; */
     /* background-color: darkslategrey; */
     background-color: #DCDCDC;
-    /* color: white; */
-    /* min-width: 340px; */
-    
-
+  
 }
 
 .form-button-container {
@@ -44,6 +40,37 @@
 .modal-container .modal,
 .modal-container .modal-backdrop {
     position: absolute;
+}
+
+.phone-input-form {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+@media screen and (min-width:600px) {
+    .form-container {
+        width: 550px;
+    }
+}
+
+@media screen and (min-width:1000px) {
+    .form-container {
+        width: 900px;
+    }
 }
 
 /* dark grey used on bunkerlabs #383838 */
