@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import { Button, Form, FormGroup, FormControl, Col, ControlLabel, Modal } from 'react-bootstrap';
 import './form.css';
+import PhoneInput from 'react-phone-number-input/basic-input';
 
 class NewForm extends React.Component {
     constructor(){
@@ -442,7 +443,21 @@ class NewForm extends React.Component {
                             Phone Number*
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="tel" format="(###) ###-####" mask="_" placeholder="Phone Number" value={this.state.form.phone} onChange={this.handlephone} />
+                            <PhoneInput className="form-control"
+                            country="US"
+                            value = {
+                                this.state.form.phone
+                            }
+                            onChange={ value => 
+                                {
+                                    this.setState({
+                                        form: { ...this.state.form,
+                                                phone: value
+                                        }
+                                    })
+                                }
+                                }
+                            placeholder="Phone Number" maxLength='14' />
                         </Col>
                     </FormGroup>
 

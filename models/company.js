@@ -13,7 +13,7 @@ const CompanySchema = new Schema({
     needs: Array, // this might be an array?
     website: String,
     email: String,
-    phone: Number,
+    phone: String,
     youtubeLink: String,
     paypalLink: String,
     location: String,
