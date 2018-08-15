@@ -38,8 +38,6 @@ The user can click on the Company Logo and it will be redirected to a Company De
 ### Admin Page
 The Admin Page has two main components: the Admin Panel Login Page and the Admin Home Panel Page. The Admin Page was created having both security and ease of use  in mind. On this page, the admin can enter data for a company, edit the information of the business or delete a company profile.
 
-<img src="readme/AdminPage">
-          
 
 #### Admin Panel Login Page
 On the Admin Panel Login Page, the administrator must enter a username and password to be granted access to the Admin Home Panel.Only after the login credentials are valided, the Admin can access the page and start making changes.
@@ -48,6 +46,10 @@ On the Admin Panel Login Page, the administrator must enter a username and passw
 
 #### Admin Home Panel Page
 Once granted login priviledges, the administrator can access the Admin Home Panel Page and choose from a dropdown to perform tasks such as: add a new company, update an existing  or be removed from the database.
+For safety purposes, on this page it will be displayed create a new user form and it will be displayed bellow.
+
+<img src="readme/AdminPage">
+          
 
 ## About Page 
 The About Bunker Labs Marketplace, displayed as an icon, redirects the user to a new page that explains the purpose of this application, its intended users and outcome.
