@@ -9,6 +9,7 @@
     justify-content: center;
     /* border: 1px solid black; */
     margin-top: 20px;
+    min-height: 450px;
 }
 
 .company-list-image {
