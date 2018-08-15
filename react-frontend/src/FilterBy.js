@@ -1,5 +1,8 @@
 import React from 'react';
-// import Dropdown from './Dropdown';
+import {
+    FormGroup,
+    FormControl,
+} from 'react-bootstrap';
 import './Filter.css';
 
 class FilterBy extends React.Component{
@@ -13,10 +16,15 @@ class FilterBy extends React.Component{
     render(){
             return(
                 <div className="filter-button">
-                    <select className="select-filterby" name={this.props.type} defaultValue={this.props.value} onChange={(e) => 
-                    {this.props.handleChange(e.target.value)}} >
-                        {this.props.listItems.map(item => this._convertToDropDown(item))}
-                    </select>
+                    <FormGroup controlId="formHorizontalSelect">
+                            <FormControl className="filter-select-form" componentClass="select" 
+                                name={this.props.type} 
+                                defaultValue={this.props.value} 
+                                onChange={(e) => 
+                                {this.props.handleChange(e.target.value)}}>          
+                                    {this.props.listItems.map(item => this._convertToDropDown(item))}
+                            </FormControl >
+                    </FormGroup>
                 </div>
             )
         }

@@ -2,7 +2,6 @@
     display: flex;
 }
 
-.left, .right{
-    margin-left: 30px;
-    margin-right: 30px;
+.filter-select-form {
+    width: 127px;
 }

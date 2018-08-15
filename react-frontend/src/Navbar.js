@@ -55,7 +55,6 @@ class Navbar extends React.Component{
                 {/* </NavDropdown> */}
                 {/* </div> */}
             </Nav>
-           
         </div>
     )}
 }

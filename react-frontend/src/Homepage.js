@@ -1,5 +1,5 @@
 import React from 'react';
-import './LandingPage.css';
+import './Homepage.css';
 import SearchBar from './SearchBar';
 import CompanyList from './CompanyList';
 import FilterBy from './FilterBy';
@@ -10,8 +10,8 @@ class Homepage extends React.Component{
         this.state={
             companies:[],
             searchText: '',
-            industryFilter: 'All',
-            stageFilter: 'All',
+            industryFilter: 'Industry',
+            stageFilter: 'Stage',
             industryList: [],
             stageList: []
         }
@@ -19,8 +19,8 @@ class Homepage extends React.Component{
 
     componentDidMount(){
         const url=`http://localhost:4000/api/companies/`;
-        let industries = ['All'];
-        let stages = ['All'];
+        let industries = ['Industry'];
+        let stages = ['Stage'];
         fetch(url)
             .then(companies=>companies.json())
             .then(companies=>{
@@ -43,7 +43,7 @@ class Homepage extends React.Component{
             .then((() => {
                 this.setState({
                     industryList: industries,
-                    stageList: stages 
+                    stageList: stages,
                 })
             }));
     }
@@ -73,14 +73,14 @@ class Homepage extends React.Component{
         let doesSearchMatchName
         let doesIndustryMatch;
         let doesStageMatch;
-        if (this.state.industryFilter !== 'All' || this.state.stageFilter !== 'All' || this.state.searchText !== '') {
+        if (this.state.industryFilter !== 'Industry' || this.state.stageFilter !== 'Stage' || this.state.searchText !== '') {
             let filteredCompanies = this.state.companies.filter(company => {
-                if (this.state.industryFilter === 'All') {
+                if (this.state.industryFilter === 'Industry') {
                     doesIndustryMatch = true
                 } else {
                     doesIndustryMatch = company.industry.toLowerCase().includes(this.state.industryFilter.toLowerCase());
                 }
-                if (this.state.stageFilter === 'All') {
+                if (this.state.stageFilter === 'Stage') {
                     doesStageMatch = true
                 } else {
                     doesStageMatch = company.stage.toLowerCase().includes(this.state.stageFilter.toLowerCase());
