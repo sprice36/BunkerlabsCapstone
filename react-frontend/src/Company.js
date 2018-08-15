@@ -53,9 +53,9 @@ import ReactPlayer from 'react-player';
             return (
                 <div className='youtube-embed'>
                    <ReactPlayer
-                   url='{companyDetail.youtubelink}'
+                   url='https://www.youtube.com/watch?v=Ez5-7yozuNg'
                    width='240px'
-                   height='320px'
+                   height='434px'
                    />
                    
                    
@@ -116,13 +116,13 @@ import ReactPlayer from 'react-player';
     function renderprofile(picture) {
         if (picture) {
             return (
-                <div>
+                <div className="container-image">
                     <img className="company-picture" src={`http://localhost:4000/${picture}`} alt=""/>
                 </div>
             )
         } else {
             return (
-                <div>
+                <div className="container-image">
                     <img className="company-picture" src={`http://localhost:4000/images/default/noprofileimage2.png`} alt=""/>
                 </div>
             )
@@ -177,10 +177,9 @@ import ReactPlayer from 'react-player';
                 </div>
                 </div>
                 </div>
+                <div className='column-video'>
                 <div className="company-profile"> {renderprofile(companyDetail.profile)}</div>
                 <div>
-                <div className="company-youtube">{renderyoutubelink(companyDetail.youtubelink)}</div>
-                </div>
                 <Timeline className='twitter-feed'
                     dataSource={{
                         sourceType: 'profile',
@@ -194,7 +193,13 @@ import ReactPlayer from 'react-player';
                     }}
                         onLoad={() => console.log('Timeline is loaded')}
                         />
+                </div>
+                </div>
+                <div className="twitter-biggersize">
+                <div className="company-youtube">{renderyoutubelink(companyDetail.youtubelink)}</div>
+                
 
+                </div>
                 </div>
     
     //currying  pattern-to customize and preset a component
