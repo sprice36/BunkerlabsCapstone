@@ -5,8 +5,13 @@
     /* border:1px solid pink; */
     /* width:75%; */
     align-items: flex-start;
+    text-align: left;
     font-size: 16px;
-    background-color: red;
+    
+    
+    height: 800px;
+    
+    
 
 }
 .company-renderLogo{
@@ -28,6 +33,7 @@
     flex-direction: column;
     align-items: flex-start;
     margin-left: 20px;
+    
 
 }
 
@@ -65,5 +71,23 @@
         margin-left: 30px;
     }
 
+
+}
+
+.twitter-feed {
+    border: 3px solid black;
+}
+
+.youtube-embed {
+    display: flex;
+    border: 3px solid black;
+   
+}
+
+.summary-border {
+    border: 5px solid #D66A38;
+    background-color: lightgray;
+    width: 260px;
+    height: 400px;
 
 }
