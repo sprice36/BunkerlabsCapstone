@@ -3,40 +3,12 @@
     -ms-flex-direction: row;
     flex-direction: row;
     border-bottom-color: rgba(0,0,0,0.5);
-    background-color: rgba(0,0,0,0.9);
+    background-color: #16120D;
     width:100%;
-    padding: 3em;
+    padding: 2.2em 1em;
     margin:0px;
-    align-items: center;
-    justify-content:space-between;
-    /* border: 1px solid green; */
-    /* display:flex;
-    /*  */
-}
-
-/* .About-BL{
-    justify-content: center;
-    align-items: center;
     display: flex;
-    flex:end;
-    margin-top: -20px;
-    margin-bottom: 20px;
-} */
-    #button-AdminPanel{
-        color: white;
-        /* margin-right: -85px */
-    
-    }
-
-    .fa-info{
-     font-size:20px;
-     font:white;
-    }
-
-    .About-BL{
-    color: white;
-    margin-left: 83px;
-
+    align-items: center;
 }
 
 .image-nav{
@@ -45,7 +17,11 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    /* border: 2px solid blue; */
+    height: 100%;
+    width: 50%;
+    display: flex;
 }
 
 NavItem:hover {
@@ -53,36 +29,24 @@ NavItem:hover {
 }
 
 .navbar-logo{
-    width:100%;
-    height:100%;
-    object-fit: contain;
-    /* float: left; */
-    /* border:1px solid red; */
+    width: 180px;
+    /* border: 1px solid red; */
 }
 
-.Navbar-imageSizing{
-    width:42%;
-    height: 42%;
+.navbar-log:hover {
+    background-color: orange;
 }
-
-/* .navDropdown{
-    margin-left: 1320px;
-    margin-top: 10px;
-} */
+NavItem:hover {
+    background-color: orange;
+}
 
 .orange-area{
     background-color: #e46326;
     color: #555555;
     border-bottom-color: rgba(0,0,0,0.5);
-    height:50px;
+    height:40px;
     width:100%;
 }
-/* .about{
-    line-height: 83px;
-    height: 86px;
-    color: white;
-    display: flex;
-} */
 
 .icon-container{
     display: flex;
@@ -91,46 +55,41 @@ NavItem:hover {
     flex-direction: row;
     color: white;
     font-size: 14px;
-    /* margin-left: 11px; */
+    width: 50%;
+    height: 100%;
+    margin-right: 10px;
 }
 
-.company-list-image {
-    width: 100%;
-    /* height: 100%; */
-    /* border: 1px solid green; */
-    box-shadow: 5px 5px 28px 20px #9d9d9d;
+.individual-icon {
+    /* border: 2px solid orange; */
+    padding: 0px 15px;
+    align-items: center;
+    display: flex;
 }
 
-/* @media screen and (min-width:415px){
-    /* .navbar-logo{
-    width: 60%;
-    height: 47%; */
-    /* float: left; */
-    /* align-content: flex-start;
-    display: flex; */
-    /* justify-content: flex-start; */
-    /* border: 1px solid red; */
-    /* margin-left: -105px; */
-    /* flex-direction: row;
-    margin-top: -5px;
-    } */
-/* } */ */
-    .nav>li{
-        text-align: left;
-    } 
+.words-nav {
+    display: none;
+}
 
-    .navbar-nav>li>a {
-      padding:0px;
-       margin:0px;
-       background-clip: #181818;
+.nav>li{
+    text-align: left;
+} 
 
-       
-    }
-    .nav>li {
-        text-align: left;
-        /* position: absolute; */
-    }
-    .nav>li>a{
-        display: block;
-        position: static;
+.navbar-nav>li>a {
+    padding:0px;
+}
+
+.navbar-nav>li>a:hover {
+    background-color: #16120D;
+}
+
+    @media screen and (min-width:900px) {
+        .words-nav {
+            display: block;
+            width: 75px;
+        }
+
+        .icons-nav {
+            display:none;
+        }
     }

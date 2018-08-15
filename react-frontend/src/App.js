@@ -22,7 +22,7 @@ class App extends React.Component {
         <Route path='/login' component={ adminLogin } exact={true}/>
         <Route path='/admin/companies/:id/edit' component={ EditPage } exact={true}/>
         <Route path='/company/:id' component={Company} exact={true}/>
-        <Route path='/aboutMarketplace' component={AboutMarketplace} exact={true}/>
+        <Route path='/about' component={AboutMarketplace} exact={true}/>
         <Route path='/admin' component={ adminPage } exact={true}/>
         <Route path='/admin/companies/new' component={ NewForm } exact={true}/>
         <Route path='/admin/companies/edit/:id' component={ EditPage } exact={true}/>
