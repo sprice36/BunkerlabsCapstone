@@ -368,7 +368,7 @@ class NewForm extends React.Component {
                             placeholder="Company Summary" 
                             value={this.state.form.summary} 
                             onChange={this.handlesummary}
-                            maxLength='100' required rows='3'/>
+                            maxLength='300' required rows='3'/>
                         </Col>
                     </FormGroup>
 
