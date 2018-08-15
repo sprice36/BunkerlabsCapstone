@@ -5,8 +5,13 @@
     /* border:1px solid pink; */
     /* width:75%; */
     align-items: flex-start;
+    text-align: left;
     font-size: 16px;
-    background-color: red;
+    
+    
+    height: 800px;
+    
+    
 
 }
 .company-renderLogo{
@@ -28,9 +33,15 @@
     flex-direction: column;
     align-items: flex-start;
     margin-left: 20px;
+    border:10px solid red;
+    
 
 }
 
+.company-box{
+    border:10px solid pink;
+
+}
 .company-name{
     margin-top: 25px;
     font-size: 20px;
@@ -64,6 +75,86 @@
     .div-Company{
         margin-left: 30px;
     }
+}
 
+@media screen and (min-width:500) {
+    .twitter-feed, .youtube-embed, .summary-border, .company-outercontainer, .div-Company, .company-profile, .company-name {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 499px) {
+    .twitter-feed, .youtube-embed, .summary-border, .company-outercontainer, .div-Company, .company-profile, .company-name {
+        justify-content: center;
+        align-content: center;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .youtube-embed {
+        flex-direction: initial;
+    }
+}
+
+.twitter-feed {
+    border: 3px solid black;
+}
+
+.youtube-embed {
+    display: flex;
+    border: 3px solid black;
+   
+}
+
+.summary-border {
+    border: 5px solid #D66A38;
+    background-color: lightgray;
+    width: 260px;
+    height: 400px;
+
+}
+
+.column-video {
+    margin-left:46px;
+    margin-right: 46px;
+
+
+}
+
+.container-image{
+    margin-bottom:30px;
+}
+
+@media screen and (min-width:1100px){
+    .twitter-biggersize{
+        width:500px;
+        margin-left:55px;
+        
+    }
+    .company-outercontainer{
+        justify-content: center;
+    }
+}
+
+@media screen and (min-width:1350px){
+    .twitter-biggersize{
+        width:600px;
+        margin-left:75px;
+        margin-top:20px;
+        
+    }
+
+    .div-Company{
+        margin-left:50px;
+        margin-top: 20px;
+    }
+
+    .column-video{
+        margin-top:20px;
+    }
+
+    .company-outercontainer{
+        justify-content: center;
+    }
 
 }
