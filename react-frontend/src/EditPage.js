@@ -32,7 +32,8 @@ class EditPage extends React.Component {
                 profile: null,
                 ownerName: ''
             },
-            token: ""
+            token: "",
+            cropperIsHidden: true
         }
     }
 
@@ -82,6 +83,12 @@ class EditPage extends React.Component {
         });
         })
     .catch(() => this.props.history.push('/admin'))
+    }
+
+    toggleCropperHidden() {
+        this.setState({
+            cropperIsHidden: false
+        })
     }
 
     handlename = (event) => {
@@ -207,6 +214,7 @@ class EditPage extends React.Component {
                 });
             };
             reader.readAsDataURL(event.target.files[0]);
+            this.toggleCropperHidden();
         };
     }
 
@@ -657,7 +665,7 @@ class EditPage extends React.Component {
                     </div>     
                 </Form>
     </div>
-            
+            {!this.state.cropperIsHidden && 
             <Cropper
                 ref='cropper'
                 src={this.state.imagePreview}
@@ -672,7 +680,7 @@ class EditPage extends React.Component {
                 cropBoxMovable={true}
                 cropBoxResizable={false}
                 crop={this._crop.bind(this)} />
-                <br/>
+            }
             
             {/* update modal */}
             <div className="static-modal">

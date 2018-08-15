@@ -104,6 +104,19 @@ class Homepage extends React.Component{
         return(
             <div>
                 <div className="homepage-container">
+
+                <div className="homepage-info-container">
+                    <div className="homepage-info">
+                    <h3> 
+                        SUPPORTING VETERAN OWNED BUSINESSES
+                    </h3>
+                    <p> This page is dedicated to highlighting Veteran owned business. Search businesses by stage and industry and learn more about their current needs. 
+                    Meet each owner, leanrn more and support our veterans!
+                    </p>
+
+                    </div>
+                </div>
+
                 <div>
                 <SearchBar text={this.state.searchText} 
                 handleChange={this._updateSearchText} />
