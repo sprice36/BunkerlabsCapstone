@@ -7,13 +7,13 @@ class Footer extends React.Component{
         return(
 
             <div>
-        <p className="address-class"> 
+        <a href="https://bunkerlabs.org/atlanta/"><p className="address-class"> 
                     Bunker Labs
                     <br/>
                     3423 Piedmont Rd
                     <br/>
                     NE Atlanta, Ga 30305
-                </p>   
+                </p> </a>  
         
         <div className="footer-class">
         </div>
