@@ -30,7 +30,9 @@ class CompanyList extends React.Component {
                 <div className="individualCompany" key={company._id}>
             <Link to={`/company/${company._id}`}>
                     {renderLogo(company.picture)}
-                    <h3>{company.name}</h3>
+                    <div className="homepage-name-container">
+                        <h4 >{company.name}</h4>
+                    </div>
             </Link>
                 </div>
             ))
