@@ -42,7 +42,7 @@ The Admin Page has two main components: the Admin Panel Login Page and the Admin
 #### Admin Panel Login Page
 On the Admin Panel Login Page, the administrator must enter a username and password to be granted access to the Admin Home Panel.Only after the login credentials are valided, the Admin can access the page and start making changes.
 
-<img src="readme/Login">
+<img src="readme/Login.png">
 
 #### Admin Home Panel Page
 Once granted login priviledges, the administrator can access the Admin Home Panel Page and choose from a dropdown to perform tasks such as: add a new company, update an existing  or be removed from the database.
