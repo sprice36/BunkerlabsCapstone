@@ -35,6 +35,7 @@ function createAdmin(username, password, superUser=true) {
     return user.save((err) => {
         if (err) return console.log(err);
         console.log('saved user');
+        db.close();
     });
 };
 

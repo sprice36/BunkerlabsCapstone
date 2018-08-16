@@ -71,6 +71,24 @@ NavItem:hover {
     display: none;
 }
 
+.words-nav:hover {
+    color: white;
+    text-decoration-color: inherit;
+    text-decoration-line: none;
+}
+
+.words-nav:visited {
+    color: white;
+    text-decoration-color: inherit;
+    text-decoration-line: none;
+}
+
+.words-nav:active {
+    color: white;
+    text-decoration-color: inherit;
+    text-decoration-line: none;
+}
+
 .nav>li{
     text-align: left;
 } 

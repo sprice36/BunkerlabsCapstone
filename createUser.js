@@ -3,4 +3,8 @@ const {
 } = require('./db');
 
 
-createAdmin("dms", "dms")
+createAdmin("Bunkerlabsatl", "Digitalcrafts");
+createAdmin("DCstephen", "Jarrett");
+createAdmin("DCdan", "Mckinney");
+createAdmin("DCsebastian", "Price");
+createAdmin("DCdelia", "Sanders");

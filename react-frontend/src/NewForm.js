@@ -205,10 +205,11 @@ class NewForm extends React.Component {
             let reader = new FileReader();
             reader.onloadend = (e) => {
                 this.setState({
-                    imageProfilePreview: e.target.result
+                    imagePreviewOwner: e.target.result
                 });
             };
             reader.readAsDataURL(event.target.files[0]);
+            this.handleOpenModalCropperOwner();
         };
     }
 
@@ -273,6 +274,15 @@ class NewForm extends React.Component {
         this.handleCloseModalCropper());
         });
     }
+
+    handleLogoCropAcceptOwner = () => {
+        this.refs.cropperOwner.getCroppedCanvas().toBlob((blob) => {
+            this.setState({
+                ownerBlob: blob
+            },
+        this.handleCloseModalCropperOwner());
+        });
+    }
     
     handleEntry(event){
         event.preventDefault();
@@ -321,10 +331,10 @@ class NewForm extends React.Component {
             return id
         })
         .then((id) => {
-            if (this.state.ownerPhoto) {
+            if (this.state.ownerBlob) {
                 let fd;
                 fd = new FormData();
-                fd.append('picture', this.state.ownerPhoto)
+                fd.append('picture', this.state.ownerBlob)
                 axios({
                     method: 'post',
                     url: `http://localhost:4000/api/createownerphoto/${id}`,
@@ -349,6 +359,13 @@ class NewForm extends React.Component {
         });  
     };  
 
+    _cropOwner() {
+        // const dataUrl = this.refs.cropper.getCroppedCanvas().toDataURL();
+        this.setState({
+            croppedImageOwner: this.refs.cropperOwner.getCroppedCanvas().toDataURL()
+        });  
+    };  
+
     handleOpenModal = () => {
         this.setState({ 
             showModal: true 
@@ -369,6 +386,18 @@ class NewForm extends React.Component {
     handleCloseModalCropper = () => {
         this.setState({ 
             showModalCropper: false,
+        });
+    }
+
+    handleOpenModalCropperOwner = () => {
+        this.setState({ 
+            showModalCropperOwner: true 
+        });
+    }
+    
+    handleCloseModalCropperOwner = () => {
+        this.setState({ 
+            showModalCropperOwner: false,
         });
     }
 
@@ -672,16 +701,16 @@ class NewForm extends React.Component {
                 <div className="modal-cropper-logo">
                     <Modal show={this.state.showModalCropper} onHide={this.handleCloseModalCropper}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Crop Image</Modal.Title>
+                            <Modal.Title>Crop Logo</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <Cropper
                             ref='cropper'
                             src={this.state.imagePreview}
-                            style={{height: 400, width: '100%'}}
+                            style={{height: 500, width: '100%'}}
                             // Cropper.js options
                             aspectRatio={8/6}
-                            guides={false}
+                            guides={true}
                             autoCropArea={0}
                             strict={false}
                             highlight={false}
@@ -692,6 +721,33 @@ class NewForm extends React.Component {
                         </Modal.Body>
                         <Modal.Footer> 
                                 <Button bsStyle="success" onClick={this.handleLogoCropAccept}>Continue</Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
+
+                <div className="modal-cropper-owner">
+                    <Modal show={this.state.showModalCropperOwner} onHide={this.handleCloseModalCropperOwner}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Crop Profile Image</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Cropper
+                            ref='cropperOwner'
+                            src={this.state.imagePreviewOwner}
+                            style={{height: 500, width: '100%'}}
+                            // Cropper.js options
+                            aspectRatio={3/4}
+                            guides={true}
+                            autoCropArea={0}
+                            strict={false}
+                            highlight={false}
+                            dragCrop={true}
+                            cropBoxMovable={true}
+                            cropBoxResizable={false}
+                            crop={this._cropOwner.bind(this)} />
+                        </Modal.Body>
+                        <Modal.Footer> 
+                                <Button bsStyle="success" onClick={this.handleLogoCropAcceptOwner}>Continue</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>

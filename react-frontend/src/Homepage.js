@@ -111,7 +111,7 @@ class Homepage extends React.Component{
                         SUPPORTING VETERAN OWNED BUSINESSES
                     </h3>
                     <p> This page is dedicated to highlighting Veteran owned business. Search businesses by stage and industry and learn more about their current needs. 
-                    Meet each owner, leanrn more and support our veterans!
+                    Meet each owner, learn more and support our veterans!
                     </p>
 
                     </div>

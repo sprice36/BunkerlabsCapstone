@@ -1,10 +1,37 @@
 .aboutMarketplace{
-    font-size: 18px;
-    margin-top: 20px;
-    margin-bottom:20px;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    /* margin-top: 20px; */
+    /* margin-bottom:20px; */
     text-align: left;
-    margin-left: 10px;
-    background-color: #f2f2f2;
-    padding: 20px;
+    justify-content: center;
+    /* margin: 20px 10px; */
+    /* background-color: #f2f2f2; */
+    /* padding: 100px; */
+    align-items: center;
+}
+
+.about-marketplace-outer {
+    background-color: #333333;
+    width: 100%;
+    /* height: 100%; */
+    /* height: max-content; */
+    display: flex;
+    justify-content: center;
+    /* margin: 30px 10px; */
+}
+
+.about-marketplace-inner {
+    font-size: 18px;
+    width: 75%;
+    color: white;
+    text-shadow: -2.5px 0 black,
+    0 2.5px black,
+    2.5px 0 black,
+    0 -2.5px black;
+    text-align: left;
+    padding: 20px 15px 20px 15px;
+
 }
 
