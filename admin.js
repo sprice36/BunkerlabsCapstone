@@ -99,7 +99,7 @@ admin.post('/api/createcompanypicture/:id', upload.single('picture'), (req, res)
 
 // creates an owner profile picture
 admin.post('/api/createownerphoto/:id', upload.single('picture'), (req, res) => {
-    console.log(req.file);
+    // console.log(req.file);
     fs.rename(req.file.path,
         `public/images/owners/${req.params.id}`,
         (err) => {

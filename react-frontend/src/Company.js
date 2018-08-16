@@ -29,11 +29,11 @@ import ReactPlayer from 'react-player';
         }
     }
 
-    function renderowner(owner) {
-        if (owner !== null && owner !== ''){
+    function renderownerName(ownerName) {
+        if (ownerName !== null && ownerName !== ''){
             return (
             <div>
-                {owner}
+                {ownerName}
             </div>
             )
         } else {
@@ -64,16 +64,12 @@ import ReactPlayer from 'react-player';
         if (youtubelink !== null && youtubelink !== ''){
             return (
                 <div className='youtube-embed'>
-                   <ReactPlayer
-                   url='https://www.youtube.com/watch?v=Ez5-7yozuNg'
-                   width='100%'
-                   height='420px'
-                   
-                   />
-                   
-                   
-                   
-                   
+                    <ReactPlayer
+                    url='https://www.youtube.com/watch?v=Ez5-7yozuNg'
+                    width='100%'
+                    height='420px'
+                    />
+
                     {/* <YoutubeEmbedVideo 
                     videoId='jgsPJVZY5pM'
                     suggestions={false}
@@ -85,8 +81,7 @@ import ReactPlayer from 'react-player';
         } else {
             return null
         }
-       
-        }
+    }
     
     
 
@@ -94,7 +89,7 @@ import ReactPlayer from 'react-player';
         if (paypallink !== null && paypallink !== ''){
             return (
                 <div>
-                    {paypallink}
+                    Donate: {paypallink}
                 </div>
             )
         } else {
@@ -106,6 +101,13 @@ import ReactPlayer from 'react-player';
         if (linkedin !== null && linkedin !== ''){
             return (
                 <div>
+                    <p> 
+                        <em>
+                            <strong>
+                                Connect
+                            </strong>
+                        </em> 
+                    </p>
                     {linkedin}
                 </div>
             )
@@ -152,11 +154,22 @@ import ReactPlayer from 'react-player';
         } else {
             return (
                 <div>
-                  <img className="company-renderLogo" src={`http://localhost:4000/images/default/noimageavailable.jpg`} alt=""/>
+                    <img className="company-renderLogo" src={`http://localhost:4000/images/default/noimageavailable.jpg`} alt=""/>
                 </div>
             )
         }
     }
+
+    function renderPhone (phone) {
+        console.log(phone);
+        let part1 = ' (' + phone.slice(0,3) + ') ';
+        let part2 = phone.slice(3,6) + '-';
+        let part3 = phone.slice(6,10);
+        let formattedPhone = part1 + part2 +part3;
+        return (
+            formattedPhone
+        );
+    };
 
    
     const Company=({companyDetail})=>
@@ -164,14 +177,14 @@ import ReactPlayer from 'react-player';
                 <div className='please'>
                 <div className="div-Company"> {renderLogo(companyDetail.picture)}
                 <div className="company-name">{companyDetail.name}</div>
-                <div className='owner-name'> {renderowner(companyDetail.owner)}</div>
+                <div className='owenr-name'> {renderownerName(companyDetail.ownerName)}</div>
                 <div className="company-box">           
                 <div className='summary-border'>
                 <div className="company-summary">{companyDetail.summary}</div>
-                <div className="company-industry">{companyDetail.industry}</div>
-                <div className="company-stage">{companyDetail.stage}</div>
+                <div className="company-industry">{companyDetail.industry} industry</div>
+                <div className="company-stage">{companyDetail.stage} stage</div>
                 {/* <p>Product and Services:{companyDetail.productAndServices}</p> */}
-                <div className="company-needs">Company Needs:
+                <div className="company-needs">Needs:
                 </div>
                 <ul>
                 <li>{companyDetail.need1}</li>
@@ -179,14 +192,22 @@ import ReactPlayer from 'react-player';
                 {renderneed3(companyDetail.need3)}
                 </ul>
                 {/* </p> */}
-               
+                <div>
+                    <p> 
+                        <em>
+                            <strong>
+                                Contact
+                            </strong>
+                        </em> 
+                    </p>
                 <div className="company-website"><a href={`${companyDetail.website}`}> {renderwebsite(companyDetail.website)}</a></div>
-                <div className="company-email"><a href={`mailto:${companyDetail.email}`}>{companyDetail.email}</a></div>
-                <div className="company-phone"><a href={`tel:${companyDetail.phone}`}>Phone:{companyDetail.phone}</a></div>
+                <div className="company-email"><a href={`mailto:${companyDetail.email}`}>Email: {companyDetail.email}</a></div>
+                <div className="company-phone"><a href={`tel:{${companyDetail.phone}}`}>Phone: {renderPhone(companyDetail.phone)}</a></div>
+                <div className="company-linkedin"><a href={`${companyDetail.linkedIn}`}>{renderlinkedin(companyDetail.linkedIn)}</a></div>
+                </div>
                 </div>
                 {/* Donate to this business - legal review/disclaimer needed? */}
-                <div className="company-paypal"> <a href={`${companyDetail.paypallink}`}>{renderpaypallink(companyDetail.paypallink)}</a></div>
-                <div className="company-linkedin"><a href={`${companyDetail.linkedin}`}>{renderlinkedin(companyDetail.linkedin)}</a></div>
+                <div className="company-paypal"> <a href={`${companyDetail.paypalLink}`}>{renderpaypallink(companyDetail.paypalLink)}</a></div>
                 </div>
                 </div>
                 </div>
@@ -207,7 +228,7 @@ import ReactPlayer from 'react-player';
                         
                         
                     }}
-                        onLoad={() => console.log('Timeline is loaded')}
+                        // onLoad={() => console.log('Timeline is loaded')}
                         />
 
                 </div>
@@ -282,7 +303,7 @@ import ReactPlayer from 'react-player';
                                 email: company.email,
                                 phone: company.phone,
                                 youtubeLine: company.youtubeLine,
-                                PaypalLink: company.paypalLink,
+                                paypalLink: company.paypalLink,
                                 profile: company.profile,
                                 linkedIn: company.linkedIn
                         }
