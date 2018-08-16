@@ -1,6 +1,7 @@
 .env
 public/images/5*
 public/images/owners/*
+createUser.js
 node.bcrypt.js-2.0.1
 node.bcrypt.js-2.0.1/.editorconfig
 node.bcrypt.js-2.0.1/.gitignore
