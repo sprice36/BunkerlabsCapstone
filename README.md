@@ -26,7 +26,7 @@ BunkerLabs Atlanta serves as a launching platform for veterans to present their 
 
 
 ### Landing Page
-The Landing Page displays the different companies currently featured. The user can search for different companies to help or engage. The user can choose a company and they are displayed the companies details and a "pitch" video to help illustrate the idea(l)s.
+The Landing Page displays the different companies currently featured. The user can search for different companies to help or engage. The user can choose a company and they are displayed the companies details and a "pitch" video to help illustrate the ideals.
 
 <img src="readme/landingPage.png">
 
@@ -41,7 +41,7 @@ The Admin Page has two main components: the Admin Panel Login Page and the Admin
 
 
 #### Admin Panel Login Page
-On the Admin Panel Login Page, the admin must enter a valid username and password to be granted access to the Admin Home Panel. Once valided, the Admin can access the necessary pages to edit or delete company data.
+On the Admin Panel Login Page, the admin must enter a valid username and password to be granted access to the Admin Home Panel. Once validated, the Admin can access the necessary pages to edit or delete company data.
 
 <img src="readme/Login.png">
 
